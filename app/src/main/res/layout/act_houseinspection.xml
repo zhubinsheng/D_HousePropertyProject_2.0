@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_45"
+        android:layout_marginTop="@dimen/dip_20">
+
+        <ImageView
+            android:id="@+id/HouseInspection_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dip_10"
+            android:src="@mipmap/icon_blck_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/home_HouseInspection_name"
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/fond_21sp" />
+
+        <ImageView
+            android:id="@+id/HouseInspection_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dip_10"
+            android:src="@mipmap/icon_min_contact_customer_service" />
+    </RelativeLayout>
+
+    <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/houseinspection_img"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_150"
+        android:layout_marginLeft="@dimen/dip_10"
+        android:layout_marginTop="@dimen/dip_5"
+        android:layout_marginRight="@dimen/dip_10"
+        android:scaleType="fitXY"
+        app:riv_corner_radius="@dimen/dip_8"
+        app:riv_mutate_background="true"
+        app:riv_oval="false" />
+
+    <RelativeLayout
+        android:id="@+id/re_startTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dip_10"
+        android:layout_marginTop="@dimen/dip_20"
+        android:layout_marginRight="@dimen/dip_10"
+        android:paddingTop="@dimen/dip_10"
+        android:paddingBottom="@dimen/dip_10">
+
+        <EditText
+            android:id="@+id/HouseInspection_startTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:focusable="false"
+            android:hint="出发时间"
+            android:textColor="@color/min_color"
+            android:textColorHint="#DDDDDD"
+            android:textSize="@dimen/fond_16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawableRight="@mipmap/icon_right"
+            android:drawablePadding="@dimen/dip_10"
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/fond_16sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_1"
+        android:layout_marginLeft="@dimen/dip_10"
+        android:layout_marginRight="@dimen/dip_10"
+        android:background="#F1F1F1" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dip_10"
+        android:layout_marginRight="@dimen/dip_10"
+        android:paddingTop="@dimen/dip_10"
+        android:paddingBottom="@dimen/dip_10">
+
+
+        <com.example.d_housepropertyproject.view.EditTextWithDel
+            android:id="@+id/HouseInspection_Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawablePadding="@dimen/dip_10"
+            android:hint="输入真实姓名"
+            android:maxLength="10"
+            android:textColor="@color/min_color"
+            android:textColorHint="#DDDDDD"
+            android:textFontWeight="1"
+            android:textSize="@dimen/fond_16sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_1"
+        android:layout_marginLeft="@dimen/dip_10"
+        android:layout_marginRight="@dimen/dip_10"
+        android:background="#F1F1F1" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dip_10"
+        android:layout_marginRight="@dimen/dip_10"
+        android:paddingTop="@dimen/dip_10"
+        android:paddingBottom="@dimen/dip_10">
+
+        <com.example.d_housepropertyproject.view.EditTextWithDel
+            android:id="@+id/HouseInspection_Number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawablePadding="@dimen/dip_10"
+            android:hint="输入人数"
+            android:inputType="number"
+            android:maxLength="2"
+            android:textColor="@color/min_color"
+            android:textColorHint="#DDDDDD"
+            android:textSize="@dimen/fond_16sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_1"
+        android:layout_marginLeft="@dimen/dip_10"
+        android:layout_marginRight="@dimen/dip_10"
+        android:background="#F1F1F1" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dip_10"
+        android:layout_marginRight="@dimen/dip_10"
+        android:paddingTop="@dimen/dip_10"
+        android:paddingBottom="@dimen/dip_10">
+
+        <com.example.d_housepropertyproject.view.EditTextWithDel
+            android:id="@+id/HouseInspection_Phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawablePadding="@dimen/dip_10"
+            android:hint="输入手机号码"
+            android:inputType="number"
+            android:maxLength="11"
+            android:textColor="@color/min_color"
+            android:textColorHint="#DDDDDD"
+            android:textSize="@dimen/fond_16sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_1"
+        android:layout_marginLeft="@dimen/dip_10"
+        android:layout_marginRight="@dimen/dip_10"
+        android:background="#F1F1F1" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dip_10"
+        android:layout_marginRight="@dimen/dip_10"
+        android:paddingTop="@dimen/dip_10"
+        android:paddingBottom="@dimen/dip_10">
+
+        <EditText
+            android:id="@+id/HouseInspection_Code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dip_90"
+            android:background="@null"
+            android:drawablePadding="@dimen/dip_10"
+            android:hint="验证码"
+            android:inputType="number"
+            android:maxLength="6"
+            android:textColor="@color/min_color"
+            android:textColorHint="#DDDDDD"
+            android:textSize="@dimen/fond_16sp" />
+
+        <com.example.d_housepropertyproject.view.HouseinspectionTimerText
+            android:id="@+id/lg_Timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="bottom"
+            android:paddingBottom="@dimen/dip_5"
+            android:text="@string/lg_tv_yz"
+            android:textColor="@color/home_unit_fond_color1"
+            android:textSize="@dimen/fond_16sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_1"
+        android:layout_marginLeft="@dimen/dip_10"
+        android:layout_marginRight="@dimen/dip_10"
+        android:background="#F1F1F1" />
+
+    <TextView
+        android:id="@+id/HouseInspection_commit"
+        android:layout_width="@dimen/dip_160"
+        android:layout_height="@dimen/dip_45"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dip_40"
+        android:background="@drawable/houseinspection_bt_style"
+        android:gravity="center"
+        android:text="立即报名"
+        android:textColor="@color/white"
+        android:textSize="@dimen/fond_16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dip_10"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/HouseInspection_RadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableLeft="@drawable/cb_tab"
+            android:drawablePadding="@dimen/dip_5"
+            android:gravity="center"
+            android:text="我已阅读并同意"
+            android:textColor="#5B5B5B"
+            android:textSize="@dimen/fond_12sp" />
+
+        <TextView
+            android:id="@+id/HouseInspection_Explain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="《订多多看房团活动声明》"
+            android:textColor="#5C96FF"
+            android:textSize="@dimen/fond_12sp" />
+
+        <TextView
+            android:id="@+id/HouseInspection_xuzhi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="《参团须知》"
+            android:textColor="#5C96FF"
+            android:textSize="@dimen/fond_12sp" />
+    </LinearLayout>
+
+</LinearLayout>

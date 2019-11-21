@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/dip_5">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_0.1"
+        android:layout_marginLeft="@dimen/dip_10"
+        android:layout_marginRight="@dimen/dip_10"
+        android:background="#c0c0c0" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/dip_60"
+                    android:layout_height="@dimen/dip_60"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/dip_10"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/icon_message" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/dip_5">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="通知"
+                            android:textColor="@color/min_color"
+                            android:textSize="@dimen/fond_16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/messge_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="@dimen/dip_10"
+                            android:text="2012.1.1"
+                            android:textColor="#50121314"
+                            android:textSize="@dimen/fond_12sp" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/messge_context"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="3"
+                        android:paddingTop="@dimen/dip_5"
+                        android:text="大在在在"
+                        android:textColor="#80121314"
+                        android:textSize="@dimen/fond_14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/message_status"
+                android:layout_width="@dimen/dip_5"
+                android:layout_height="@dimen/dip_5"
+                android:layout_margin="@dimen/dip_10"
+                android:background="@drawable/message_yuandain" />
+        </RelativeLayout>
+
+</LinearLayout>

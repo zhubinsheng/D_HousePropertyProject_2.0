@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_45"
+        android:layout_marginTop="@dimen/dip_20">
+
+        <ImageView
+            android:id="@+id/modifycellphone_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/dip_10"
+            android:paddingTop="@dimen/dip_10"
+            android:paddingRight="@dimen/dip_20"
+            android:paddingBottom="@dimen/dip_10"
+            android:src="@mipmap/icon_blck_back" />
+
+        <TextView
+            android:id="@+id/modifycellphone_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="第三方账号绑定"
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/fond_21sp" />
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_0.1"
+        android:background="#e0e0e0" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/dip_10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_min_wx"
+            android:drawablePadding="@dimen/dip_10"
+            android:gravity="center"
+            android:text="微信"
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/fond_14sp" />
+
+        <TextView
+            android:id="@+id/bangding_status1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/mine_portrait_boder"
+            android:paddingLeft="@dimen/dip_10"
+            android:paddingTop="@dimen/dip_2"
+            android:paddingRight="@dimen/dip_10"
+            android:paddingBottom="@dimen/dip_2"
+            android:text="去绑定"
+            android:textColor="@drawable/mine_fond_selecte"
+            android:textSize="@dimen/fond_12sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.001dip"
+        android:layout_marginLeft="@dimen/dip_10"
+        android:layout_marginRight="@dimen/dip_10"
+        android:background="@color/login_liner" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dip_1"
+        android:background="@color/white"
+        android:padding="@dimen/dip_10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_min_qq"
+            android:drawablePadding="@dimen/dip_10"
+            android:gravity="center"
+            android:text="QQ"
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/fond_14sp" />
+
+        <TextView
+            android:id="@+id/bangding_status2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/mine_portrait_boder"
+            android:paddingLeft="@dimen/dip_10"
+            android:paddingTop="@dimen/dip_2"
+            android:paddingRight="@dimen/dip_10"
+            android:paddingBottom="@dimen/dip_2"
+            android:text="去绑定"
+            android:textColor="@drawable/mine_fond_selecte"
+            android:textSize="@dimen/fond_12sp" />
+    </RelativeLayout>
+</LinearLayout>

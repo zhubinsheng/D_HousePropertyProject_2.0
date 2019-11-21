@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/dip_20">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dip_45"
+            android:layout_marginTop="@dimen/dip_20">
+
+            <ImageView
+                android:id="@+id/evaluate_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/dip_10"
+                android:src="@mipmap/icon_blck_back" />
+
+            <TextView
+                android:id="@+id/evaluate_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/min_color"
+                android:textSize="@dimen/fond_21sp" />
+        </RelativeLayout>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/evaluate_image"
+            android:layout_width="@dimen/dip_65"
+            android:layout_height="@dimen/dip_65"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dip_20"
+            android:src="@mipmap/icon_test" />
+
+        <TextView
+            android:id="@+id/evaluate_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dip_5"
+            android:text="钱多多"
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/dip_18"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/evaluate_grade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/evaluate_gaoji"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dip_5"
+                android:text="高级金牌顾问"
+                android:textColor="@color/min_color"
+                android:textSize="@dimen/dip_14" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dip_40"
+            android:layout_marginTop="@dimen/dip_30"
+            android:layout_marginRight="@dimen/dip_40"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dip_0.1"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="#30000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dip_10"
+                android:layout_marginRight="@dimen/dip_10"
+                android:text="TA打分"
+                android:textColor="#50121314" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dip_0.1"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="#30000000" />
+        </LinearLayout>
+
+        <RatingBar
+            android:id="@+id/yaoqingren_rationgbar"
+            style="@style/mRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/dip_10"
+            android:layout_marginTop="@dimen/dip_20"
+            android:numStars="5"
+            android:rating="0"
+            android:stepSize="1" />
+
+        <LinearLayout
+            android:id="@+id/userevaluate_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/dip_20" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dip_190"
+            android:layout_marginLeft="@dimen/dip_10"
+            android:layout_marginTop="@dimen/dip_20"
+            android:layout_marginRight="@dimen/dip_10"
+            android:background="@drawable/pf_boder">
+
+            <EditText
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="top"
+                android:hint="您对置业顾问还满意吗？留下您的意见，有助于我们提高服务质量"
+                android:maxLength="50"
+                android:minLines="10"
+                android:padding="@dimen/dip_8"
+                android:textColorHint="#A4A4A4"
+                android:textSize="@dimen/fond_14sp" />
+
+            <TextView
+                android:id="@+id/shuliang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:padding="@dimen/dip_10"
+                android:text="1/50"
+                android:textColor="#A4A4A4"
+                android:textSize="@dimen/fond_12sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/ProblemFeedback_commit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dip_50"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/dip_20"
+            android:layout_marginTop="@dimen/dip_30"
+            android:layout_marginRight="@dimen/dip_20"
+            android:background="@drawable/lg_login_style"
+            android:gravity="center"
+            android:text="提交"
+            android:textColor="@color/white"
+            android:textSize="@dimen/fond_16sp" />
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

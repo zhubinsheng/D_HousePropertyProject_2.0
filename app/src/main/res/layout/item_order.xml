@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_apptment_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dip_10">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_0.1"
+        android:background="#E5E5E5" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_10" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_70"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dip_10">
+
+        <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/title_hader"
+            android:layout_width="@dimen/dip_70"
+            android:layout_height="@dimen/dip_70"
+            android:scaleType="fitXY"
+            android:src="@mipmap/icon_test"
+            app:riv_corner_radius="@dimen/dip_3"
+            app:riv_mutate_background="true"
+            app:riv_oval="false" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/dip_10">
+            <LinearLayout
+                android:id="@+id/ll_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/item_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/dip_10"
+                    android:paddingLeft="@dimen/dip_5"
+                    android:paddingTop="@dimen/dip_1"
+                    android:paddingRight="@dimen/dip_5"
+                    android:paddingBottom="@dimen/dip_1"
+                    android:text="意向"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/fond_9sp" />
+                <TextView
+                    android:id="@+id/title"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="悉昙湾   一室一厅"
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_16sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/item_fanghao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_title"
+                android:paddingTop="@dimen/dip_5"
+                android:text="B1-03   1栋1单元205    56.3m"
+                android:textColor="#80686868"
+                android:textSize="@dimen/sp_12" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/item_des"
+                    android:layout_width="wrap_content"
+                    android:singleLine="true"
+                    android:layout_height="wrap_content"
+                    android:text="户型解读：没有啥说的就是好看好看好看好..."
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_12sp" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dip_15"
+        android:paddingLeft="@dimen/dip_10">
+
+        <TextView
+            android:id="@+id/item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="需付款：￥0.0"
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/dip_13" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal"
+            android:paddingRight="@dimen/dip_10">
+
+            <TextView
+                android:id="@+id/item_order_cancel"
+                android:layout_width="@dimen/dip_50"
+                android:layout_height="@dimen/dip_20"
+                android:background="@drawable/oder_boder"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="@drawable/oder_fond_selecte"
+                android:textSize="@dimen/fond_12sp" />
+
+            <TextView
+                android:id="@+id/item_order_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dip_3"
+                android:paddingTop="@dimen/dip_3"
+                android:paddingRight="@dimen/dip_10"
+                android:paddingLeft="@dimen/dip_10"
+                android:layout_marginLeft="@dimen/dip_10"
+                android:background="@drawable/oder_boder"
+                android:gravity="center"
+                android:text="去支付"
+                android:textColor="@drawable/oder_fond_selecte"
+                android:textSize="@dimen/fond_12sp" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

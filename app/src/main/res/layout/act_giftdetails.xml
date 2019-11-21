@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_45"
+        android:layout_marginTop="@dimen/dip_20">
+
+        <ImageView
+            android:id="@+id/min_Historical_Record_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dip_10"
+            android:src="@mipmap/icon_blck_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="积分礼品详情"
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/fond_21sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/dip_60">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.youth.banner.Banner
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dip_300" />
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:padding="@dimen/dip_10"
+                    android:text="农夫山泉饮用天然水4L *4/箱取"
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_16sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/price"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1400"
+                                android:textColor="#FFF44619"
+                                android:textSize="@dimen/fond_20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/unit"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="@dimen/dip_2"
+                                android:text="积分"
+                                android:textColor="#FFF44619"
+                                android:textSize="@dimen/fond_10sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/salePrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:text="剩余1545件"
+                        android:textColor="#FF999999"
+                        android:textSize="@dimen/fond_9sp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dip_10"
+                    android:layout_marginTop="@dimen/dip_10"
+                    android:background="#FFF9F9F9" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/dip_5"
+                    android:paddingTop="@dimen/dip_5"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/icon_addr11" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="顾凯凯 13666666666"
+                            android:textColor="@color/min_color"
+                            android:textSize="@dimen/fond_12sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/dip_5"
+                            android:text="四川成都新都区 中国塑料城9栋23号"
+                            android:textColor="@color/min_color"
+                            android:textSize="@dimen/fond_12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dip_0.1"
+                    android:layout_marginLeft="@dimen/dip_10"
+                    android:layout_marginTop="@dimen/dip_5"
+                    android:layout_marginRight="@dimen/dip_10"
+                    android:background="#FFB9B9B9" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_10"
+                    android:text="礼品详情"
+                    android:textColor="@color/min_color"
+                    android:textStyle="bold" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/imageRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingTop="@dimen/dp_10"
+                    android:text="特别说明"
+                    android:textColor="@color/min_color"
+                    android:textStyle="bold" />
+                <TextView
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="有任何疑问，可直接联系客服专线：400-xxxxxx
+若因地址不详.联系号码错误，停机等个人原因导致快递多次配送不成功，延期退回后我们将不再进行二次发货，敬请谅解。"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/fond_12sp" />
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dip_60"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dip_35"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dip_20"
+                android:layout_marginRight="@dimen/dip_20"
+                android:background="@drawable/tv_jifencb"
+                android:gravity="center"
+                android:text="积分不足"
+                android:textColor="@color/white"
+                android:textSize="@dimen/fond_16sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

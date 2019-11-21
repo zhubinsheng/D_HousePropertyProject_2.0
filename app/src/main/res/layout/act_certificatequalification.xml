@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_45"
+        android:layout_marginTop="@dimen/dip_20">
+
+        <ImageView
+            android:id="@+id/CertificateQualification_about_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingTop="@dimen/dip_10"
+            android:paddingRight="@dimen/dip_20"
+            android:paddingLeft="@dimen/dip_10"
+            android:paddingBottom="@dimen/dip_10"
+            android:src="@mipmap/icon_blck_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="证照资质"
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/fond_21sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/CertificateQualification_qualification"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_50"
+        android:drawableRight="@mipmap/icon_right"
+        android:drawablePadding="@dimen/dip_10"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dip_10"
+        android:paddingRight="@dimen/dip_10"
+        android:text="订多多营业执照"
+        android:textColor="@color/min_color"
+        android:textSize="@dimen/fond_16sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_0.1"
+        android:layout_marginLeft="@dimen/dip_35"
+        android:background="@color/min_bg_color" />
+
+    <TextView
+        android:id="@+id/CertificateQualification_ICP"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_50"
+        android:drawableRight="@mipmap/icon_right"
+        android:drawablePadding="@dimen/dip_10"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dip_10"
+        android:paddingRight="@dimen/dip_10"
+        android:text="ICP证书"
+        android:textColor="@color/min_color"
+        android:textSize="@dimen/fond_16sp" />
+</LinearLayout>

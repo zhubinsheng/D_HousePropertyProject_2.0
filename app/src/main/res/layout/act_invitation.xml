@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_45"
+        android:layout_marginTop="@dimen/dip_20">
+
+        <ImageView
+            android:id="@+id/Invitation_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/dip_10"
+            android:paddingTop="@dimen/dip_10"
+            android:paddingRight="@dimen/dip_20"
+            android:paddingBottom="@dimen/dip_10"
+            android:src="@mipmap/icon_blck_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="绑定邀请人"
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/fond_21sp" />
+
+        <TextView
+            android:id="@+id/Invitation_Preservation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dip_10"
+            android:text="保存"
+            android:textColor="#5C96FF" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.example.d_housepropertyproject.view.EditTextWithDel
+            android:id="@+id/Invitation_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请输入您的邀请人手机号"
+            android:inputType="number"
+            android:padding="@dimen/dip_10"
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/fond_16sp" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+    <com.example.d_housepropertyproject.view.ResizableImageView
+        android:id="@+id/oader_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       />
+    <!--<com.yk.big_picture_library.BigView-->
+        <!--android:id="@+id/oader_img"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--/>-->
+</LinearLayout>

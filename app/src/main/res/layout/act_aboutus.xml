@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_45"
+        android:layout_marginTop="@dimen/dip_20">
+
+        <ImageView
+            android:id="@+id/min_about_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dip_10"
+            android:src="@mipmap/icon_blck_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/min_about_us"
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/fond_21sp" />
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dip_10"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                android:text="        成都订多多网络科技有限公司是一家快速成长、锐意进取、集互联网开发、网络运营、互联网服务于一体的网络科技公司。"
+                android:textColor="@color/min_color"
+                android:textSize="@dimen/fond_16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                android:text="        公司主要专注于技术创新、寄情于网络IT、投身于互联网事业。拥有全新的服务理念，服务社会。
+以人为本，以客户为中心，以需求为导向，以服务为宗旨；以信仰、诚信、和谐、创新和高效为经营理念。"
+                android:textColor="@color/min_color"
+                android:textSize="@dimen/fond_16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                android:text="        公司业务涵盖互联网金融、互联网电商、互联网营销、大数据研究、人工智能、电子竞技、物联网、创投孵化等领域。公司秉承“为合作伙伴创造价值”的核心价值观，并以“诚实、宽容、创新、服务”为企业精神，通过自主创新和真诚合作为互联网及信息服务行业创造价值。"
+                android:textColor="@color/min_color"
+                android:textSize="@dimen/fond_16sp" />
+
+            <ImageView
+                android:id="@+id/guanwang"
+                android:layout_width="@dimen/dip_180"
+                android:layout_height="@dimen/dip_180"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dip_10"
+                android:src="@mipmap/icon_guanwang" />
+
+            <TextView
+                android:id="@+id/neirong1"
+                android:layout_width="@dimen/dip_200"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/guanwang"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dip_30"
+                android:gravity="center"
+                android:text="Copyright️©2004-2018"
+                android:textColor="#c0c0c0" />
+
+            <TextView
+                android:layout_width="@dimen/dip_220"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/neirong1"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="成都订多多网络科技有限公司版权所有"
+                android:textColor="#c0c0c0"
+                android:textSize="@dimen/fond_12sp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

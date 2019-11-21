@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_45"
+        android:layout_marginTop="@dimen/dip_20">
+
+        <ImageView
+            android:id="@+id/cash_withdrawal_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dip_10"
+            android:src="@mipmap/icon_blck_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/Cash_Withdrawal_name"
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/fond_21sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dip_20"
+        android:padding="@dimen/dip_10"
+        android:text="请输入提现金额" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/dip_10"
+        android:paddingRight="@dimen/dip_10">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:ems="4"
+            android:hint="0.00"
+            android:inputType="numberSigned|numberDecimal"
+            android:textColor="@color/min_color"
+            android:textColorHighlight="#DDDDDD"
+            android:textSize="@dimen/fond_60sp" />
+
+        <TextView
+            android:id="@+id/cash_withdrawal_zhuanchu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="@dimen/dip_10"
+            android:text="全部转出"
+            android:textColor="#5C96FF" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/cash_withdrawal_bankCar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dip_10"
+        android:paddingLeft="@dimen/dip_10"
+        android:paddingTop="@dimen/dip_15"
+        android:paddingBottom="@dimen/dip_15">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_jianshe"
+            android:drawablePadding="@dimen/dip_10"
+            android:text="建设银行（0125）"
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/fond_16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawableRight="@mipmap/icon_right"
+            android:drawablePadding="@dimen/dip_5"
+            android:text="更换"
+            android:textColor="#ABABAB"
+            android:textSize="@dimen/fond_12sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/cash_withdrawal_Submission"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/dip_40"
+        android:layout_marginLeft="@dimen/dip_10"
+        android:layout_marginRight="@dimen/dip_10"
+        android:textSize="@dimen/fond_19sp"
+        android:background="@drawable/lg_login_style"
+        android:gravity="center_horizontal"
+        android:text="提现" />
+</LinearLayout>

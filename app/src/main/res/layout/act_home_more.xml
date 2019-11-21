@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_45"
+        android:layout_marginTop="@dimen/dip_20">
+
+        <ImageView
+            android:id="@+id/min_More_Record_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dip_10"
+            android:src="@mipmap/icon_blck_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/More_name"
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/fond_21sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dip_20"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/home_more_jisuanqi"
+            android:layout_width="0dip"
+            android:layout_height="@dimen/dip_90"
+            android:layout_marginLeft="@dimen/dip_10"
+            android:layout_marginRight="@dimen/dip_5"
+            android:layout_weight="1"
+            android:background="@drawable/home_more_boder">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:drawableTop="@mipmap/icon_jisuanqi"
+                android:drawablePadding="@dimen/dip_5"
+                android:text="房贷计算器"
+                android:textColor="@color/min_color" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/home_more_shangjin"
+            android:layout_width="0dip"
+            android:layout_height="@dimen/dip_90"
+            android:layout_marginLeft="@dimen/dip_5"
+            android:layout_marginRight="@dimen/dip_10"
+            android:layout_weight="1"
+            android:background="@drawable/home_more_boder">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:drawableTop="@mipmap/icon_shangjin"
+                android:drawablePadding="@dimen/dip_5"
+                android:text="去赚钱"
+                android:textColor="@color/min_color" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

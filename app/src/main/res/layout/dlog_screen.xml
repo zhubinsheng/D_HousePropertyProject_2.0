@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/waibu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/dip_100"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dip_100">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/dlog_screenRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:padding="@dimen/dip_10"
+                        android:text="自定义"
+                        android:textColor="@color/min_color"
+                        android:textSize="@dimen/fond_16sp" />
+
+                    <EditText
+                        android:id="@+id/et_min"
+                        android:layout_width="@dimen/dip_72"
+                        android:layout_height="@dimen/dip_25"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:background="@drawable/screen_boder1"
+                        android:clickable="true"
+                        android:enabled="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:hint="低层"
+                        android:inputType="number"
+                        android:maxLength="3"
+                        android:paddingTop="@dimen/dip_3"
+                        android:paddingBottom="@dimen/dip_3"
+                        android:textColor="@color/min_color"
+                        android:textColorHighlight="#60121314"
+                        android:textSize="@dimen/fond_12sp" />
+
+                    <View
+                        android:layout_width="@dimen/dip_20"
+                        android:layout_height="@dimen/dip_1"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/dip_5"
+                        android:layout_marginRight="@dimen/dip_5"
+                        android:background="#979797" />
+
+                    <EditText
+                        android:id="@+id/et_max"
+                        android:layout_width="@dimen/dip_72"
+                        android:layout_height="@dimen/dip_25"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:background="@drawable/screen_boder1"
+                        android:clickable="true"
+                        android:enabled="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:hint="高层"
+                        android:inputType="number"
+                        android:maxLength="3"
+                        android:paddingTop="@dimen/dip_3"
+                        android:paddingBottom="@dimen/dip_3"
+                        android:textColor="@color/min_color"
+                        android:textColorHighlight="#60121314"
+                        android:textSize="@dimen/fond_12sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dip_90"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dip_40">
+
+            <TextView
+                android:id="@+id/clier"
+                android:layout_width="0dip"
+                android:layout_height="@dimen/dip_40"
+                android:layout_marginLeft="@dimen/dip_10"
+                android:layout_marginRight="@dimen/dip_10"
+                android:layout_weight="1"
+                android:background="@drawable/home_bg1"
+                android:gravity="center"
+                android:text="清空"
+                android:textColor="@color/white"
+                android:textSize="@dimen/fond_16sp" />
+
+            <TextView
+                android:id="@+id/center"
+                android:layout_width="0dip"
+                android:layout_height="@dimen/dip_40"
+                android:layout_marginLeft="@dimen/dip_10"
+                android:layout_marginRight="@dimen/dip_10"
+                android:layout_weight="1"
+                android:background="@drawable/testing_bg"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="@color/white"
+                android:textSize="@dimen/fond_16sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

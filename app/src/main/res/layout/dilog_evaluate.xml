@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dip_150"
+    android:layout_marginLeft="@dimen/dip_30"
+    android:layout_marginRight="@dimen/dip_30"
+    android:background="@drawable/dlog_testing_time"
+    android:orientation="vertical"
+    android:padding="@dimen/dip_10">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dip_20"
+        android:text="是否放弃本次评价"
+        android:textColor="#000000"
+        android:textSize="@dimen/sp_16" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dip_10">
+
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="@dimen/dip_110"
+            android:layout_height="@dimen/dip_40"
+            android:paddingLeft="@dimen/dip_10"
+            android:gravity="center"
+            android:layout_marginRight="@dimen/dip_10"
+            android:text="暂不评价"
+            android:layout_gravity="center"
+            android:textColor="#ABABAB"
+            android:textSize="@dimen/fond_16sp" />
+
+        <TextView
+            android:id="@+id/center"
+            android:layout_marginLeft="@dimen/dip_10"
+            android:layout_width="@dimen/dip_110"
+            android:layout_height="@dimen/dip_40"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:paddingRight="@dimen/dip_10"
+            android:text="继续评价"
+            android:background="@drawable/testing_bg"
+            android:textColor="@color/white"
+            android:textSize="@dimen/fond_16sp" />
+    </LinearLayout>
+</RelativeLayout>

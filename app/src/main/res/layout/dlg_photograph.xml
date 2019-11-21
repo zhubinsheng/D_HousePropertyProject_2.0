@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#f0f0f0"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/phontograph_paizhao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:padding="@dimen/dip_15"
+        android:text="拍照"
+        android:textColor="@color/min_color"
+        android:textSize="@dimen/fond_18sp" />
+    <TextView
+        android:id="@+id/phontograph_xiangce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dip_05"
+        android:background="@color/white"
+        android:gravity="center"
+        android:padding="@dimen/dip_15"
+        android:text="从手机相册选择"
+        android:textColor="@color/min_color"
+        android:textSize="@dimen/fond_18sp" />
+
+    <TextView
+        android:id="@+id/phontograph_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dip_05"
+        android:background="@color/white"
+        android:gravity="center"
+        android:padding="@dimen/dip_15"
+        android:text="取消"
+        android:textColor="@color/min_color"
+        android:textSize="@dimen/fond_18sp" />
+</LinearLayout>

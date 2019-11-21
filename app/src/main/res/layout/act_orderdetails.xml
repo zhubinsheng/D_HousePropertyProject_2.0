@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/dip_45"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/dip_70">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dip_0.1"
+                android:background="#c8c8c8" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dip_20"
+                android:orientation="horizontal"
+                android:padding="@dimen/dip_10">
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="订单号："
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_14sp" />
+
+                <TextView
+                    android:id="@+id/id_order"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="213412341234123412341234234"
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/dip_10">
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="下单时间："
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_14sp" />
+
+                <TextView
+                    android:id="@+id/time_created"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/fond_14sp">
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="订单状态："
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_14sp" />
+
+                <TextView
+                    android:id="@+id/status"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textColor="#EA1A27"
+                    android:textSize="@dimen/fond_14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/dip_10">
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="下单账号："
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_14sp" />
+
+                <TextView
+                    android:id="@+id/num_order"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dip_10"
+                android:layout_marginTop="@dimen/dip_20"
+                android:text="商品信息："
+                android:textColor="@color/min_color"
+                android:textSize="@dimen/fond_14sp"
+                android:textStyle="bold" />
+
+            <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/oader_img"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dip_160"
+                android:layout_marginLeft="@dimen/dip_10"
+                android:layout_marginTop="@dimen/dip_10"
+                android:layout_marginRight="@dimen/dip_10"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/icon_test"
+                app:riv_corner_radius="@dimen/dip_8"
+                app:riv_mutate_background="true"
+                app:riv_oval="false" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dip_10"
+                android:padding="@dimen/dip_10"
+                android:text="三百峰一期"
+                android:textColor="@color/min_color"
+                android:textSize="@dimen/fond_20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvContext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dip_10"
+                android:textColor="@color/min_color"
+                android:textSize="@dimen/fond_20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dip_10"
+                android:orientation="horizontal"
+                android:padding="@dimen/dip_10">
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="出发时段："
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_14sp" />
+
+                <TextView
+                    android:id="@+id/time_begin_time_end"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="2019.2.23"
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/dip_10">
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="姓名："
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_14sp" />
+
+                <TextView
+                    android:id="@+id/name_visitor"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="钱多多"
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/dip_10">
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="报名人数："
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_14sp" />
+
+                <TextView
+                    android:id="@+id/count"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="3人"
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/dip_10">
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="联系电话："
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_14sp" />
+
+                <TextView
+                    android:id="@+id/phone_u"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="1888888888"
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_zhipaizhong"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dip_30"
+                android:orientation="horizontal"
+                android:padding="@dimen/dip_10"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="置业顾问："
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_14sp" />
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="right"
+                    android:text="指派置业顾问中….."
+                    android:textColor="#5C96FF"
+                    android:textSize="@dimen/fond_14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_youzhiyeguwen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dip_30"
+                android:orientation="horizontal"
+                android:padding="@dimen/dip_10"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="置业顾问："
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_14sp" />
+
+                <TextView
+                    android:id="@+id/zhiyeguwen"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="right"
+                    android:text=""
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dip_30"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dip_10">
+
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="应付款："
+                        android:textColor="@color/min_color"
+                        android:textSize="@dimen/fond_14sp" />
+
+                    <TextView
+                        android:id="@+id/price1"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:text="¥3333333"
+                        android:textColor="@color/min_color"
+                        android:textSize="@dimen/fond_14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dip_10">
+
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="已付款："
+                        android:textColor="@color/min_color"
+                        android:textSize="@dimen/fond_14sp" />
+
+                    <TextView
+                        android:id="@+id/price2"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:text="¥3333333"
+                        android:textColor="#F22222"
+                        android:textSize="@dimen/fond_16sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/ll_buttom_status1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_50"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/onlinebooking"
+            android:layout_width="0dip"
+            android:layout_height="@dimen/dip_50"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="取消订单"
+            android:textColor="#50121314"
+            android:textSize="@dimen/fond_16sp" />
+
+        <TextView
+            android:id="@+id/CustomerService"
+            android:layout_width="0dip"
+            android:layout_height="@dimen/dip_50"
+            android:layout_weight="1"
+            android:background="@drawable/pf_style"
+            android:gravity="center"
+            android:text="联系置业顾问"
+            android:textColor="@color/white"
+            android:textSize="@dimen/fond_16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_buttom_status2"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_40"
+        android:layout_alignParentBottom="true"
+        android:background="#605C96FF"
+        android:orientation="vertical"
+       >
+
+        <TextView
+            android:id="@+id/odredetaile_tuikuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingTop="@dimen/dip_5"
+            android:text="已退款：10000"
+            android:textColor="@color/white"
+            android:textSize="@dimen/fond_18sp" />
+
+        <TextView
+            android:id="@+id/odredetaile_zhifu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="支付："
+            android:visibility="gone"
+            android:textColor="@color/white"
+            android:textSize="@dimen/fond_12sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_buttom_status3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/ll_show"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#805C96FF"
+            android:gravity="center"
+            android:padding="@dimen/dip_5"
+            android:text="保持联系电话畅通，等待客服与您联系！"
+            android:textColor="@color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dip_50"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/orderdetails_evaluate"
+                android:layout_width="0dip"
+                android:layout_height="@dimen/dip_50"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="评价邀请人"
+                android:textColor="#50121314"
+                android:textSize="@dimen/fond_16sp" />
+
+            <TextView
+                android:id="@+id/orderdetails_cancel"
+                android:layout_width="0dip"
+                android:layout_height="@dimen/dip_50"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="取消订单"
+                android:textColor="#50121314"
+                android:textSize="@dimen/fond_16sp" />
+
+            <TextView
+                android:id="@+id/orderdetails_customerService"
+                android:layout_width="0dip"
+                android:layout_height="@dimen/dip_50"
+                android:layout_weight="1"
+                android:background="@drawable/pf_style"
+                android:gravity="center"
+                android:text="联系客服"
+                android:textColor="@color/white"
+                android:textSize="@dimen/fond_16sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_buttom_status4"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_50"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tuikuan"
+            android:layout_width="0dip"
+            android:layout_height="@dimen/dip_50"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="取消订单"
+            android:textColor="#50121314"
+            android:textSize="@dimen/fond_16sp" />
+
+        <TextView
+            android:id="@+id/CustomerService1"
+            android:layout_width="0dip"
+            android:layout_height="@dimen/dip_50"
+            android:layout_weight="1"
+            android:background="@drawable/pf_style"
+            android:gravity="center"
+            android:text="联系置业顾问"
+            android:textColor="@color/white"
+            android:textSize="@dimen/fond_16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_buttom_status5"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_50"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/lijipingjia"
+            android:layout_width="0dip"
+            android:layout_height="@dimen/dip_50"
+            android:layout_weight="1"
+            android:background="@drawable/pf_style"
+            android:gravity="center"
+            android:text="立即评价"
+            android:textColor="@color/white"
+            android:textSize="@dimen/fond_16sp" />
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_45"
+        android:background="@color/white"
+        android:layout_marginTop="@dimen/dip_20">
+
+        <ImageView
+            android:id="@+id/OrderDetails_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/dip_10"
+            android:paddingTop="@dimen/dip_10"
+            android:paddingRight="@dimen/dip_20"
+            android:paddingBottom="@dimen/dip_10"
+            android:src="@mipmap/icon_blck_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/OrderDetails_name"
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/fond_21sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

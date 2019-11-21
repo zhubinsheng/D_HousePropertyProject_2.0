@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dip_260"
+    android:background="@drawable/dlog_chosedate_time"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dip_10">
+
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dip_10"
+            android:paddingTop="@dimen/dip_10"
+            android:text="取消"
+            android:textColor="#B5B5B5"
+            android:textSize="@dimen/fond_13sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="选择出发时间"
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/fond_19sp" />
+
+        <TextView
+            android:id="@+id/center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingTop="@dimen/dip_10"
+            android:paddingRight="@dimen/dip_10"
+            android:text="确定"
+            android:textColor="#00A7FF" />
+    </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/my_RecyclerView"
+        android:layout_marginTop="@dimen/dip_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

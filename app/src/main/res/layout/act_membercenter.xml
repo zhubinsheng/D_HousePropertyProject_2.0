@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dip_45"
+            android:layout_marginTop="@dimen/dip_20">
+
+            <ImageView
+                android:id="@+id/min_Historical_Record_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/dip_10"
+                android:src="@mipmap/icon_blck_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="会员中心"
+                android:textColor="@color/min_color"
+                android:textSize="@dimen/fond_21sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/icon_vipcenterbg" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dip_40"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="金牌会员"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/fond_22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="您当前会员等级"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/fond_10sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dip_40"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="您还未加入会员"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/fond_22sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="@dimen/dip_80"
+                    android:layout_height="@dimen/dip_20"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/dip_5"
+                    android:background="@drawable/vip_bg"
+                    android:text="立即加入"
+                    android:textColor="#E8C3A4"
+                    android:textSize="@dimen/fond_12sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="会员权益"
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/fond_12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10"
+            android:text="I have been questioned by many people to disclose some of the greatest traffic generating techniques that I know of. I am not to immediate to reveal them because I know the majority doesn’t even take battle on them. All I know is that they work and you should be familiar with this too.
+
+Let’s find to them! My first and foremost form of traffic comes from the higher ranked pages. My link is on web’s most popular sites. You should be able to be part of those famous sites. Do not waste your time in submitting your link anywhere blindly. You must show up your creative work. Going for link partners just to gain a few ranks, is a hard work.
+
+Advertising is key factor in your web site promotion. Let people talk about you, your products, and your services. You see, people are always on the look out for good content right? Your site should have really good contents. Don’t write “Welcome to my website” or “Ours is a World’s first company…blah blah” unless and until you really have dominating product. You sell your products or services as like others, but you think you must be noticed. Your offer should be different to attract visitor. Your presentation should be mind catching. Get aware of advertisers online. There are few major players around.      "
+            android:textColor="#BBBBBB"
+            android:textSize="@dimen/fond_12sp" />
+    </LinearLayout>
+</ScrollView>

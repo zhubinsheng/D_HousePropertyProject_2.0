@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F8F8"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_45"
+        android:layout_marginTop="@dimen/dip_20">
+
+        <ImageView
+            android:id="@+id/CustomerServiceDetails_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/dip_10"
+            android:paddingTop="@dimen/dip_10"
+            android:paddingRight="@dimen/dip_20"
+            android:paddingBottom="@dimen/dip_10"
+            android:src="@mipmap/icon_blck_back" />
+
+        <TextView
+            android:id="@+id/CustomerServiceDetails_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/fond_21sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/usergreement_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="@dimen/dip_10"
+                android:background="@drawable/service_boder_right"
+                android:padding="@dimen/dip_10"
+                android:textColor="@color/white"
+                android:textSize="@dimen/fond_16sp" />
+            <TextView
+                android:id="@+id/usergreement_webview"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/dip_20"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dip_10"
+                android:background="@drawable/service_boder"
+                android:padding="@dimen/dip_10"
+                android:textColor="@color/min_color"
+                android:textSize="@dimen/fond_16sp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

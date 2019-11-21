@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_apptment_text"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dip_91"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dip_5">
+
+    <TextView
+        android:id="@+id/item_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_0.1"
+        android:background="#E5E5E5" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_5" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_80"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/item_apartment_img"
+            android:layout_width="@dimen/dip_110"
+            android:layout_height="@dimen/dip_80"
+            android:scaleType="fitXY"
+           />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/dip_10">
+
+            <TextView
+                android:id="@+id/item_apartment_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/min_color"
+                android:textSize="@dimen/fond_16sp" />
+
+            <TextView
+                android:id="@+id/item_apptment_carpetArea"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_apartment_name"
+                android:paddingTop="@dimen/dip_10"
+                android:textColor="#686868"
+                android:textSize="@dimen/sp_12" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="参考价格："
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_9sp" />
+
+                <TextView
+                    android:id="@+id/item_apptment_referenceRmbPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FF5E33"
+                    android:textSize="@dimen/fond_21sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="万/套"
+                    android:textColor="#FF5E33"
+                    android:textSize="@dimen/fond_9sp" />
+
+                <TextView
+                    android:id="@+id/item_apptment_ReferenceForeignPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dip_20"
+                    android:textColor="#FF5E33"
+                    android:textSize="@dimen/fond_21sp" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="万/套"
+                    android:textColor="#FF5E33"
+                    android:textSize="@dimen/fond_9sp" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

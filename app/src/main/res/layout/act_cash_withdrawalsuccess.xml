@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_45"
+        android:layout_marginTop="@dimen/dip_20">
+
+        <ImageView
+            android:id="@+id/Cash_WithdrawalSuccess_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dip_10"
+            android:src="@mipmap/icon_blck_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+        android:text="@string/Cash_Withdrawal_name"
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/fond_21sp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_lose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dip_70"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@mipmap/icon_eero" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dip_20"
+            android:text="提现申请失败"
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/fond_19sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_Success"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dip_70"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@mipmap/icon_success" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dip_20"
+            android:text="提现申请成功"
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/fond_19sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="
+          您的提现申请已经提交成功
+提现金额将在一个工作日内划入您的提现账户，请重新支付"
+            android:textColor="#C6C6C6" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dip_20"
+        android:layout_marginTop="@dimen/dip_70">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="提现金额  30000"
+                android:textColor="#6F6F6F"
+                android:textSize="@dimen/fond_13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/dip_10"
+                android:text="提现账户  建设银行（0125）"
+                android:textColor="#6F6F6F"
+                android:textSize="@dimen/fond_13sp" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/Cash_WithdrawalSuccess_oder"
+            android:layout_width="@dimen/dip_110"
+            android:layout_height="@dimen/dip_30"
+            android:layout_marginRight="@dimen/dip_20"
+            android:layout_gravity="center_vertical"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dip_50"
+            android:background="@drawable/cashier_boder"
+            android:gravity="center"
+            android:text="查看账单"
+            android:textColor="#6F6F6F"
+            android:textSize="@dimen/fond_16sp" />
+    </RelativeLayout>
+</LinearLayout>

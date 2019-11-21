@@ -1,0 +1,34 @@
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme" >
+        <item name="colorPrimaryDark">#00ffffff</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="appTitleSize">@dimen/txt_big</item>
+        <item name="appTitleColor">@color/colorAccent</item>
+        <item name="android:windowBackground">@mipmap/icon_loding</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <!--高度为1的线-->
+    <style name="com_line" parent="@style/line_bg">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+    </style>
+    <style name="line_bg">
+        <item name="android:background">@color/line_color</item>
+    </style>
+    <!--宽为1的竖直线-->
+    <style name="vertical_line" parent="@style/line_bg">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="mRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/ratingbar</item>
+        <item name="android:minHeight">38dp</item>
+        <item name="android:maxHeight">38dp</item> //这里是图片的高度
+    </style>
+</resources>

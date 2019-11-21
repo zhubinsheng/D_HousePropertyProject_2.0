@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="@dimen/dip_10"
+    android:layout_marginLeft="@dimen/dip_10"
+    android:layout_marginTop="@dimen/dip_2"
+    android:layout_marginBottom="@dimen/dip_2"
+    android:background="@color/white">
+    <ImageView
+        android:id="@+id/my_Img"
+        android:layout_width="match_parent"
+        android:scaleType="centerCrop"
+        android:layout_height="@dimen/dip_180" />
+</LinearLayout>

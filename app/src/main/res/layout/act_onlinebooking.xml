@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dip_45"
+            android:layout_marginTop="@dimen/dip_20">
+
+            <ImageView
+                android:id="@+id/OnlineBooking_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="@dimen/dip_10"
+                android:paddingBottom="@dimen/dip_10"
+                android:paddingRight="@dimen/dip_20"
+                android:paddingTop="@dimen/dip_10"
+                android:src="@mipmap/icon_blck_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="@string/home_OnlineBooking_name"
+                android:textColor="@color/min_color"
+                android:textSize="@dimen/fond_21sp" />
+            <ImageView
+                android:id="@+id/unitdetails_fangdaijisuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dip_10"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/dip_10"
+                android:src="@mipmap/icon_fandaijisuan" />
+        </RelativeLayout>
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/onlinebooking_hader"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dip_160"
+            android:layout_marginLeft="@dimen/dip_10"
+            android:layout_marginTop="@dimen/dip_10"
+            android:layout_marginRight="@dimen/dip_10"
+            android:scaleType="fitXY"
+            android:src="@mipmap/icon_test"
+            app:riv_corner_radius="@dimen/dip_8"
+            app:riv_mutate_background="true"
+            app:riv_oval="false" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dip_10"
+            android:padding="@dimen/dip_10"
+            android:text="海德花园   1栋1单元205 "
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/fond_20sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dip_10"
+            android:paddingRight="@dimen/dip_10">
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="户型："
+                    android:textColor="#7A7A7A"
+                    android:textSize="@dimen/fond_16sp" />
+
+                <TextView
+                    android:id="@+id/Act_Ap_UnitDetails_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="B1-03  1室1厅"
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/dip_10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="室内面积："
+                    android:textColor="#7A7A7A"
+                    android:textSize="@dimen/fond_16sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_16sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dip_10"
+            android:paddingTop="@dimen/dip_10"
+            android:paddingRight="@dimen/dip_10">
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="土地面积："
+                    android:textColor="#7A7A7A"
+                    android:textSize="@dimen/fond_16sp" />
+
+                <TextView
+                    android:id="@+id/Act_Ap_UnitDetails_carpetArea1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="34.2㎡"
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/dip_10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="阳台面积："
+                    android:textColor="#7A7A7A"
+                    android:textSize="@dimen/fond_16sp" />
+
+                <TextView
+                    android:id="@+id/Act_Ap_UnitDetails_balconyArea"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8㎡"
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_16sp" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dip_10"
+            android:paddingTop="@dimen/dip_10"
+            android:paddingRight="@dimen/dip_10">
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="房屋价格："
+                    android:textColor="#7A7A7A"
+                    android:textSize="@dimen/fond_16sp" />
+
+                <TextView
+                    android:id="@+id/Act_Ap_UnitDetails_referenceRmbPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#4B95FF"
+                    android:textSize="@dimen/fond_16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/dip_10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="房屋订金："
+                    android:textColor="#7A7A7A"
+                    android:textSize="@dimen/fond_16sp" />
+                <TextView
+                    android:id="@+id/booking_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_16sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/onlinebooking_NextStep"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/pf_style"
+        android:gravity="center"
+        android:paddingTop="@dimen/dip_15"
+        android:paddingBottom="@dimen/dip_15"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_16" />
+</RelativeLayout>

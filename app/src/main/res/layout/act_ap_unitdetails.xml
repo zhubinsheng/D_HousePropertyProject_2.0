@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_45"
+        android:layout_marginTop="@dimen/dip_20">
+
+        <ImageView
+            android:id="@+id/Ap_UnitDetails_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/dip_10"
+            android:paddingTop="@dimen/dip_10"
+            android:paddingRight="@dimen/dip_20"
+            android:paddingBottom="@dimen/dip_10"
+            android:src="@mipmap/icon_blck_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/UnitDetails"
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/fond_21sp" />
+
+        <ImageView
+            android:id="@+id/unitdetails_fangdaijisuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dip_10"
+            android:padding="@dimen/dip_10"
+            android:src="@mipmap/icon_fandaijisuan" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/dip_50">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/dip_10">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/Ap_UnitDetails_RecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dip_160">
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/Ap_UnitDetails_ViewPager"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="@dimen/dip_10">
+
+                        <TextView
+                            android:id="@+id/Ap_UnitDetails_tv1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/unitdetails_cb"
+                            android:text="视频"
+                            android:textColor="@drawable/unitdetails_fond_selecte"
+                            android:textSize="@dimen/fond_9sp" />
+
+                        <TextView
+                            android:id="@+id/Ap_UnitDetails_tv2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dip_5"
+                            android:background="@drawable/unitdetails_cb"
+                            android:text="图片"
+                            android:textColor="@drawable/unitdetails_fond_selecte"
+                            android:textSize="@dimen/fond_9sp" />
+
+                        <TextView
+                            android:id="@+id/Ap_UnitDetails_tv3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dip_5"
+                            android:background="@drawable/unitdetails_cb"
+                            android:text="户型"
+                            android:textColor="@drawable/unitdetails_fond_selecte"
+                            android:textSize="@dimen/fond_10sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/Act_Ap_UnitDetails_page"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="@dimen/dip_10"
+                        android:layout_marginBottom="@dimen/dip_10"
+                        android:background="@drawable/unitdetails_bg"
+                        android:text="共100张"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/fond_9sp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/Act_Ap_UnitDetails_Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dip_20"
+                    android:layout_marginBottom="@dimen/dip_10"
+                    android:paddingLeft="@dimen/dip_10"
+                    android:textColor="#121314"
+                    android:textSize="@dimen/fond_21sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dip_10"
+                    android:paddingRight="@dimen/dip_10">
+
+                    <LinearLayout
+                        android:layout_width="0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="户型"
+                            android:textColor="@color/home_unit_fond_color"
+                            android:textSize="@dimen/fond_13sp" />
+
+                        <TextView
+                            android:id="@+id/Act_Ap_UnitDetails_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/dip_5"
+                            android:textColor="@color/login_input_hind_color"
+                            android:textSize="@dimen/fond_16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="面积"
+                            android:textColor="@color/home_unit_fond_color"
+                            android:textSize="@dimen/fond_13sp" />
+
+                        <TextView
+                            android:id="@+id/Act_Ap_UnitDetails_carpetArea"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/dip_5"
+                            android:text=""
+                            android:textColor="@color/login_input_hind_color"
+                            android:textSize="@dimen/fond_18sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="参考价格"
+                            android:textColor="@color/home_unit_fond_color"
+                            android:textSize="@dimen/fond_13sp" />
+
+                        <TextView
+                            android:id="@+id/Act_Ap_UnitDetails_referenceRmbPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/dip_5"
+                            android:text=""
+                            android:textColor="@color/login_input_hind_color"
+                            android:textSize="@dimen/fond_18sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dip_40"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dip_10">
+
+                    <LinearLayout
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="房型："
+                            android:textColor="@color/home_unit_fond_color"
+                            android:textSize="@dimen/fond_13sp" />
+
+                        <TextView
+                            android:id="@+id/Act_Ap_UnitDetails_code"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/dip_10"
+                            android:paddingLeft="@dimen/dip_10"
+                            android:textColor="#121314"
+                            android:textSize="@dimen/fond_15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="土地面积："
+                            android:textColor="@color/home_unit_fond_color"
+                            android:textSize="@dimen/fond_13sp" />
+
+                        <TextView
+                            android:id="@+id/Act_Ap_UnitDetails_carpetArea1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/dip_10"
+                            android:paddingLeft="@dimen/dip_10"
+                            android:textColor="#121314"
+                            android:textSize="@dimen/fond_15sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dip_10">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="阳台面积："
+                        android:textColor="@color/home_unit_fond_color"
+                        android:textSize="@dimen/fond_13sp" />
+
+                    <TextView
+                        android:id="@+id/Act_Ap_UnitDetails_balconyArea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dip_10"
+                        android:paddingLeft="@dimen/dip_10"
+                        android:textColor="#121314"
+                        android:textSize="@dimen/fond_15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dip_10"
+                    android:paddingRight="@dimen/dip_10">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="户型解读："
+                        android:textColor="@color/home_unit_fond_color"
+                        android:textSize="@dimen/fond_13sp" />
+
+                    <TextView
+                        android:id="@+id/Act_Ap_UnitDetails_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dip_10"
+                        android:paddingLeft="@dimen/dip_10"
+                        android:text="住宅户型平面设计是住宅建筑设计的基础，是住宅工程项目策划"
+                        android:textColor="#121314"
+                        android:textSize="@dimen/fond_15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llShow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/unitdetails_addImageview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/showShutDown"
+                    android:layout_width="wrap_content"
+                    android:text="合上"
+                    android:padding="@dimen/dip_10"
+                    android:layout_gravity="right"
+                    android:textColor="#A6A6A6"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dip_50"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/onlinebooking"
+                android:layout_width="0dip"
+                android:layout_height="@dimen/dip_50"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="在线预定"
+                android:textColor="#5C96FF"
+                android:textSize="@dimen/fond_16sp" />
+
+            <TextView
+                android:id="@+id/CustomerService"
+                android:layout_width="0dip"
+                android:layout_height="@dimen/dip_50"
+                android:layout_weight="1"
+                android:background="@drawable/pf_style"
+                android:gravity="center"
+                android:text="在线客服"
+                android:textColor="@color/white"
+                android:textSize="@dimen/fond_16sp" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

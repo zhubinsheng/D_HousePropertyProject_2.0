@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_110"
+        android:background="@mipmap/icon_notuse"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="￥"
+                    android:textColor="#FF5E33"
+                    android:textSize="@dimen/fond_18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2000"
+                    android:textColor="#FF5E33"
+                    android:textSize="@dimen/fond_39sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="商品优惠券"
+                android:textColor="#5F5F5F"
+                android:textSize="@dimen/fond_12sp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="5">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_weight="5"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="参与看房团活动获得"
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dip_5"
+                    android:text="有效期至 2019.11.11   23:59"
+                    android:textColor="#5F5F5F"
+                    android:textSize="@dimen/fond_9sp" />
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/item_ClipCoupons_cb"
+                android:layout_width="@dimen/dip_20"
+                android:layout_height="@dimen/dip_20"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dip_20"
+                android:button="@drawable/mine_clipcoupons_cb"
+                android:text="可使用"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dip_13" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

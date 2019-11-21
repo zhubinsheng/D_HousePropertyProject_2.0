@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="login_blck">#000000</color>
+    <color name="login_input_hind_color">#5C96FF</color>
+    <color name="login_input_hind">#C1C1C1</color>
+    <color name="login_liner">#99c0c0c0</color>
+    <color name="login_send_color">#61B3F8</color>
+    <color name="login_send_color1">#61B3F8</color>
+    <color name="login_send_hid_color">#C3C3C3</color>
+    <color name="home_unit_fond_color">#C3C3C3</color>
+    <color name="home_unit_fond_color1">#929292</color>
+    <color name="min_color">#121314</color>
+    <color name="login_color">#80000000</color>
+    <color name="min_bg_color">#E5E5E5</color>
+    <color name="color_f6">#f6f6f6</color>
+    <color name="color_f7">#5C96FF</color>
+    <color name="mycolor">#10121314</color>
+</resources>

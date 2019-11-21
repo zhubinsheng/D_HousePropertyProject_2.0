@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dip_50">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dip_225">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/UnitDetails_ViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/dip_15">
+
+                    <TextView
+                        android:id="@+id/UnitDetails_tv1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/unitdetails_cb"
+                        android:text="视频"
+                        android:textColor="@drawable/unitdetails_fond_selecte"
+                        android:textSize="@dimen/fond_9sp" />
+
+                    <TextView
+                        android:id="@+id/UnitDetails_tv2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dip_5"
+                        android:background="@drawable/unitdetails_cb"
+                        android:text="图片"
+                        android:textColor="@drawable/unitdetails_fond_selecte"
+                        android:textSize="@dimen/fond_9sp" />
+
+                    <TextView
+                        android:id="@+id/UnitDetails_tv3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dip_5"
+                        android:background="@drawable/unitdetails_cb"
+                        android:text="户型"
+                        android:textColor="@drawable/unitdetails_fond_selecte"
+                        android:textSize="@dimen/fond_10sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="@dimen/dip_10"
+                    android:layout_marginBottom="@dimen/dip_15"
+                    android:background="@drawable/unitdetails_bg"
+                    android:text="共100张"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/fond_9sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dip_20">
+
+                    <ImageView
+                        android:id="@+id/UnitDetails_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dip_10"
+                        android:src="@mipmap/icon_wihtback" />
+
+                    <ImageView
+                        android:id="@+id/UnitDetails_call"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:padding="@dimen/dip_10"
+                        android:src="@mipmap/icon_call" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dip_20"
+                android:layout_marginBottom="@dimen/dip_10"
+                android:paddingLeft="@dimen/dip_10"
+                android:text="海德花园"
+                android:textColor="#121314"
+                android:textSize="@dimen/fond_21sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dip_10"
+                android:paddingRight="@dimen/dip_10">
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="户型"
+                        android:textColor="@color/home_unit_fond_color"
+                        android:textSize="@dimen/fond_13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/dip_5"
+                        android:text="2室1厅"
+                        android:textColor="@color/login_input_hind_color"
+                        android:textSize="@dimen/fond_19sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="面积"
+                        android:textColor="@color/home_unit_fond_color"
+                        android:textSize="@dimen/fond_13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/dip_5"
+                        android:text="325㎡"
+                        android:textColor="@color/login_input_hind_color"
+                        android:textSize="@dimen/fond_19sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="参考价格"
+                        android:textColor="@color/home_unit_fond_color"
+                        android:textSize="@dimen/fond_13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/dip_5"
+                        android:text="91万  429万泰铢"
+                        android:textColor="@color/login_input_hind_color"
+                        android:textSize="@dimen/fond_19sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dip_40"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dip_10">
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="房型："
+                        android:textColor="@color/home_unit_fond_color"
+                        android:textSize="@dimen/fond_13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dip_10"
+                        android:paddingLeft="@dimen/dip_10"
+                        android:text="B1-03"
+                        android:textColor="#121314"
+                        android:textSize="@dimen/fond_15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="土地面积："
+                        android:textColor="@color/home_unit_fond_color"
+                        android:textSize="@dimen/fond_13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dip_10"
+                        android:paddingLeft="@dimen/dip_10"
+                        android:text="325㎡"
+                        android:textColor="#121314"
+                        android:textSize="@dimen/fond_15sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dip_10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="阳台面积："
+                    android:textColor="@color/home_unit_fond_color"
+                    android:textSize="@dimen/fond_13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dip_10"
+                    android:paddingLeft="@dimen/dip_10"
+                    android:text="12㎡"
+                    android:textColor="#121314"
+                    android:textSize="@dimen/fond_15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dip_10"
+                android:paddingRight="@dimen/dip_10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="户型解读："
+                    android:textColor="@color/home_unit_fond_color"
+                    android:textSize="@dimen/fond_13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dip_10"
+                    android:paddingLeft="@dimen/dip_10"
+                    android:text="住宅户型平面设计是住宅建筑设计的基础，是住宅工程项目策划"
+                    android:textColor="#121314"
+                    android:textSize="@dimen/fond_15sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dip_30"
+                android:layout_marginBottom="@dimen/dip_10"
+                android:paddingLeft="@dimen/dip_10"
+                android:text="推荐户型"
+                android:textColor="#121314"
+                android:textSize="@dimen/fond_16sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:paddingTop="@dimen/dip_15"
+                android:descendantFocusability="blocksDescendants"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/UnitDetails_RecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <TextView
+        android:id="@+id/UnitDetails_coomit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_50"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/unitdetails_bt_style"
+        android:gravity="center"
+        android:text="看房团报名"
+        android:textColor="@color/white"
+        android:textSize="@dimen/fond_16sp" />
+</RelativeLayout>

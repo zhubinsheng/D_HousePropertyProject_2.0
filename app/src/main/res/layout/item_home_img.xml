@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/dip_20"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/dip_10"
+        android:paddingBottom="@dimen/dip_10"
+        android:text="小区介绍"
+        android:textColor="@color/min_color"
+        android:textSize="@dimen/fond_12sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dip_10"
+        android:text="文字代替文字代替文字代替文字代替文字代替文字代替文字代替文字代替."
+        android:textColor="#444649"
+        android:textSize="@dimen/fond_12sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="0dip"
+            android:layout_height="@dimen/dip_150"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            android:src="@mipmap/icon_test"
+            app:riv_corner_radius="@dimen/dip_3"
+            app:riv_mutate_background="true"
+            app:riv_oval="false" />
+
+    </LinearLayout>
+</LinearLayout>

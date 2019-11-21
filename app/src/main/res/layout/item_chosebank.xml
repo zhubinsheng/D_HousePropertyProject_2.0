@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <VideoView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_0.1"
+        android:layout_marginLeft="@dimen/dip_10"
+        android:layout_marginRight="@dimen/dip_20"
+        android:background="#E5E5E5" />
+    <RelativeLayout
+        android:id="@+id/cash_withdrawal_bankCar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dip_10"
+        android:paddingTop="@dimen/dip_15"
+        android:paddingBottom="@dimen/dip_15"
+        android:paddingLeft="@dimen/dip_10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_jianshe"
+            android:drawablePadding="@dimen/dip_10"
+            android:text="建设银行（0125）"
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/fond_16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawableRight="@mipmap/icon_right"
+            android:drawablePadding="@dimen/dip_5"
+            android:textColor="#ABABAB"
+            android:textSize="@dimen/fond_12sp" />
+    </RelativeLayout>
+</LinearLayout>
