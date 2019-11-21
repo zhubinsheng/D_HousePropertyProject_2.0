@@ -5,6 +5,7 @@
     android:padding="@dimen/dp_10"
     android:background="@color/white">
     <TextView
+        android:id="@+id/mSubcategoryParamName"
         android:layout_width="0dip"
         android:textSize="@dimen/fond_14sp"
         android:textColor="#999999"
@@ -12,6 +13,7 @@
         android:layout_weight="1"
         android:text="等级" />
     <TextView
+        android:id="@+id/valueContext"
         android:layout_width="0dip"
         android:textSize="@dimen/fond_14sp"
         android:textColor="@color/min_color"

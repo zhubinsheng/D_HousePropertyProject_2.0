@@ -71,6 +71,7 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/newStatus"
         android:layout_width="wrap_content"
         android:src="@mipmap/icon_new"
         android:paddingLeft="@dimen/dip_20"

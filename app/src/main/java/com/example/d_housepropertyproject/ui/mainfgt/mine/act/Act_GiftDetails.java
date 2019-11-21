@@ -3,12 +3,17 @@ package com.example.d_housepropertyproject.ui.mainfgt.mine.act;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import com.example.d_housepropertyproject.R;
+import com.example.d_housepropertyproject.net.http.HttpHelper;
 import com.example.d_housepropertyproject.tool.GlideImageLoader;
 import com.example.d_housepropertyproject.ui.mainfgt.home.adapter.ImageListAdapter;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.GoodsQueryInfoIntegralUserBean;
+import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lykj.aextreme.afinal.common.BaseActivity;
+import com.lykj.aextreme.afinal.utils.MyToast;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
@@ -26,6 +31,17 @@ public class Act_GiftDetails extends BaseActivity {
     Banner banner;
     @BindView(R.id.imageRecyclerView)
     RecyclerView imageRecyclerView;
+    @BindView(R.id.name)
+    TextView name;
+    @BindView(R.id.price)
+    TextView price;
+    @BindView(R.id.salePrice)
+    TextView salePrice;
+    @BindView(R.id.linkman)
+    TextView linkman;
+    @BindView(R.id.address)
+    TextView address;
+
     @Override
     public int initLayoutId() {
         return R.layout.act_giftdetails;
@@ -37,29 +53,31 @@ public class Act_GiftDetails extends BaseActivity {
         ImmersionBar.with(this).statusBarDarkFont(true).init();
     }
 
+    private String goodId;
+
     @Override
     public void initView() {
         hideHeader();
         //绑定初始化ButterKnife
         ButterKnife.bind(this);
+        goodId = getIntent().getStringExtra("goodId");
     }
 
-    List<Integer> image = new ArrayList<>();
+    private String des;
+    String[] stImg;
+    List<String> imgs = new ArrayList<>();
+    List<String> image = new ArrayList<>();
+    private String bannerPic;
+    String[] bannerstImg;
+    ImageListAdapter imageListAdapter;
 
     @Override
     public void initData() {
-        image.add(R.mipmap.icon_test1);
-        image.add(R.mipmap.icon_test2);
-        banner.setImageLoader(new GlideImageLoader());
-        banner.setImages(image).start();
         imageRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        List<Integer> data = new ArrayList<>();
-        data.add(R.mipmap.icon_test1);
-        data.add(R.mipmap.icon_test3);
-        ImageListAdapter imageListAdapter = new ImageListAdapter(data);
+        imageListAdapter = new ImageListAdapter(imgs);
         imageRecyclerView.setAdapter(imageListAdapter);
+        goodsQueryInfoIntegralUser();
     }
-
     @Override
     public void updateUI() {
 
@@ -81,4 +99,71 @@ public class Act_GiftDetails extends BaseActivity {
     public void onClick() {
         finish();
     }
+
+    /**
+     * 商品列表
+     */
+    public void goodsQueryInfoIntegralUser() {
+        HttpHelper.goodsQueryInfoIntegralUser(context, goodId, new HttpHelper.HttpUtilsCallBack<String>() {
+            @Override
+            public void onFailure(String failure) {
+                MyToast.show(context, failure);
+                loding.dismiss();
+            }
+            @Override
+            public void onSucceed(String succeed) {
+                loding.dismiss();
+                Gson gson = new Gson();
+                GoodsQueryInfoIntegralUserBean entity = gson.fromJson(succeed, GoodsQueryInfoIntegralUserBean.class);
+                if (entity.getCode() == 20000) {
+                    //banner图
+                    if (entity.getResult().getPic().contains(";http")) {
+                        String mmc[] = entity.getResult().getPic().split(";");
+                        for (int i = 0; i < mmc.length; i++) {
+                            image.add(mmc[i]);
+                        }
+                    } else if (entity.getResult().getPic().contains(",")) {
+                        bannerstImg = entity.getResult().getPic().split(",");
+                        for (int i = 0; i < bannerstImg.length; i++) {
+                            image.add(bannerstImg[i]);
+                        }
+                    } else if (entity.getResult().getPic().contains(";")) {
+                        bannerPic = entity.getResult().getPic().replace(";", "");
+                        image.add(bannerPic);
+                    }
+                    banner.setImageLoader(new GlideImageLoader());
+                    banner.setImages(image).start();
+                    //产品详情图片显示
+                    if (entity.getResult().getDes().contains(";http")) {
+                        String mmc[] = entity.getResult().getDes().split(";");
+                        for (int i = 0; i < mmc.length; i++) {
+                            imgs.add(mmc[i]);
+                        }
+                    } else if (entity.getResult().getDes().contains(",")) {
+                        stImg = entity.getResult().getDes().split(",");
+                        for (int i = 0; i < stImg.length; i++) {
+                            imgs.add(stImg[i]);
+                        }
+                    } else if (entity.getResult().getDes().contains(";")) {
+                        des = entity.getResult().getDes().replace(";", "");
+                        imgs.add(des);
+                    }
+                    imageListAdapter.notifyDataSetChanged();
+                    name.setText(entity.getResult().getName());
+                    price.setText(entity.getResult().getSalePrice() + "");
+                    salePrice.setText("剩余" + entity.getResult().getStock() + entity.getResult().getUnit());
+                    linkman.setText(entity.getResult().getLinkman() + "  " + entity.getResult().getPhone());
+                    address.setText(entity.getResult().getAddress());
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                loding.dismiss();
+                MyToast.show(context, error);
+            }
+        });
+    }
+
+
 }

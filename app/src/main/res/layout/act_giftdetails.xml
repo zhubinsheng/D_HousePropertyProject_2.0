@@ -83,7 +83,6 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/unit"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingLeft="@dimen/dip_2"
@@ -131,6 +130,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/linkman"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="顾凯凯 13666666666"
@@ -138,6 +138,7 @@
                             android:textSize="@dimen/fond_12sp" />
 
                         <TextView
+                            android:id="@+id/address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingTop="@dimen/dip_5"

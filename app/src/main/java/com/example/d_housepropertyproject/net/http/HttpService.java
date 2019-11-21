@@ -168,6 +168,17 @@ public interface HttpService {
     @GET(ApiConstant.judgeinit + "{judgedId}/{type}")
     Observable<String> judgeinit(@Path("judgedId") String judgedId, @Path("type") String type, @Header("token") String token);
 
+
+    @GET(ApiConstant.goodsQueryListUser)
+    Observable<String> goodsQueryListUser(@QueryMap Map<String, String> map);
+
+
+    @GET(ApiConstant.goodsQueryInfoStoreUser)
+    Observable<String> goodsQueryInfoStoreUser(@QueryMap Map<String, String> map);
+
+
+    @GET(ApiConstant.goodsQueryInfoIntegralUser)
+    Observable<String> goodsQueryInfoIntegralUser(@QueryMap Map<String, String> map);
     /**
      * 下载文件
      *

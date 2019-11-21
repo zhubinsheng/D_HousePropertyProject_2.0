@@ -9,13 +9,13 @@ import com.example.d_housepropertyproject.R;
 
 import java.util.List;
 
-public class ImageListAdapter extends BaseQuickAdapter<Integer, BaseViewHolder> {
-    public ImageListAdapter( List<Integer> data) {
+public class ImageListAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+    public ImageListAdapter( List<String> data) {
         super(R.layout.item_imagelist, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, Integer item) {
+    protected void convert(BaseViewHolder helper, String item) {
         Glide.with(mContext).load(item).into((ImageView) helper.getView(R.id.imghader));
     }
 }

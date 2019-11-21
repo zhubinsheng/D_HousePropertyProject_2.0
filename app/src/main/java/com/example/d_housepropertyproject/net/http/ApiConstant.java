@@ -9,11 +9,11 @@ public class ApiConstant {
     //测试
     public static String MyWebServiceUrl = "ws://192.168.2.240:8802/websocket/";
     //外网
-    public static final String ROOT_URL = "http://app.dingduoduo.net.cn/";
+//    public static final String ROOT_URL = "http://app.dingduoduo.net.cn/";
     //外网测试
 //    public static final String ROOT_URL = "http://www.dingduoduo.net.cn/dev/";
     // 本地服务器
-//    public static String ROOT_URL = "http://192.168.2.240:802/";
+    public static String ROOT_URL = "http://192.168.2.240:802/";
     //户型
     public static final String houseTypeProject = "houseType/project/";
     //户型详情
@@ -104,5 +104,11 @@ public class ApiConstant {
     public static final String judgeinit = "judge/init/";
     //获取所有下级区域
     public static final String areagetByParentId = "area/getByParentId/";
+    //商品列表
+    public static final String goodsQueryListUser = "goods/query/list/user/";
+    //商品详情
+    public static final String goodsQueryInfoStoreUser= "goods/query/info/store/user";
+    //积分商品详情
+    public static final String goodsQueryInfoIntegralUser= "goods/query/info/integral/user";
 }
 

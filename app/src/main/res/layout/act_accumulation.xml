@@ -28,113 +28,124 @@
             android:textSize="@dimen/fond_21sp" />
     </RelativeLayout>
 
-    <android.support.v4.widget.NestedScrollView
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dip_220"
-                android:scaleType="fitXY"
-                android:src="@mipmap/icon_jifentest1" />
+            android:layout_height="match_parent">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dip_15"
-                android:layout_marginBottom="@dimen/dp_10"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:src="@mipmap/icon_jifennumber" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dip_220"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/icon_jifentest1" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dip_15"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dip"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:orientation="horizontal">
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@mipmap/icon_jifennumber" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="积分"
+                                android:textColor="@color/min_color"
+                                android:textSize="@dimen/fond_12sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="54654"
+                                android:textColor="#FA5A37"
+                                android:textSize="@dimen/fond_12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ExchangeRecords"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@mipmap/icon_duihuanjilu" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="积分"
+                            android:layout_gravity="center"
+                            android:text="兑换记录"
                             android:textColor="@color/min_color"
                             android:textSize="@dimen/fond_12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/MyIncome"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@mipmap/icon_jifenjilv" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="54654"
-                            android:textColor="#FA5A37"
+                            android:layout_gravity="center"
+                            android:text="积分明细"
+                            android:textColor="@color/min_color"
                             android:textSize="@dimen/fond_12sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/ExchangeRecords"
-                    android:layout_width="0dip"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:descendantFocusability="blocksDescendants"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:src="@mipmap/icon_duihuanjilu" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="兑换记录"
-                        android:textColor="@color/min_color"
-                        android:textSize="@dimen/fond_12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/MyIncome"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:src="@mipmap/icon_jifenjilv" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="积分明细"
-                        android:textColor="@color/min_color"
-                        android:textSize="@dimen/fond_12sp" />
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/jifenRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
                 </LinearLayout>
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:descendantFocusability="blocksDescendants"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/jifenRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-            </LinearLayout>
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+        </android.support.v4.widget.NestedScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

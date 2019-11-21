@@ -1,5 +1,6 @@
 package com.example.d_housepropertyproject.tool;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.text.ParseException;
@@ -69,5 +70,14 @@ public class MyTimeUtils {
         Date date = new Date(lt);
         res = simpleDateFormat.format(date);
         return res;
+    }
+
+    public static String format(String date) {
+        if (TextUtils.isEmpty(date))
+            return null;
+        //需要其他格式的以此类推
+        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日hh时mm分");
+        Long time = new Long(date);
+        return format.format(time);
     }
 }

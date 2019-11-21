@@ -2,6 +2,7 @@ package com.example.d_housepropertyproject.net.http;
 
 import android.content.Context;
 import android.content.Intent;
+
 import com.example.d_housepropertyproject.bean.CodeBean;
 import com.example.d_housepropertyproject.bean.PostJudgeAddBean;
 import com.example.d_housepropertyproject.bean.RegisterAndLoginBean;
@@ -17,11 +18,14 @@ import com.example.d_housepropertyproject.ui.mainfgt.apartment.bean.TransactionA
 import com.example.d_housepropertyproject.ui.mainfgt.apartment.bean.TransactionWXUnifiedOrderBean;
 import com.example.d_housepropertyproject.ui.mainfgt.apartment.dialog.bean.HouseInFoAttrBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.CheckUserBean;
+import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.GoodsQueryInfoStoreUserBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.QueryInfoBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.bean.GetPlatForFileBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.bean.HomeByidBean;
+import com.example.d_housepropertyproject.ui.mainfgt.home.bean.RecommendingCommoditiesBean;
 import com.example.d_housepropertyproject.ui.mainfgt.message.bean.MessageBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.CertificateVerificationBean;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.GoodsQueryInfoIntegralUserBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.OrderBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.OrderDetaileBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.UserGetUserBean;
@@ -566,6 +570,7 @@ public class HttpHelper {
                     }
                 });
     }
+
     /**
      * 修改个人信息上传头像
      */
@@ -607,6 +612,7 @@ public class HttpHelper {
                     }
                 });
     }
+
     /**
      * 旧手机验证
      */
@@ -1534,7 +1540,7 @@ public class HttpHelper {
     /**
      * 退团申请
      */
-    public static void eventOut(String id_seeuser,String neirong, final HttpUtilsCallBack<String> callBack) {
+    public static void eventOut(String id_seeuser, String neirong, final HttpUtilsCallBack<String> callBack) {
         HashMap<String, String> map = new HashMap<>();
         map.put("des", neirong);
         map.put("id_seeuser", id_seeuser);//参团时间
@@ -1888,7 +1894,7 @@ public class HttpHelper {
         HttpService httpService = RetrofitFactory.getRetrofit(15l, 15l).create(HttpService.class);
         Gson gson = new Gson();
         String json = gson.toJson(postJudgeAddBean);
-        Debug.e("-----------------"+json);
+        Debug.e("-----------------" + json);
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
         httpService.judgeAdd(body, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
@@ -1897,9 +1903,10 @@ public class HttpHelper {
                     @Override
                     public void onSubscribe(Disposable d) {
                     }
+
                     @Override
                     public void onNext(String succeed) {
-                        Debug.e("--------------onNext----succeed=="+succeed);
+                        Debug.e("--------------onNext----succeed==" + succeed);
                         Gson gson = new Gson();
                         UserEvaluateBean entity = gson.fromJson(succeed, UserEvaluateBean.class);
                         if (entity.getCode() == 20000) {
@@ -1911,7 +1918,7 @@ public class HttpHelper {
 
                     @Override
                     public void onError(Throwable e) {
-                        Debug.e("--------------onNext----onError=="+e.getMessage());
+                        Debug.e("--------------onNext----onError==" + e.getMessage());
                         callBack.onFailure(httpFailureMsg());
                     }
 
@@ -1937,7 +1944,7 @@ public class HttpHelper {
 
                     @Override
                     public void onNext(String succeed) {
-                        Debug.e("------------评价信息初始化---succeed==="+succeed);
+                        Debug.e("------------评价信息初始化---succeed===" + succeed);
                         Gson gson = new Gson();
                         judgeinitBean entity = gson.fromJson(succeed, judgeinitBean.class);
                         if (entity.getCode() == 20000) {
@@ -1949,7 +1956,7 @@ public class HttpHelper {
 
                     @Override
                     public void onError(Throwable e) {
-                        Debug.e("------------评价信息初始化---onError==="+e.getMessage());
+                        Debug.e("------------评价信息初始化---onError===" + e.getMessage());
                         callBack.onFailure(httpFailureMsg());
                     }
 
@@ -1958,6 +1965,129 @@ public class HttpHelper {
                     }
                 });
     }
+
+    /**
+     * 商品列表
+     */
+    public static void goodsQueryListUser(Context context, HashMap<String, String> hashMap, final HttpUtilsCallBack<String> callBack) {
+        HttpService httpService = RetrofitFactory.getRetrofit(15l, 15l).create(HttpService.class);
+        httpService.goodsQueryListUser(hashMap)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(String succeed) {
+                        Gson gson = new Gson();
+                        RecommendingCommoditiesBean entity = gson.fromJson(succeed, RecommendingCommoditiesBean.class);
+                        if (choseLoginStatis(entity.getCode(), context)) {
+                            return;
+                        }
+                        if (entity.getCode() == 20000) {
+                            callBack.onSucceed(succeed);
+                        } else {
+                            callBack.onError(entity.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callBack.onFailure(httpFailureMsg());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
+    /**
+     * 商品详情
+     */
+    public static void goodsQueryInfoStoreUser(Context context, String goodId, final HttpUtilsCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("id", goodId);
+        HttpService httpService = RetrofitFactory.getRetrofit(15l, 15l).create(HttpService.class);
+        httpService.goodsQueryInfoStoreUser(hashMap)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(String succeed) {
+                        Gson gson = new Gson();
+                        GoodsQueryInfoStoreUserBean entity = gson.fromJson(succeed, GoodsQueryInfoStoreUserBean.class);
+                        if (choseLoginStatis(entity.getCode(), context)) {
+                            return;
+                        }
+                        if (entity.getCode() == 20000) {
+                            callBack.onSucceed(succeed);
+                        } else {
+                            callBack.onError(entity.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callBack.onFailure(httpFailureMsg());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
+    /**
+     * 积分商品详情
+     */
+    public static void goodsQueryInfoIntegralUser(Context context, String goodId, final HttpUtilsCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("id", goodId);
+        HttpService httpService = RetrofitFactory.getRetrofit(15l, 15l).create(HttpService.class);
+        httpService.goodsQueryInfoIntegralUser(hashMap)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(String succeed) {
+                        Gson gson = new Gson();
+                        GoodsQueryInfoIntegralUserBean entity = gson.fromJson(succeed, GoodsQueryInfoIntegralUserBean.class);
+                        if (choseLoginStatis(entity.getCode(), context)) {
+                            return;
+                        }
+                        if (entity.getCode() == 20000) {
+                            callBack.onSucceed(succeed);
+                        } else {
+                            callBack.onError(entity.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callBack.onFailure(httpFailureMsg());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
+
 
     public interface HttpUtilsCallBack<T> {
         public void onFailure(String failure);
