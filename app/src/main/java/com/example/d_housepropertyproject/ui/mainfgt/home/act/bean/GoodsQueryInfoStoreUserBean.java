@@ -1,8 +1,9 @@
 package com.example.d_housepropertyproject.ui.mainfgt.home.act.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class GoodsQueryInfoStoreUserBean {
+public class GoodsQueryInfoStoreUserBean implements Serializable {
 
     /**
      * result : {"id":"1166181118927409154","name":"测试002","pic":"http://116.62.242.76:8080/group1/M00/00/06/rBA9Jl1kmmSAObTjAACeipFOgNg439.png;http://116.62.242.76:8080/group1/M00/00/06/rBA9Jl1kmmaAeqPvAAAB5_JVXGU332.png;","des":"http://116.62.242.76:8080/group1/M00/00/05/rBA9Jl1eOD-ADc1lAB2VZvptHCU458.jpg;","unit":"个","isFavorite":"0","vipPrice":null,"salePrice":28,"price":30,"firmId":"1156812465077477378","brandId":"1156812465144586241","brandName":"中塑手机","brandLogo":"http://192.168.2.201:8080/group1/M00/00/12/wKgCyV1KQ-aAXypRAAAQp9O-omc391.jpg","brandSale":66,"brandNum":1,"time":null,"proportion":null,"attrs":[{"mSubcategoryParamId":"1162182689754587138","mSubcategoryParamName":null,"value":"12"},{"mSubcategoryParamId":"1162182739964600322","mSubcategoryParamName":null,"value":"123"},{"mSubcategoryParamId":"1162182830129553409","mSubcategoryParamName":null,"value":"12"}],"hot":[{"id":"1162278114532655105","name":"迪奥烈艳蓝金唇膏999 3.5g","pic":"http://116.62.242.76:8080/group1/M00/00/05/rBA9Jl1WZfqAX_9jAAMydvMZeak505.png","salePrice":315,"price":400,"unit":"支","newStatus":"1"},{"id":"1163327774349307905","name":"矿泉水1L农夫山泉","pic":"http://116.62.242.76:8080/group1/M00/00/05/rBA9Jl1aOHaAH8EFAACPnzycM1s040.png","salePrice":3,"price":20,"unit":"瓶","newStatus":"0"},{"id":"1163348579523211266","name":"鞋子李林42码测试测测测","pic":"http://116.62.242.76:8080/group1/M00/00/05/rBA9Jl1aOnWAYWnVAACJkGAOdbc457.png","salePrice":120,"price":201.5,"unit":"双","newStatus":"1"},{"id":"1165919053742575617","name":"0822优化后上架商品","pic":"http://116.62.242.76:8080/group1/M00/00/06/rBA9Jl1jpbaAVQmKAABocQWjFVQ641.png","salePrice":130,"price":200,"unit":"克","newStatus":"1"}],"pAttrs":[{"id":"1158917809828134914","name":"厚度","attrs":[{"attrId":"1158975951456006146","value":"薄款"},{"attrId":"1158975951464394753","value":"加厚款"}]},{"id":"1158917967135506433","name":"领型","attrs":[{"attrId":"1158976185531723777","value":"圆领"},{"attrId":"1158976185535918081","value":"V领"}]},{"id":"1158924929076281345","name":"颜色","attrs":[{"attrId":"1158976094754402305","value":"红"},{"attrId":"1158976094754402306","value":"黄"},{"attrId":"1158976094758596610","value":"深蓝"}]}]}
@@ -38,7 +39,7 @@ public class GoodsQueryInfoStoreUserBean {
         this.code = code;
     }
 
-    public static class ResultBean {
+    public static class ResultBean implements Serializable {
         /**
          * id : 1166181118927409154
          * name : 测试002
@@ -61,6 +62,15 @@ public class GoodsQueryInfoStoreUserBean {
          * hot : [{"id":"1162278114532655105","name":"迪奥烈艳蓝金唇膏999 3.5g","pic":"http://116.62.242.76:8080/group1/M00/00/05/rBA9Jl1WZfqAX_9jAAMydvMZeak505.png","salePrice":315,"price":400,"unit":"支","newStatus":"1"},{"id":"1163327774349307905","name":"矿泉水1L农夫山泉","pic":"http://116.62.242.76:8080/group1/M00/00/05/rBA9Jl1aOHaAH8EFAACPnzycM1s040.png","salePrice":3,"price":20,"unit":"瓶","newStatus":"0"},{"id":"1163348579523211266","name":"鞋子李林42码测试测测测","pic":"http://116.62.242.76:8080/group1/M00/00/05/rBA9Jl1aOnWAYWnVAACJkGAOdbc457.png","salePrice":120,"price":201.5,"unit":"双","newStatus":"1"},{"id":"1165919053742575617","name":"0822优化后上架商品","pic":"http://116.62.242.76:8080/group1/M00/00/06/rBA9Jl1jpbaAVQmKAABocQWjFVQ641.png","salePrice":130,"price":200,"unit":"克","newStatus":"1"}]
          * pAttrs : [{"id":"1158917809828134914","name":"厚度","attrs":[{"attrId":"1158975951456006146","value":"薄款"},{"attrId":"1158975951464394753","value":"加厚款"}]},{"id":"1158917967135506433","name":"领型","attrs":[{"attrId":"1158976185531723777","value":"圆领"},{"attrId":"1158976185535918081","value":"V领"}]},{"id":"1158924929076281345","name":"颜色","attrs":[{"attrId":"1158976094754402305","value":"红"},{"attrId":"1158976094754402306","value":"黄"},{"attrId":"1158976094758596610","value":"深蓝"}]}]
          */
+        private int goodnum;
+
+        public int getGoodnum() {
+            return goodnum;
+        }
+
+        public void setGoodnum(int goodnum) {
+            this.goodnum = goodnum;
+        }
 
         private String id;
         private String name;
@@ -100,6 +110,12 @@ public class GoodsQueryInfoStoreUserBean {
         }
 
         public String getPic() {
+            if (pic.contains(";http")) {
+                String[] mmc = pic.split(";");
+                pic = mmc[0];
+            } else if (pic.contains(";")) {
+                pic = pic.replace(";", "");
+            }
             return pic;
         }
 
@@ -243,7 +259,7 @@ public class GoodsQueryInfoStoreUserBean {
             this.pAttrs = pAttrs;
         }
 
-        public static class AttrsBean {
+        public static class AttrsBean implements Serializable {
             /**
              * mSubcategoryParamId : 1162182689754587138
              * mSubcategoryParamName : null
@@ -263,8 +279,8 @@ public class GoodsQueryInfoStoreUserBean {
             }
 
             public Object getMSubcategoryParamName() {
-                if(mSubcategoryParamName==null){
-                    mSubcategoryParamName="";
+                if (mSubcategoryParamName == null) {
+                    mSubcategoryParamName = "";
                 }
                 return mSubcategoryParamName;
             }
@@ -282,7 +298,7 @@ public class GoodsQueryInfoStoreUserBean {
             }
         }
 
-        public static class HotBean {
+        public static class HotBean implements Serializable {
             /**
              * id : 1162278114532655105
              * name : 迪奥烈艳蓝金唇膏999 3.5g
@@ -358,7 +374,7 @@ public class GoodsQueryInfoStoreUserBean {
             }
         }
 
-        public static class PAttrsBean {
+        public static class PAttrsBean implements Serializable {
             /**
              * id : 1158917809828134914
              * name : 厚度
@@ -393,11 +409,20 @@ public class GoodsQueryInfoStoreUserBean {
                 this.attrs = attrs;
             }
 
-            public static class AttrsBeanX {
+            public static class AttrsBeanX implements Serializable {
                 /**
                  * attrId : 1158975951456006146
                  * value : 薄款
                  */
+                private boolean Status;
+
+                public boolean isStatus() {
+                    return Status;
+                }
+
+                public void setStatus(boolean status) {
+                    Status = status;
+                }
 
                 private String attrId;
                 private String value;

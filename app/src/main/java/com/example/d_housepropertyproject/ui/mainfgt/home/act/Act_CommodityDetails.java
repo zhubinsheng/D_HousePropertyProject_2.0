@@ -1,5 +1,6 @@
 package com.example.d_housepropertyproject.ui.mainfgt.home.act;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,11 +14,13 @@ import com.example.d_housepropertyproject.commt.BaseAct;
 import com.example.d_housepropertyproject.net.http.HttpHelper;
 import com.example.d_housepropertyproject.tool.GlideImageLoader;
 import com.example.d_housepropertyproject.tool.MyTimeUtils;
+import com.example.d_housepropertyproject.tool.MyUtils;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.GoodsQueryInfoStoreUserBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.GuiGeBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.adapter.GuiGeAdapter;
 import com.example.d_housepropertyproject.ui.mainfgt.home.adapter.ImageListAdapter;
 import com.example.d_housepropertyproject.ui.mainfgt.home.bean.RecommendingCommoditiesBean;
+import com.example.d_housepropertyproject.ui.mainfgt.home.dialog.Dalog_AddShopping;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
@@ -55,6 +58,7 @@ public class Act_CommodityDetails extends BaseAct {
     RecyclerView imageRecyclerView;
     @BindView(R.id.GuiGeRecyclerView)
     RecyclerView GuiGeRecyclerView;
+    private Dalog_AddShopping addShopping;
 
     @Override
     public int initLayoutId() {
@@ -75,6 +79,7 @@ public class Act_CommodityDetails extends BaseAct {
     List<String> image = new ArrayList<>();
     private ImageListAdapter imageListAdapter;
     GuiGeAdapter geAdapter;
+
     @Override
     public void initData() {
         imageRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -107,7 +112,17 @@ public class Act_CommodityDetails extends BaseAct {
                 finish();
                 break;
             case R.id.but_commit:
-                startAct(Act_ConfirmationOfOrder.class);
+                if (entity == null) {
+                    return;
+                }
+                addShopping = new Dalog_AddShopping(this);
+                addShopping.setTouchCancle(true);
+                addShopping.setCustomerBean(entity);
+                addShopping.setLijigouwu(true);
+                addShopping.show();
+//                Intent intent = new Intent();
+//                intent.putExtra("bean", entity);
+//                startAct(intent, Act_ConfirmationOfOrder.class);
                 break;
         }
     }
@@ -118,8 +133,10 @@ public class Act_CommodityDetails extends BaseAct {
 
     private String bannerPic;
     String[] bannerstImg;
+    private GoodsQueryInfoStoreUserBean entity;
+
     /**
-     * 商品列表
+     * 商品详情
      */
     public void goodsQueryInfoStoreUser() {
         HttpHelper.goodsQueryInfoStoreUser(context, goodId, new HttpHelper.HttpUtilsCallBack<String>() {
@@ -133,23 +150,9 @@ public class Act_CommodityDetails extends BaseAct {
             public void onSucceed(String succeed) {
                 loding.dismiss();
                 Gson gson = new Gson();
-                GoodsQueryInfoStoreUserBean entity = gson.fromJson(succeed, GoodsQueryInfoStoreUserBean.class);
+                entity = gson.fromJson(succeed, GoodsQueryInfoStoreUserBean.class);
                 if (entity.getCode() == 20000) {
-                    //banner图
-                    if (entity.getResult().getPic().contains(";http")) {
-                        String mmc[] = entity.getResult().getPic().split(";");
-                        for (int i = 0; i < mmc.length; i++) {
-                            image.add(mmc[i]);
-                        }
-                    } else if (entity.getResult().getPic().contains(",")) {
-                        bannerstImg = entity.getResult().getPic().split(",");
-                        for (int i = 0; i < bannerstImg.length; i++) {
-                            image.add(bannerstImg[i]);
-                        }
-                    } else if (entity.getResult().getPic().contains(";")) {
-                        bannerPic = entity.getResult().getPic().replace(";", "");
-                        image.add(bannerPic);
-                    }
+                    image.add(entity.getResult().getPic());
                     banner.setImageLoader(new GlideImageLoader());
                     banner.setImages(image).start();
                     //产品详情图片显示
@@ -168,7 +171,7 @@ public class Act_CommodityDetails extends BaseAct {
                         imgs.add(des);
                     }
                     imageListAdapter.notifyDataSetChanged();
-                    price.setText(entity.getResult().getSalePrice() +"" );
+                    price.setText(entity.getResult().getSalePrice() + "");
                     salePrice.setText("市场价:" + entity.getResult().getPrice() + "/" + entity.getResult().getUnit());
                     name.setText(entity.getResult().getName());
                     if (entity.getResult().getTime() == null) {

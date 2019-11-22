@@ -179,6 +179,15 @@ public interface HttpService {
 
     @GET(ApiConstant.goodsQueryInfoIntegralUser)
     Observable<String> goodsQueryInfoIntegralUser(@QueryMap Map<String, String> map);
+
+    @POST(ApiConstant.pmsgoodsqueryproductinfo)
+    Observable<String> pmsgoodsqueryproductinfo(@Body RequestBody requestBody);
+
+    @POST(ApiConstant.pmsOrderAddBasket)
+    Observable<String> pmsOrderAddBasket(@Body RequestBody requestBody, @Header("token") String token);
+
+    @POST(ApiConstant.ordersubmitbasket)
+    Observable<String> ordersubmitbasket(@Body RequestBody requestBody, @Header("token") String token);
     /**
      * 下载文件
      *

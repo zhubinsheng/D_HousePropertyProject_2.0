@@ -110,5 +110,11 @@ public class ApiConstant {
     public static final String goodsQueryInfoStoreUser= "goods/query/info/store/user";
     //积分商品详情
     public static final String goodsQueryInfoIntegralUser= "goods/query/info/integral/user";
+    //产品信息
+    public static final String pmsgoodsqueryproductinfo = "goods/query/product/info";
+    //添加购物车
+    public static final String pmsOrderAddBasket = "order/add/basket";
+    //下单
+    public static final String ordersubmitbasket = "order/submit/basket";
 }
 

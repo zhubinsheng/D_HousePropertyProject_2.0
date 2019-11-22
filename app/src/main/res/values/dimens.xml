@@ -62,6 +62,7 @@
     <dimen name="dip_300">300dip</dimen>
     <dimen name="dip_310">310dip</dimen>
     <dimen name="dip_335">335dip</dimen>
+    <dimen name="dip_460">460dip</dimen>
     <dimen name="fond_8sp">8sp</dimen>
     <dimen name="fond_9sp">9sp</dimen>
     <dimen name="fond_10sp">10sp</dimen>

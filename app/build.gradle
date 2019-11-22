@@ -163,5 +163,7 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.1'
     //bug收集
     compile 'com.tencent.bugly:crashreport:latest.release'
+    //标签列表控件
+    compile 'com.hyman:flowlayout-lib:1.1.2'
 }
 

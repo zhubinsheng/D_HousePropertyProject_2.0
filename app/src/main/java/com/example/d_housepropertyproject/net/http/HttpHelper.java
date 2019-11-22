@@ -19,7 +19,10 @@ import com.example.d_housepropertyproject.ui.mainfgt.apartment.bean.TransactionW
 import com.example.d_housepropertyproject.ui.mainfgt.apartment.dialog.bean.HouseInFoAttrBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.CheckUserBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.GoodsQueryInfoStoreUserBean;
+import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.PostBasketBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.QueryInfoBean;
+import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.pmsOrderAddBasketBean;
+import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.pmsgoodsqueryproductinfoBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.bean.GetPlatForFileBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.bean.HomeByidBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.bean.RecommendingCommoditiesBean;
@@ -2046,6 +2049,141 @@ public class HttpHelper {
                 });
     }
 
+
+    /**
+     * 产品信息
+     */
+    public static void pmsgoodsqueryproductinfo(String goodsId, String attrs, final HttpUtilsCallBack<String> callBack) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("attrs", "mm");
+        map.put("goodsId", goodsId);
+        Gson gson = new Gson();
+        String json = gson.toJson(map);
+        json = json.replace("\"mm\"", attrs);
+        HttpService httpService = RetrofitFactory.getRetrofit(15l, 15l).create(HttpService.class);
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
+        httpService.pmsgoodsqueryproductinfo(body)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(String succeed) {
+                        Gson gson = new Gson();
+                        pmsgoodsqueryproductinfoBean entity = gson.fromJson(succeed, pmsgoodsqueryproductinfoBean.class);
+//                        if (entity.getCode() == 20000) {
+                        callBack.onSucceed(succeed);
+//                        } else {
+//                            callBack.onError(entity.getMessage() + "");
+//                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callBack.onFailure(httpFailureMsg());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
+
+    /**
+     * 下单购物车信息
+     * FirmId厂商id
+     * remark备注
+     * BasketId购物车id
+     * linkman//联系人id
+     */
+    public static void pmsordersubmitbasket(String linkman, List<PostBasketBean.BasketBean> basket, final HttpUtilsCallBack<String> callBack) {
+        PostBasketBean basketBean = new PostBasketBean();
+        basketBean.setLinkman(linkman);//联系人id
+        basketBean.setBasket(basket);
+        Gson gson = new Gson();
+        String json = gson.toJson(basketBean);
+        Debug.e("-------------"+json);
+        HttpService httpService = RetrofitFactory.getRetrofit(15l, 15l).create(HttpService.class);
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
+        httpService.ordersubmitbasket(body, "1")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+                    @Override
+                    public void onNext(String succeed) {
+                        Gson gson = new Gson();
+                        Debug.e("----------succeed==" + succeed);
+//                        pmsordersubmitbasketBean entity = gson.fromJson(succeed, pmsordersubmitbasketBean.class);
+//                        if (entity.getCode() == 20000) {
+//                            callBack.onSucceed(succeed);
+//                        } else {
+//                            callBack.onError(entity.getMessage() + "");
+//                        }
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        callBack.onFailure(httpFailureMsg());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
+    /**
+     * 添加购物车
+     */
+    public static void pmsOrderAddBasket(String attrs, String goodsId, String num, final HttpUtilsCallBack<String> callBack) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("attrs", "attrs0");
+        map.put("goodsId", goodsId);
+        map.put("num", num);
+        Gson gson = new Gson();
+        String json = gson.toJson(map);
+        json = json.replace("\"attrs0\"", attrs);
+        HttpService httpService = RetrofitFactory.getRetrofit(15l, 15l).create(HttpService.class);
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
+        httpService.pmsOrderAddBasket(body, "1")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(String succeed) {
+                        Debug.e("----------------succeed===" + succeed);
+                        Gson gson = new Gson();
+                        pmsOrderAddBasketBean entity = gson.fromJson(succeed, pmsOrderAddBasketBean.class);
+                        if (entity.getCode() == 20000) {
+                            callBack.onSucceed(succeed);
+                        } else {
+                            callBack.onError(entity.getMessage() + "");
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callBack.onFailure(httpFailureMsg());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
     /**
      * 积分商品详情
      */
@@ -2086,7 +2224,6 @@ public class HttpHelper {
                     }
                 });
     }
-
 
 
     public interface HttpUtilsCallBack<T> {
