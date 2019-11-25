@@ -26,6 +26,7 @@ public class MyTimeUtils {
         res = String.valueOf(ts);
         return res;
     }
+
     /*
      * 将时间转换为时间戳
      */
@@ -49,6 +50,14 @@ public class MyTimeUtils {
         res = String.valueOf(ts);
         return res;
     }
+    public static String dateToStampTimeHH(String date) {
+        if (TextUtils.isEmpty(date))
+            return null;
+        //需要其他格式的以此类推
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Long time = new Long(date);
+        return format.format(time);
+    }
     /*
      * 将时间戳转换为时间
      */
@@ -60,10 +69,11 @@ public class MyTimeUtils {
         res = simpleDateFormat.format(date);
         return res;
     }
+
     /*
      * 将时间戳转换为时间
      */
-    public static String stampToDate(String s,String geshi) {
+    public static String stampToDate(String s, String geshi) {
         String res;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(geshi);
         long lt = new Long(s);

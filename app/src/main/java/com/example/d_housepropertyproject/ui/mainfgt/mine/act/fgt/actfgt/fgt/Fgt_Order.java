@@ -116,7 +116,6 @@ public class Fgt_Order extends BaseFragment implements BaseQuickAdapter.OnItemCh
                     Debug.e("---------------------没有滑动删除=====idext===" + delteIndex);
                     return;
                 }
-
             }
             SwipeMenuItem deleteItem = new SwipeMenuItem(context);
             deleteItem

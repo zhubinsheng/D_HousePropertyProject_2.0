@@ -24,6 +24,7 @@ import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.pmsgoodsquery
 import com.example.d_housepropertyproject.ui.mainfgt.home.adapter.AddShoppingAdapter;
 import com.google.gson.Gson;
 import com.lykj.aextreme.afinal.common.BaseDialog;
+import com.lykj.aextreme.afinal.utils.Debug;
 import com.lykj.aextreme.afinal.utils.MyToast;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.zyao89.view.zloading.ZLoadingDialog;
@@ -225,6 +226,7 @@ public class Dalog_AddShopping extends BaseDialog {
                         customerBean.getResult().setGoodnum(Integer.valueOf(num.getText().toString()));
                         Intent intent = new Intent();
                         intent.putExtra("datas", customerBean);
+                        intent.putExtra("basketIdItem1",entity.getResult());
                         intent.setClass(getContext(), Act_ConfirmationOfOrder.class);
                         getContext().startActivity(intent);
                     } else {

@@ -15,6 +15,7 @@ public class AccumulationAdapter extends BaseQuickAdapter<RecommendingCommoditie
     protected void convert(BaseViewHolder helper, RecommendingCommoditiesBean.ResultBean.ListBean item) {
         Glide.with(mContext).load(item.getPic()).into((RoundedImageView) helper.getView(R.id.image));
         helper.setText(R.id.title,item.getName())
-                .setText(R.id.costPrice,item.getSalePrice()+"/"+item.getUnit());
+                .setText(R.id.costPrice,item.getSalePrice()+" 积分")
+                .setText(R.id.shenyuduos,"剩余" + item.getStock() + item.getUnit());
     }
 }

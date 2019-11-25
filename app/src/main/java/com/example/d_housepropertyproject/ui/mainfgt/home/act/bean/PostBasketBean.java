@@ -3,21 +3,31 @@ package com.example.d_housepropertyproject.ui.mainfgt.home.act.bean;
 import java.util.List;
 
 public class PostBasketBean {
+
     /**
-     * basket : [{"basketId":["1158298627172454401"],"firmId":"1151758373284909058","remark":""},
-     * {"basketId":["1158298744101261313"],"firmId":"1152105237146431490","remark":""}]
-     * linkman : 1156817021685456897
+     * basket : [{"basketId":[0],"firmId":0,"remark":"string"}]
+     * couponId : 0
+     * linkmanId : 0
      */
 
-    private String linkman;
+    private String couponId;
+    private String linkmanId;
     private List<BasketBean> basket;
 
-    public String getLinkman() {
-        return linkman;
+    public String getCouponId() {
+        return couponId;
     }
 
-    public void setLinkman(String linkman) {
-        this.linkman = linkman;
+    public void setCouponId(String couponId) {
+        this.couponId = couponId;
+    }
+
+    public String getLinkmanId() {
+        return linkmanId;
+    }
+
+    public void setLinkmanId(String linkmanId) {
+        this.linkmanId = linkmanId;
     }
 
     public List<BasketBean> getBasket() {
@@ -30,20 +40,20 @@ public class PostBasketBean {
 
     public static class BasketBean {
         /**
-         * basketId : ["1158298627172454401"]
-         * firmId : 1151758373284909058
-         * remark :
+         * basketId : [0]
+         * firmId : 0
+         * remark : string
          */
 
-        private String firmId;
+        private Long firmId;
         private String remark;
         private List<String> basketId;
 
-        public String getFirmId() {
+        public Long getFirmId() {
             return firmId;
         }
 
-        public void setFirmId(String firmId) {
+        public void setFirmId(Long firmId) {
             this.firmId = firmId;
         }
 

@@ -1,5 +1,7 @@
 package com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean;
 
+import android.text.TextUtils;
+
 public class GoodsQueryInfoIntegralUserBean {
 
     /**
@@ -128,6 +130,9 @@ public class GoodsQueryInfoIntegralUserBean {
         }
 
         public String getLinkman() {
+            if (linkman == null || linkman.equals("")) {
+                linkman = "";
+            }
             return linkman;
         }
 
@@ -136,6 +141,9 @@ public class GoodsQueryInfoIntegralUserBean {
         }
 
         public String getPhone() {
+            if (phone == null || phone.equals("")) {
+                phone = "";
+            }
             return phone;
         }
 
@@ -144,6 +152,9 @@ public class GoodsQueryInfoIntegralUserBean {
         }
 
         public String getAddress() {
+            if (!TextUtils.isEmpty(address)) {
+                address = "";
+            }
             return address;
         }
 

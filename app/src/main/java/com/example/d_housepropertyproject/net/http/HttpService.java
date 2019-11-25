@@ -163,7 +163,7 @@ public interface HttpService {
     Observable<String> goodsUpdateBookOut(@QueryMap Map<String, String> map, @Header("token") String token);
 
     @POST(ApiConstant.judgeAdd)
-    Observable<String> judgeAdd(@Body RequestBody requestBody,@Header("token") String token);
+    Observable<String> judgeAdd(@Body RequestBody requestBody, @Header("token") String token);
 
     @GET(ApiConstant.judgeinit + "{judgedId}/{type}")
     Observable<String> judgeinit(@Path("judgedId") String judgedId, @Path("type") String type, @Header("token") String token);
@@ -188,6 +188,12 @@ public interface HttpService {
 
     @POST(ApiConstant.ordersubmitbasket)
     Observable<String> ordersubmitbasket(@Body RequestBody requestBody, @Header("token") String token);
+
+    @POST(ApiConstant.traWxUnified_orderApp)
+    Observable<String> traWxUnified_orderApp(@QueryMap Map<String, String> map, @Header("token") String token);
+
+    @GET(ApiConstant.couponGetMyCouponList)
+    Observable<String> couponGetMyCouponList(@QueryMap Map<String, String> map, @Header("token") String token);
     /**
      * 下载文件
      *

@@ -107,14 +107,18 @@ public class ApiConstant {
     //商品列表
     public static final String goodsQueryListUser = "goods/query/list/user/";
     //商品详情
-    public static final String goodsQueryInfoStoreUser= "goods/query/info/store/user";
+    public static final String goodsQueryInfoStoreUser = "goods/query/info/store/user";
     //积分商品详情
-    public static final String goodsQueryInfoIntegralUser= "goods/query/info/integral/user";
+    public static final String goodsQueryInfoIntegralUser = "goods/query/info/integral/user";
     //产品信息
     public static final String pmsgoodsqueryproductinfo = "goods/query/product/info";
     //添加购物车
     public static final String pmsOrderAddBasket = "order/add/basket";
     //下单
     public static final String ordersubmitbasket = "order/submit/basket";
+    //微信商品支付
+    public static final String traWxUnified_orderApp = "tra/wx/unified_order/app";
+    //获取我的优惠券
+    public static final String couponGetMyCouponList = "coupon/getMyCouponList";
 }
 

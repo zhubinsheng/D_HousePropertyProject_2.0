@@ -14,6 +14,7 @@ import com.example.d_housepropertyproject.ui.mainfgt.mine.act.adapter.Accumulati
 import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lykj.aextreme.afinal.common.BaseActivity;
+import com.lykj.aextreme.afinal.utils.Debug;
 import com.lykj.aextreme.afinal.utils.MyToast;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -148,7 +149,6 @@ public class Act_Accumulation extends BaseActivity {
                     adapter.notifyDataSetChanged();
                 }
             }
-
             @Override
             public void onError(String error) {
                 loding.dismiss();

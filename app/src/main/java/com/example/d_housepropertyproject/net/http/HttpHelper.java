@@ -23,6 +23,7 @@ import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.PostBasketBea
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.QueryInfoBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.pmsOrderAddBasketBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.pmsgoodsqueryproductinfoBean;
+import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.pmsordersubmitbasketBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.bean.GetPlatForFileBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.bean.HomeByidBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.bean.RecommendingCommoditiesBean;
@@ -37,6 +38,7 @@ import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.judgeinitBean
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.actfgt.fgthouseinspection.bean.HouseInspectionChlideBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.actfgt.fgthouseinspection.bean.UserEvaluateBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.bean.HouseInspectionOrderDetailsBean;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.bean.couponGetCouponListBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.bean.ApartmentBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.bean.Historical_RecordBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.bean.LookrecordDeleteBean;
@@ -1144,7 +1146,6 @@ public class HttpHelper {
 
                     @Override
                     public void onNext(String succeed) {
-                        Debug.e("-----------微信统一下单===succeed==" + succeed);
                         Gson gson = new Gson();
                         TransactionWXUnifiedOrderBean entity = gson.fromJson(succeed, TransactionWXUnifiedOrderBean.class);
                         if (choseLoginStatis(entity.getCode(), context)) {
@@ -2093,7 +2094,6 @@ public class HttpHelper {
                 });
     }
 
-
     /**
      * 下单购物车信息
      * FirmId厂商id
@@ -2103,11 +2103,10 @@ public class HttpHelper {
      */
     public static void pmsordersubmitbasket(String linkman, List<PostBasketBean.BasketBean> basket, final HttpUtilsCallBack<String> callBack) {
         PostBasketBean basketBean = new PostBasketBean();
-        basketBean.setLinkman(linkman);//联系人id
+        basketBean.setLinkmanId(String.valueOf(linkman));//联系人id
         basketBean.setBasket(basket);
         Gson gson = new Gson();
         String json = gson.toJson(basketBean);
-        Debug.e("-------------"+json);
         HttpService httpService = RetrofitFactory.getRetrofit(15l, 15l).create(HttpService.class);
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
         httpService.ordersubmitbasket(body, "1")
@@ -2117,16 +2116,105 @@ public class HttpHelper {
                     @Override
                     public void onSubscribe(Disposable d) {
                     }
+
                     @Override
                     public void onNext(String succeed) {
                         Gson gson = new Gson();
-                        Debug.e("----------succeed==" + succeed);
-//                        pmsordersubmitbasketBean entity = gson.fromJson(succeed, pmsordersubmitbasketBean.class);
-//                        if (entity.getCode() == 20000) {
-//                            callBack.onSucceed(succeed);
-//                        } else {
-//                            callBack.onError(entity.getMessage() + "");
-//                        }
+                        pmsordersubmitbasketBean entity = gson.fromJson(succeed, pmsordersubmitbasketBean.class);
+                        if (entity.getCode() == 20000) {
+                            callBack.onSucceed(succeed);
+                        } else {
+                            callBack.onError(entity.getMessage() + "");
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callBack.onFailure(httpFailureMsg());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
+
+    /**
+     * 微信商品支付
+     */
+    public static void traWxUnified_orderApp(Context context, String id, final HttpUtilsCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("id", id);
+        HttpService httpService = RetrofitFactory.getRetrofit(15l, 15l).create(HttpService.class);
+        httpService.traWxUnified_orderApp(hashMap, "1")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(String succeed) {
+                        Gson gson = new Gson();
+                        TransactionWXUnifiedOrderBean entity = gson.fromJson(succeed, TransactionWXUnifiedOrderBean.class);
+                        if (choseLoginStatis(entity.getCode(), context)) {
+                            return;
+                        }
+                        if (entity.getCode() == 20000) {
+                            callBack.onSucceed(succeed);
+                        } else {
+                            callBack.onError(entity.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Debug.e("-------------微信商品支付===onError==" + e.getMessage());
+                        callBack.onFailure(httpFailureMsg());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
+
+    /**
+     * 获取我的优惠券
+     * searchValue 查询值
+     * fettle  1: 可使用; 2: 已使用; 3: 已过期
+     */
+    public static void couponGetMyCouponList(Context context, String fettle, String page, String searchValue, final HttpUtilsCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<>();
+//        hashMap.put("searchValue", searchValue);
+        hashMap.put("fettle", fettle);
+//        hashMap.put("page", page);
+//        hashMap.put("size", "10");
+        HttpService httpService = RetrofitFactory.getRetrofit(15l, 15l).create(HttpService.class);
+        httpService.couponGetMyCouponList(hashMap, "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+                    @Override
+                    public void onNext(String succeed) {
+                        Gson gson = new Gson();
+                        couponGetCouponListBean entity = gson.fromJson(succeed, couponGetCouponListBean.class);
+                        if (choseLoginStatis(entity.getCode(), context)) {
+                            return;
+                        }
+                        if (entity.getCode() == 20000) {
+                            callBack.onSucceed(succeed);
+                        } else {
+                            callBack.onError(entity.getMessage());
+                        }
                     }
                     @Override
                     public void onError(Throwable e) {
@@ -2163,7 +2251,6 @@ public class HttpHelper {
 
                     @Override
                     public void onNext(String succeed) {
-                        Debug.e("----------------succeed===" + succeed);
                         Gson gson = new Gson();
                         pmsOrderAddBasketBean entity = gson.fromJson(succeed, pmsOrderAddBasketBean.class);
                         if (entity.getCode() == 20000) {

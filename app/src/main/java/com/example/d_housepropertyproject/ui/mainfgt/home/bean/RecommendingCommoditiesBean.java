@@ -5,7 +5,7 @@ import java.util.List;
 public class RecommendingCommoditiesBean {
 
     /**
-     * result : {"total":"5","list":[{"id":"1166181118927409154","name":"测试002","pic":"http://116.62.242.76:8080/group1/M00/00/06/rBA9Jl1kmmSAObTjAACeipFOgNg439.png","salePrice":28,"price":30,"unit":"个","newStatus":"0"},{"id":"1165919053742575617","name":"0822优化后上架商品","pic":"http://116.62.242.76:8080/group1/M00/00/06/rBA9Jl1jpbaAVQmKAABocQWjFVQ641.png","salePrice":130,"price":200,"unit":"克","newStatus":"1"},{"id":"1163348579523211266","name":"鞋子李林42码测试测测测","pic":"http://116.62.242.76:8080/group1/M00/00/05/rBA9Jl1aOnWAYWnVAACJkGAOdbc457.png","salePrice":120,"price":201.5,"unit":"双","newStatus":"1"},{"id":"1163327774349307905","name":"矿泉水1L农夫山泉","pic":"http://116.62.242.76:8080/group1/M00/00/05/rBA9Jl1aOHaAH8EFAACPnzycM1s040.png","salePrice":3,"price":20,"unit":"瓶","newStatus":"0"},{"id":"1162278114532655105","name":"迪奥烈艳蓝金唇膏999 3.5g","pic":"http://116.62.242.76:8080/group1/M00/00/05/rBA9Jl1WZfqAX_9jAAMydvMZeak505.png","salePrice":315,"price":400,"unit":"支","newStatus":"1"}],"pageNum":1,"pageSize":10,"size":5,"startRow":1,"endRow":5,"pages":1,"prePage":0,"nextPage":0,"isFirstPage":true,"isLastPage":true,"hasPreviousPage":false,"hasNextPage":false,"navigatePages":8,"navigatepageNums":[1],"navigateFirstPage":1,"navigateLastPage":1}
+     * result : {"total":"1","list":[{"id":"1162279429576982529","name":"索尼合资 MTA16 Pro","pic":"http://116.62.242.76:8080/group1/M00/00/05/rBA9Jl1WaEOAJzxSAAG411yIEPs750.png","salePrice":1668,"price":1988,"unit":"台","newStatus":"1","stock":null}],"pageNum":1,"pageSize":10,"size":1,"startRow":1,"endRow":1,"pages":1,"prePage":0,"nextPage":0,"isFirstPage":true,"isLastPage":true,"hasPreviousPage":false,"hasNextPage":false,"navigatePages":8,"navigatepageNums":[1],"navigateFirstPage":1,"navigateLastPage":1}
      * message : 成功
      * code : 20000
      */
@@ -40,13 +40,13 @@ public class RecommendingCommoditiesBean {
 
     public static class ResultBean {
         /**
-         * total : 5
-         * list : [{"id":"1166181118927409154","name":"测试002","pic":"http://116.62.242.76:8080/group1/M00/00/06/rBA9Jl1kmmSAObTjAACeipFOgNg439.png","salePrice":28,"price":30,"unit":"个","newStatus":"0"},{"id":"1165919053742575617","name":"0822优化后上架商品","pic":"http://116.62.242.76:8080/group1/M00/00/06/rBA9Jl1jpbaAVQmKAABocQWjFVQ641.png","salePrice":130,"price":200,"unit":"克","newStatus":"1"},{"id":"1163348579523211266","name":"鞋子李林42码测试测测测","pic":"http://116.62.242.76:8080/group1/M00/00/05/rBA9Jl1aOnWAYWnVAACJkGAOdbc457.png","salePrice":120,"price":201.5,"unit":"双","newStatus":"1"},{"id":"1163327774349307905","name":"矿泉水1L农夫山泉","pic":"http://116.62.242.76:8080/group1/M00/00/05/rBA9Jl1aOHaAH8EFAACPnzycM1s040.png","salePrice":3,"price":20,"unit":"瓶","newStatus":"0"},{"id":"1162278114532655105","name":"迪奥烈艳蓝金唇膏999 3.5g","pic":"http://116.62.242.76:8080/group1/M00/00/05/rBA9Jl1WZfqAX_9jAAMydvMZeak505.png","salePrice":315,"price":400,"unit":"支","newStatus":"1"}]
+         * total : 1
+         * list : [{"id":"1162279429576982529","name":"索尼合资 MTA16 Pro","pic":"http://116.62.242.76:8080/group1/M00/00/05/rBA9Jl1WaEOAJzxSAAG411yIEPs750.png","salePrice":1668,"price":1988,"unit":"台","newStatus":"1","stock":null}]
          * pageNum : 1
          * pageSize : 10
-         * size : 5
+         * size : 1
          * startRow : 1
-         * endRow : 5
+         * endRow : 1
          * pages : 1
          * prePage : 0
          * nextPage : 0
@@ -225,13 +225,14 @@ public class RecommendingCommoditiesBean {
 
         public static class ListBean {
             /**
-             * id : 1166181118927409154
-             * name : 测试002
-             * pic : http://116.62.242.76:8080/group1/M00/00/06/rBA9Jl1kmmSAObTjAACeipFOgNg439.png
-             * salePrice : 28.0
-             * price : 30.0
-             * unit : 个
-             * newStatus : 0
+             * id : 1162279429576982529
+             * name : 索尼合资 MTA16 Pro
+             * pic : http://116.62.242.76:8080/group1/M00/00/05/rBA9Jl1WaEOAJzxSAAG411yIEPs750.png
+             * salePrice : 1668.0
+             * price : 1988.0
+             * unit : 台
+             * newStatus : 1
+             * stock : null
              */
 
             private String id;
@@ -241,6 +242,7 @@ public class RecommendingCommoditiesBean {
             private double price;
             private String unit;
             private String newStatus;
+            private Object stock;
 
             public String getId() {
                 return id;
@@ -296,6 +298,14 @@ public class RecommendingCommoditiesBean {
 
             public void setNewStatus(String newStatus) {
                 this.newStatus = newStatus;
+            }
+
+            public Object getStock() {
+                return stock;
+            }
+
+            public void setStock(Object stock) {
+                this.stock = stock;
             }
         }
     }
