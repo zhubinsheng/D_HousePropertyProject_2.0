@@ -14,7 +14,6 @@ public class HomeGridViewAdapter1 extends BaseQuickAdapter<HomeGridViewBean, Bas
     public HomeGridViewAdapter1(List<HomeGridViewBean> data) {
         super(R.layout.item_homegridview, data);
     }
-
     @Override
     protected void convert(BaseViewHolder helper, HomeGridViewBean item) {
         Glide.with(mContext).load(item.getImg()).into((ImageView) helper.getView(R.id.home_grid_img));

@@ -73,10 +73,6 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
     SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.RecommendingCommodities)
     RecyclerView RecommendingCommodities;
-    @BindView(R.id.pag_tv1)
-    TextView pag_tv1;
-    @BindView(R.id.pag_tv2)
-    TextView pag_tv2;
 
     @Override
     public int initLayoutId() {
@@ -159,9 +155,7 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
         }
         adapter1 = new HomeGridViewAdapter1(gridDatas);
         adapter1.setOnItemClickListener(gridItem);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        myGridView.setLayoutManager(linearLayoutManager);
+        myGridView.setLayoutManager(new GridLayoutManager(getContext(), 5));
         myGridView.setAdapter(adapter1);
 //        adapter = new HomeGridViewAdapter(context);
         data = new ArrayList<>();
@@ -388,16 +382,5 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
                 MyToast.show(context, error);
             }
         });
-    }
-
-    public void onScrollChoce(int indext) {
-        Debug.e("------------" + indext);
-        if (indext == 0) {
-            pag_tv1.setVisibility(View.VISIBLE);
-            pag_tv2.setVisibility(View.GONE);
-        } else {
-            pag_tv1.setVisibility(View.GONE);
-            pag_tv2.setVisibility(View.VISIBLE);
-        }
     }
 }

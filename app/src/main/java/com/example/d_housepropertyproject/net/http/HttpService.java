@@ -194,6 +194,15 @@ public interface HttpService {
 
     @GET(ApiConstant.couponGetMyCouponList)
     Observable<String> couponGetMyCouponList(@QueryMap Map<String, String> map, @Header("token") String token);
+
+    @GET(ApiConstant.orderQueryStoreListUser)
+    Observable<String> orderQueryStoreListUser(@QueryMap Map<String, String> map, @Header("token") String token);
+
+    @GET(ApiConstant.orderQueryStoreInfoUser)
+    Observable<String> orderQueryStoreInfoUser(@QueryMap Map<String, String> map, @Header("token") String token);
+
+    @GET(ApiConstant.orderQueryOrderset)
+    Observable<String> orderQueryOrderset( @Header("token") String token);
     /**
      * 下载文件
      *

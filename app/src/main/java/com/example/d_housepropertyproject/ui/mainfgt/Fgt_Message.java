@@ -60,7 +60,6 @@ public class Fgt_Message extends BaseFragment implements BaseQuickAdapter.OnItem
     @BindView(R.id.noteIntenet)
     RelativeLayout noteIntenet;
     private Dilog_Login_Cler dilog_login_cler;
-
     @Override
     public int initLayoutId() {
         return R.layout.fgt_message;
@@ -113,7 +112,6 @@ public class Fgt_Message extends BaseFragment implements BaseQuickAdapter.OnItem
     @Override
     public void initData() {
     }
-
     SwipeMenuItemClickListener mMenuItemClickListener = menuBridge -> {
         // 任何操作必须先关闭菜单，否则可能出现Item菜单打开状态错乱。
         menuBridge.closeMenu();

@@ -113,7 +113,6 @@ public class Fgt_Order extends BaseFragment implements BaseQuickAdapter.OnItemCh
             delteIndex++;
             for (int i = 0; i < delateAll.size(); i++) {
                 if (delteIndex == delateAll.get(i)) {
-                    Debug.e("---------------------没有滑动删除=====idext===" + delteIndex);
                     return;
                 }
             }

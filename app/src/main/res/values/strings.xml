@@ -80,4 +80,5 @@
     <string name="ConfirmationOfOrder_name">确认订单</string>
     <string name="ChoseCoupon_name">使用优惠券</string>
     <string name="MerchandiseOrder_name">商城订单</string>
+    <string name="MerchandiseOrderDetails_name">商城订单详情</string>
 </resources>

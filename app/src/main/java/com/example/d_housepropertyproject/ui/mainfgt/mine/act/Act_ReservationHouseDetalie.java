@@ -78,6 +78,7 @@ public class Act_ReservationHouseDetalie extends BaseAct {
     TextView oderTime;
     @BindView(R.id.name_p)
     TextView name_p;
+
     @Override
     public int initLayoutId() {
         return R.layout.act_reservationhousedetalie;
@@ -150,7 +151,7 @@ public class Act_ReservationHouseDetalie extends BaseAct {
                     MyToast.show(context, "订单已超时、已自动取消！");
                     return;
                 }
-                Dilog_Login_Cler dilog_login_cler = new Dilog_Login_Cler(context, () ->     goodsUpdateBookOut(odrid), "您确定要取消该订单么？");
+                Dilog_Login_Cler dilog_login_cler = new Dilog_Login_Cler(context, () -> goodsUpdateBookOut(odrid), "您确定要取消该订单么？");
                 dilog_login_cler.show();
                 break;
         }
@@ -225,7 +226,7 @@ public class Act_ReservationHouseDetalie extends BaseAct {
         Glide.with(context).load(orderDetaileBean.getResult().getPic()).into(oader_img);
         idOrder.setText(orderDetaileBean.getResult().getNum_order() + "");
         numOrder.setText(MyApplication.getLoGinBean().getResult().getUser().getUsername() + "");
-        tvTitle.setText(orderDetaileBean.getResult().getName_e()+orderDetaileBean.getResult().getName_b()+orderDetaileBean.getResult().getName_u()+orderDetaileBean.getResult().getFanghao() + "");
+        tvTitle.setText(orderDetaileBean.getResult().getName_e() + orderDetaileBean.getResult().getName_b() + orderDetaileBean.getResult().getName_u() + orderDetaileBean.getResult().getFanghao() + "");
         timeCreated.setText(MyTimeUtils.stampToDate(orderDetaileBean.getResult().getCreated(), "yyyy.MM.dd HH:mm"));
         fanghao.setText(orderDetaileBean.getResult().getCode() + "");
         yangtai.setText(orderDetaileBean.getResult().getYangtai() + "m²");
@@ -294,7 +295,7 @@ public class Act_ReservationHouseDetalie extends BaseAct {
                 Gson gson = new Gson();
                 CodeBean entity = gson.fromJson(succeed, CodeBean.class);
                 if (entity.getCode() == 20000) {
-                    MyToast.show(context,"您已成功取消订单！");
+                    MyToast.show(context, "您已成功取消订单！");
                     setResult(10);
                     finish();
                 }

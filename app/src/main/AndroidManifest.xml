@@ -322,5 +322,9 @@
             android:name=".ui.mainfgt.mine.act.Act_MerchandiseOrder"
             android:label="@string/MerchandiseOrder_name"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.mainfgt.mine.act.merchandiseorder.Act_MerchandiseOrderDetails"
+            android:label="@string/MerchandiseOrderDetails_name"
+            android:screenOrientation="portrait" />
     </application>
 </manifest>

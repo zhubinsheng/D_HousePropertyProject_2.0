@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 
 import com.example.d_housepropertyproject.R;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.actfgt.fgt.Fgt_Order;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.merchandiseorder.Fgt_MerchandiseOrder;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lykj.aextreme.afinal.common.BaseActivity;
@@ -27,7 +28,6 @@ public class Act_MerchandiseOrder extends BaseActivity {
     ViewPager orderViewpager;
     @BindView(R.id.order_table)
     SlidingTabLayout orderTable;
-
     @Override
     public int initLayoutId() {
         return R.layout.act_merchandiseorder;
@@ -51,10 +51,10 @@ public class Act_MerchandiseOrder extends BaseActivity {
 
     @Override
     public void initData() {
-        mFragments.add(new Fgt_Order(""));
-        mFragments.add(new Fgt_Order("p"));
-        mFragments.add(new Fgt_Order("s"));
-        mFragments.add(new Fgt_Order("f"));
+        mFragments.add(Fgt_MerchandiseOrder.getInstance(""));
+        mFragments.add(Fgt_MerchandiseOrder.getInstance("mm"));
+        mFragments.add(Fgt_MerchandiseOrder.getInstance("j"));
+        mFragments.add(Fgt_MerchandiseOrder.getInstance("s"));
         mAdapter = new MyPagerAdapter(getSupportFragmentManager());
         orderViewpager.setAdapter(mAdapter);
         orderTable.setViewPager(orderViewpager, mTitles);
@@ -73,7 +73,6 @@ public class Act_MerchandiseOrder extends BaseActivity {
 
     private final String[] mTitles = {"全部", "未付款", "待收货", "已完成"};
     private ArrayList<BaseFragment> mFragments = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

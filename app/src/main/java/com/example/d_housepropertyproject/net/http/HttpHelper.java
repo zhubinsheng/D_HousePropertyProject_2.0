@@ -2,6 +2,7 @@ package com.example.d_housepropertyproject.net.http;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 
 import com.example.d_housepropertyproject.bean.CodeBean;
 import com.example.d_housepropertyproject.bean.PostJudgeAddBean;
@@ -32,6 +33,7 @@ import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.CertificateVe
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.GoodsQueryInfoIntegralUserBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.OrderBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.OrderDetaileBean;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.OrderQueryStoreListUserBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.UserGetUserBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.UserUntiedBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.judgeinitBean;
@@ -39,6 +41,8 @@ import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.actfgt.fgthous
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.actfgt.fgthouseinspection.bean.UserEvaluateBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.bean.HouseInspectionOrderDetailsBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.bean.couponGetCouponListBean;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.merchandiseorder.bean.MyOrderDetaleBean;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.merchandiseorder.bean.orderQueryOrdersetBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.bean.ApartmentBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.bean.Historical_RecordBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.bean.LookrecordDeleteBean;
@@ -2203,6 +2207,7 @@ public class HttpHelper {
                     public void onSubscribe(Disposable d) {
 
                     }
+
                     @Override
                     public void onNext(String succeed) {
                         Gson gson = new Gson();
@@ -2216,6 +2221,7 @@ public class HttpHelper {
                             callBack.onError(entity.getMessage());
                         }
                     }
+
                     @Override
                     public void onError(Throwable e) {
                         callBack.onFailure(httpFailureMsg());
@@ -2227,6 +2233,128 @@ public class HttpHelper {
                 });
     }
 
+
+    /**
+     * 订单列表
+     * pay_status 付款状态
+     * status订单状态
+     */
+    public static void orderQueryStoreListUser(String page_num, String status, final HttpUtilsCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("page_num", page_num);
+        hashMap.put("page_size", "10");
+        if (status.equals("mm")) {
+            hashMap.put("pay_status", "p");
+        } else {
+            if (!TextUtils.isEmpty(status)) {
+                hashMap.put("status", status);
+            }
+        }
+        HttpService httpService = RetrofitFactory.getRetrofit(15l, 15l).create(HttpService.class);
+        httpService.orderQueryStoreListUser(hashMap, "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(String succeed) {
+                        Gson gson = new Gson();
+                        OrderQueryStoreListUserBean entity = gson.fromJson(succeed, OrderQueryStoreListUserBean.class);
+                        if (entity.getCode() == 20000) {
+                            callBack.onSucceed(succeed);
+                        } else {
+                            callBack.onError(entity.getMessage() + "");
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callBack.onFailure(httpFailureMsg());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
+    /**
+     * 订单详情
+     */
+    public static void pmsorderqueryinfocustomer(String id, final HttpUtilsCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("id", id);
+        HttpService httpService = RetrofitFactory.getRetrofit(15l, 15l).create(HttpService.class);
+        httpService.orderQueryStoreInfoUser(hashMap, "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(String succeed) {
+                        Gson gson = new Gson();
+                        MyOrderDetaleBean entity = gson.fromJson(succeed, MyOrderDetaleBean.class);
+                        if (entity.getCode() == 20000) {
+                            callBack.onSucceed(succeed);
+                        } else {
+                            callBack.onError(entity.getMessage() + "");
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callBack.onFailure(httpFailureMsg());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
+
+    /**
+     * 设置信息
+     */
+    public static void orderQueryOrderset( final HttpUtilsCallBack<String> callBack) {
+        HttpService httpService = RetrofitFactory.getRetrofit(15l, 15l).create(HttpService.class);
+        httpService.orderQueryOrderset( "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+                    @Override
+                    public void onNext(String succeed) {
+                        Gson gson = new Gson();
+                        orderQueryOrdersetBean entity = gson.fromJson(succeed, orderQueryOrdersetBean.class);
+                        if (entity.getCode() == 20000) {
+                            callBack.onSucceed(succeed);
+                        } else {
+                            callBack.onError(entity.getMessage() + "");
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callBack.onFailure(httpFailureMsg());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
     /**
      * 添加购物车
      */

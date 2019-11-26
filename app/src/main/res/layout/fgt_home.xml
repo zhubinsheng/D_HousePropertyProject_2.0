@@ -49,29 +49,6 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/dip_10"
-                android:layout_height="wrap_content">
-                <RelativeLayout
-                    android:layout_width="@dimen/dip_30"
-                    android:layout_centerHorizontal="true"
-                    android:layout_height="@dimen/dip_3"
-                    android:background="@drawable/home_page_bg">
-                    <TextView
-                        android:id="@+id/pag_tv1"
-                        android:layout_width="@dimen/dip_15"
-                        android:background="@drawable/home_tvbg1"
-                        android:layout_height="match_parent" />
-                    <TextView
-                        android:id="@+id/pag_tv2"
-                        android:layout_width="@dimen/dip_15"
-                        android:layout_alignParentRight="true"
-                        android:background="@drawable/home_tvbg1"
-                        android:layout_height="match_parent" />
-                </RelativeLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dip_5"
                 android:paddingTop="@dimen/dip_20">

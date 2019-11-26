@@ -120,5 +120,11 @@ public class ApiConstant {
     public static final String traWxUnified_orderApp = "tra/wx/unified_order/app";
     //获取我的优惠券
     public static final String couponGetMyCouponList = "coupon/getMyCouponList";
+    //商城订单列表
+    public static final String orderQueryStoreListUser = "order/query/store/list/user";
+    //商城订单详情
+    public static final String orderQueryStoreInfoUser = "order/query/store/info/user";
+    //设置信息
+    public static final String orderQueryOrderset = "order/query/orderset";
 }
 
