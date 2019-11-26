@@ -366,13 +366,10 @@ public class Fgt_Message extends BaseFragment implements BaseQuickAdapter.OnItem
             }
         });
     }
-
-
     /**
      * 获取数据看房详情
      */
     HouseInspectionOrderDetailsBean entity;
-
     public void listEventAdmin(int position) {
         loding.show();
         HttpHelper.listEventAdmin(getContext(), messageData.get(position).getOrderId() + "", new HttpHelper.HttpUtilsCallBack<String>() {
@@ -404,7 +401,6 @@ public class Fgt_Message extends BaseFragment implements BaseQuickAdapter.OnItem
             }
         });
     }
-
     /**
      * 订单详情
      */
@@ -416,7 +412,6 @@ public class Fgt_Message extends BaseFragment implements BaseQuickAdapter.OnItem
                 MyToast.show(getContext(), failure);
                 loding.dismiss();
             }
-
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();
@@ -432,7 +427,6 @@ public class Fgt_Message extends BaseFragment implements BaseQuickAdapter.OnItem
                     MyToast.show(getContext(), "订单已取消");
                 }
             }
-
             @Override
             public void onError(String error) {
                 loding.dismiss();
