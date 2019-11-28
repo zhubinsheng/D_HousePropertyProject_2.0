@@ -20,7 +20,7 @@ import com.example.d_housepropertyproject.tool.GlideCircleTransform;
 import com.example.d_housepropertyproject.tool.MyUtils;
 import com.example.d_housepropertyproject.ui.Act_Main;
 import com.example.d_housepropertyproject.ui.dilog.ShowUpAppDilog;
-import com.example.d_housepropertyproject.ui.mainfgt.apartment.act.Act_CustomerService;
+import com.example.d_housepropertyproject.ui.mainfgt.apartment.act.Act_HousePropertyCustomerService;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.Act_AboutUs;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.Act_ProblemFeedback;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.Act_UserAgreement;
@@ -83,26 +83,26 @@ public class Fgt_Mine extends BaseFragment implements Dilog_Login_Cler.OnBackCen
         aCache = ACache.get(getApp());
         unbinder1 = ButterKnife.bind(Fgt_Mine.this, v);
         ImmersionBar.with(this).statusBarDarkFont(true).init();
-//        mRefreshLayout.setRefreshHeader(new ClassicsHeader(getContext()).setSpinnerStyle(SpinnerStyle.FixedBehind).setPrimaryColorId(R.color.colorPrimary).setAccentColorId(android.R.color.white));
-////        内容跟随偏移
-//        mRefreshLayout.setEnableHeaderTranslationContent(true);
-//        //设置 Header 为 Material风格
-//        mRefreshLayout.setRefreshHeader(new MaterialHeader(context).setShowBezierWave(false));
-//        mRefreshLayout.setEnableRefresh(true);//是否启用下拉刷新功能
-//        mRefreshLayout.setEnableLoadMore(false);//是否启用上拉加载功能
-//        mRefreshLayout.setOnRefreshListener(refreshlayout -> {
-//            myRefreshlayout = true;
-//            postBackData();
-//        });
+        mRefreshLayout.setRefreshHeader(new ClassicsHeader(getContext()).setSpinnerStyle(SpinnerStyle.FixedBehind).setPrimaryColorId(R.color.colorPrimary).setAccentColorId(android.R.color.white));
+//        内容跟随偏移
+        mRefreshLayout.setEnableHeaderTranslationContent(true);
+        //设置 Header 为 Material风格
+        mRefreshLayout.setRefreshHeader(new MaterialHeader(context).setShowBezierWave(false));
+        mRefreshLayout.setEnableRefresh(true);//是否启用下拉刷新功能
+        mRefreshLayout.setEnableLoadMore(false);//是否启用上拉加载功能
+        mRefreshLayout.setOnRefreshListener(refreshlayout -> {
+            myRefreshlayout = true;
+            postBackData();
+        });
     }
 
     @Override
     public void initData() {
         hideHeader();
-//        postBackData();
-//        updateUI();
-//        myRefreshlayout = false;
-//        mine_banbenhao.setText("当前版本号：" + MyUtils.getVerName(getContext()));
+        postBackData();
+        updateUI();
+        myRefreshlayout = false;
+        mine_banbenhao.setText("当前版本号：" + MyUtils.getVerName(getContext()));
     }
 
     @Override
@@ -172,7 +172,7 @@ public class Fgt_Mine extends BaseFragment implements Dilog_Login_Cler.OnBackCen
                 startAct(Act_CertificateQualification.class);
                 break;
             case R.id.mine_contact_customer_service://联系客服
-                startAct(Act_CustomerService.class);
+                startAct(Act_HousePropertyCustomerService.class);
                 break;
             case R.id.mine_problem_feedback://问题反馈
                 startAct(Act_ProblemFeedback.class);

@@ -3,8 +3,12 @@ package com.example.d_housepropertyproject.ui.mainfgt.mine.act;
 import android.os.Bundle;
 
 import com.example.d_housepropertyproject.R;
+import com.example.d_housepropertyproject.net.http.HttpHelper;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.MyIncomeBean;
+import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lykj.aextreme.afinal.common.BaseActivity;
+import com.lykj.aextreme.afinal.utils.MyToast;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -33,7 +37,7 @@ public class Act_MemberCenter extends BaseActivity {
 
     @Override
     public void initData() {
-
+        vipGetMyVip();
     }
 
     @Override
@@ -56,5 +60,35 @@ public class Act_MemberCenter extends BaseActivity {
     @OnClick(R.id.min_Historical_Record_back)
     public void onClick() {
         finish();
+    }
+
+
+    /**
+     * 获取我的会员
+     */
+    public void vipGetMyVip() {
+        HttpHelper.vipGetMyVip(context, new HttpHelper.HttpUtilsCallBack<String>() {
+            @Override
+            public void onFailure(String failure) {
+                MyToast.show(context, failure);
+                loding.dismiss();
+            }
+
+            @Override
+            public void onSucceed(String succeed) {
+                loding.dismiss();
+                Gson gson = new Gson();
+                MyIncomeBean entity = gson.fromJson(succeed, MyIncomeBean.class);
+                if (entity.getCode() == 20000) {
+
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                loding.dismiss();
+                MyToast.show(context, error);
+            }
+        });
     }
 }

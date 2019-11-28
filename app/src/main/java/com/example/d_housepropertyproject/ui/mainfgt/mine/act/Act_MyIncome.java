@@ -1,13 +1,19 @@
 package com.example.d_housepropertyproject.ui.mainfgt.mine.act;
+
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import com.example.d_housepropertyproject.R;
+import com.example.d_housepropertyproject.net.http.HttpHelper;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.adapter.MyIncomeAdapter;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.IntegralGetMyIntegralBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.MyIncomeBean;
+import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lykj.aextreme.afinal.common.BaseActivity;
+import com.lykj.aextreme.afinal.utils.MyToast;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
@@ -28,6 +34,8 @@ public class Act_MyIncome extends BaseActivity {
     SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.ExchangeRecords_RecyclerView)
     RecyclerView MyIncomeRecyclerView;
+    @BindView(R.id.tv_integral)
+    TextView tv_integral;
 
     @Override
     public int initLayoutId() {
@@ -61,16 +69,14 @@ public class Act_MyIncome extends BaseActivity {
         MyIncomeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private List<MyIncomeBean> data = new ArrayList<>();
+    private List<MyIncomeBean.ResultBean.IntegralInfoListBean> data = new ArrayList<>();
+    private MyIncomeAdapter adapter;
 
     @Override
     public void initData() {
-        for (int i = 0; i < 15; i++) {
-            data.add(new MyIncomeBean());
-        }
-        MyIncomeAdapter adapter = new MyIncomeAdapter(data);
+        adapter = new MyIncomeAdapter(data);
         MyIncomeRecyclerView.setAdapter(adapter);
-
+        integralGetMyIntegralDetail();
     }
 
     @Override
@@ -93,5 +99,37 @@ public class Act_MyIncome extends BaseActivity {
     @OnClick(R.id.min_Historical_Record_back)
     public void onClick() {
         finish();
+    }
+
+
+    /**
+     * 获取我的积分明细
+     */
+    public void integralGetMyIntegralDetail() {
+        HttpHelper.integralGetMyIntegralDetail(context, new HttpHelper.HttpUtilsCallBack<String>() {
+            @Override
+            public void onFailure(String failure) {
+                MyToast.show(context, failure);
+                loding.dismiss();
+            }
+
+            @Override
+            public void onSucceed(String succeed) {
+                loding.dismiss();
+                Gson gson = new Gson();
+                MyIncomeBean entity = gson.fromJson(succeed, MyIncomeBean.class);
+                if (entity.getCode() == 20000) {
+                    data.addAll(entity.getResult().getIntegralInfoList());
+                    tv_integral.setText(entity.getResult().getIntegral() + "");
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                loding.dismiss();
+                MyToast.show(context, error);
+            }
+        });
     }
 }

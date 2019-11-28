@@ -64,51 +64,48 @@ public class Fgt_Message extends BaseFragment implements BaseQuickAdapter.OnItem
     public int initLayoutId() {
         return R.layout.fgt_message;
     }
-
     @Override
     public void initView() {
         hideHeader();
         ImmersionBar.with(this).statusBarDarkFont(true).init();
-//        unbinder = ButterKnife.bind(Fgt_Message.this, v);
-//        mRefreshLayout.setEnableRefresh(true);//是否启用下拉刷新功能
-//        mRefreshLayout.setEnableLoadMore(false);//是否启用上拉加载功能
-//        //内容跟随偏移
-//        mRefreshLayout.setEnableHeaderTranslationContent(true);
-//        //设置 Header 为 Material风格
-//        mRefreshLayout.setRefreshHeader(new MaterialHeader(context).setShowBezierWave(false));
-//        //设置 Footer 为 球脉冲
-//        mRefreshLayout.setRefreshFooter(new BallPulseFooter(context).setSpinnerStyle(SpinnerStyle.Scale));
-//        mRefreshLayout.setOnRefreshListener(refreshlayout -> {
-//            pmsgGetByUserId();
-//            refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
-//        });
-//        myRecyclerView.setSwipeMenuCreator(null);
-////         创建菜单：
-//        SwipeMenuCreator mSwipeMenuCreator = (leftMenu, rightMenu, viewType) -> {
-//            SwipeMenuItem deleteItem = new SwipeMenuItem(context);
-//            deleteItem
-//                    .setImage(R.mipmap.icon_delete)
-//                    .setBackgroundColor(getResources().getColor(R.color.mycolor))
-//                    .setWidth(MyUtils.dip2px(80))
-//                    .setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
-//            rightMenu.addMenuItem(deleteItem);
-//        };
-////         设置监听器。
-//        myRecyclerView.setSwipeMenuCreator(mSwipeMenuCreator);
-////         菜单点击监听。
-//        myRecyclerView.setSwipeMenuItemClickListener(mMenuItemClickListener);
-//        noteIntenet.setOnClickListener(view -> {
-//            pmsgGetByUserId();
-//            loding.show();
-//            mRefreshLayout.setEnableLoadMore(true);//是否启用上拉加载功能
-//        });
-//        myRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+        unbinder = ButterKnife.bind(Fgt_Message.this, v);
+        mRefreshLayout.setEnableRefresh(true);//是否启用下拉刷新功能
+        mRefreshLayout.setEnableLoadMore(false);//是否启用上拉加载功能
+        //内容跟随偏移
+        mRefreshLayout.setEnableHeaderTranslationContent(true);
+        //设置 Header 为 Material风格
+        mRefreshLayout.setRefreshHeader(new MaterialHeader(context).setShowBezierWave(false));
+        //设置 Footer 为 球脉冲
+        mRefreshLayout.setRefreshFooter(new BallPulseFooter(context).setSpinnerStyle(SpinnerStyle.Scale));
+        mRefreshLayout.setOnRefreshListener(refreshlayout -> {
+            pmsgGetByUserId();
+            refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+        });
+        myRecyclerView.setSwipeMenuCreator(null);
+//         创建菜单：
+        SwipeMenuCreator mSwipeMenuCreator = (leftMenu, rightMenu, viewType) -> {
+            SwipeMenuItem deleteItem = new SwipeMenuItem(context);
+            deleteItem
+                    .setImage(R.mipmap.icon_delete)
+                    .setBackgroundColor(getResources().getColor(R.color.mycolor))
+                    .setWidth(MyUtils.dip2px(80))
+                    .setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+            rightMenu.addMenuItem(deleteItem);
+        };
+//         设置监听器。
+        myRecyclerView.setSwipeMenuCreator(mSwipeMenuCreator);
+//         菜单点击监听。
+        myRecyclerView.setSwipeMenuItemClickListener(mMenuItemClickListener);
+        noteIntenet.setOnClickListener(view -> {
+            pmsgGetByUserId();
+            loding.show();
+            mRefreshLayout.setEnableLoadMore(true);//是否启用上拉加载功能
+        });
+        myRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
     }
-
     private Unbinder unbinder;
     MessageAdapter apartmentAdapter;
     JWebSClient client;
-
     @Override
     public void initData() {
     }
@@ -125,8 +122,6 @@ public class Fgt_Message extends BaseFragment implements BaseQuickAdapter.OnItem
         unbinder = ButterKnife.bind(Fgt_Message.this, v);
         initSocketClient();
     }
-
-
     @Override
     public void updateUI() {
 
@@ -169,12 +164,10 @@ public class Fgt_Message extends BaseFragment implements BaseQuickAdapter.OnItem
     public void sendMsg(int flag, Object obj) {
 
     }
-
     /**
      * 获取消息列表
      */
     List<MessageBean.ResultBean> messageData = new ArrayList<>();
-
     public void pmsgGetByUserId() {
         messageData.clear();
         HttpHelper.pmsgGetByUserId(getContext(), MyApplication.getLoGinBean().getResult().getUser().getId(), new HttpHelper.HttpUtilsCallBack<String>() {
@@ -186,7 +179,6 @@ public class Fgt_Message extends BaseFragment implements BaseQuickAdapter.OnItem
                 myRecyclerView.setVisibility(View.GONE);
                 loding.dismiss();
             }
-
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();
@@ -222,7 +214,6 @@ public class Fgt_Message extends BaseFragment implements BaseQuickAdapter.OnItem
                     EventBus.getDefault().post(new updateTextEvent("失败"));
                 }
             }
-
             @Override
             public void onError(String error) {
                 loding.dismiss();
@@ -271,9 +262,7 @@ public class Fgt_Message extends BaseFragment implements BaseQuickAdapter.OnItem
         }
         dilog_login_cler = new Dilog_Login_Cler(getContext(), () -> pmsgClear(), "确定清空消息记录");
         dilog_login_cler.show();
-
     }
-
     /**
      * 更改消息为已读
      */
@@ -285,7 +274,6 @@ public class Fgt_Message extends BaseFragment implements BaseQuickAdapter.OnItem
                 MyToast.show(context, failure);
                 loding.dismiss();
             }
-
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();
@@ -293,10 +281,8 @@ public class Fgt_Message extends BaseFragment implements BaseQuickAdapter.OnItem
                 Gson gson = new Gson();
                 PmsgUpdateIsReadBean bean = gson.fromJson(succeed, PmsgUpdateIsReadBean.class);
                 if (bean.getCode() == 20000) {
-
                 }
             }
-
             @Override
             public void onError(String error) {
                 loding.dismiss();
@@ -304,7 +290,6 @@ public class Fgt_Message extends BaseFragment implements BaseQuickAdapter.OnItem
             }
         });
     }
-
     /**
      * 删除用户消息
      */

@@ -242,7 +242,7 @@ public class RecommendingCommoditiesBean {
             private double price;
             private String unit;
             private String newStatus;
-            private Object stock;
+            private int stock;
 
             public String getId() {
                 return id;
@@ -300,11 +300,11 @@ public class RecommendingCommoditiesBean {
                 this.newStatus = newStatus;
             }
 
-            public Object getStock() {
+            public int  getStock() {
                 return stock;
             }
 
-            public void setStock(Object stock) {
+            public void setStock(int stock) {
                 this.stock = stock;
             }
         }

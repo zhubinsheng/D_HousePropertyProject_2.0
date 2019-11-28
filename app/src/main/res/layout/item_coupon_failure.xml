@@ -46,6 +46,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="参与看房团活动获得"
@@ -56,7 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="@dimen/dip_5"
-                    android:text="仅限悉昙湾项目所用"
+                    android:text=" "
                     android:textColor="#C9C9C9"
                     android:textSize="@dimen/fond_9sp" />
             </LinearLayout>

@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.d_housepropertyproject.R;
 import com.example.d_housepropertyproject.net.http.HttpHelper;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.AccumulationBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.bean.RecommendingCommoditiesBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.adapter.AccumulationAdapter;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.IntegralGetMyIntegralBean;
 import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lykj.aextreme.afinal.common.BaseActivity;
@@ -37,6 +39,8 @@ public class Act_Accumulation extends BaseActivity {
     RecyclerView jifenRecyclerView;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
+    @BindView(R.id.tv_totalIntegral)
+    TextView tv_totalIntegral;
 
     @Override
     public int initLayoutId() {
@@ -82,13 +86,14 @@ public class Act_Accumulation extends BaseActivity {
         jifenRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         adapter = new AccumulationAdapter(listDatas);
         adapter.setOnItemClickListener((adapter, view, position) -> {
-            Intent intent=new Intent();
-            intent.putExtra("goodId",listDatas.get(position).getId());
-            startAct(intent,Act_GiftDetails.class);
+            Intent intent = new Intent();
+            intent.putExtra("goodId", listDatas.get(position).getId());
+            startAct(intent, Act_GiftDetails.class);
         });
         jifenRecyclerView.setAdapter(adapter);
         jifenRecyclerView.setNestedScrollingEnabled(false);
         goodsQueryListUser();
+        integralGetMyIntegral();
     }
 
     @Override
@@ -122,7 +127,9 @@ public class Act_Accumulation extends BaseActivity {
                 break;
         }
     }
+
     private int page_num = 1;
+
     /**
      * 商品列表
      */
@@ -137,18 +144,48 @@ public class Act_Accumulation extends BaseActivity {
                 MyToast.show(context, failure);
                 loding.dismiss();
             }
+
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();
                 Gson gson = new Gson();
                 RecommendingCommoditiesBean entity = gson.fromJson(succeed, RecommendingCommoditiesBean.class);
                 if (entity.getCode() == 20000) {
-                    if (entity.getResult().getPageNum()<=page_num) {
+                    if (entity.getResult().getPageNum() <= page_num) {
                         listDatas.addAll(entity.getResult().getList());
                     }
                     adapter.notifyDataSetChanged();
                 }
             }
+
+            @Override
+            public void onError(String error) {
+                loding.dismiss();
+                MyToast.show(context, error);
+            }
+        });
+    }
+
+    /**
+     * 获取我的积分
+     */
+    public void integralGetMyIntegral() {
+        HttpHelper.integralGetMyIntegral(context, new HttpHelper.HttpUtilsCallBack<String>() {
+            @Override
+            public void onFailure(String failure) {
+                MyToast.show(context, failure);
+                loding.dismiss();
+            }
+            @Override
+            public void onSucceed(String succeed) {
+                loding.dismiss();
+                Gson gson = new Gson();
+                IntegralGetMyIntegralBean entity = gson.fromJson(succeed, IntegralGetMyIntegralBean.class);
+                if (entity.getCode() == 20000) {
+                    tv_totalIntegral.setText(entity.getResult().getTotalIntegral() + "");
+                }
+            }
+
             @Override
             public void onError(String error) {
                 loding.dismiss();

@@ -170,18 +170,18 @@ public interface HttpService {
 
 
     @GET(ApiConstant.goodsQueryListUser)
-    Observable<String> goodsQueryListUser(@QueryMap Map<String, String> map);
+    Observable<String> goodsQueryListUser(@QueryMap Map<String, String> map, @Header("token") String token);
 
 
     @GET(ApiConstant.goodsQueryInfoStoreUser)
-    Observable<String> goodsQueryInfoStoreUser(@QueryMap Map<String, String> map);
+    Observable<String> goodsQueryInfoStoreUser(@QueryMap Map<String, String> map,@Header("token") String token);
 
 
     @GET(ApiConstant.goodsQueryInfoIntegralUser)
-    Observable<String> goodsQueryInfoIntegralUser(@QueryMap Map<String, String> map);
+    Observable<String> goodsQueryInfoIntegralUser(@QueryMap Map<String, String> map,@Header("token") String token);
 
     @POST(ApiConstant.pmsgoodsqueryproductinfo)
-    Observable<String> pmsgoodsqueryproductinfo(@Body RequestBody requestBody);
+    Observable<String> pmsgoodsqueryproductinfo(@Body RequestBody requestBody,@Header("token") String token);
 
     @POST(ApiConstant.pmsOrderAddBasket)
     Observable<String> pmsOrderAddBasket(@Body RequestBody requestBody, @Header("token") String token);
@@ -203,6 +203,21 @@ public interface HttpService {
 
     @GET(ApiConstant.orderQueryOrderset)
     Observable<String> orderQueryOrderset( @Header("token") String token);
+
+    @GET(ApiConstant.orderQueryIntegralListUser)
+    Observable<String> orderQueryIntegralListUser( @QueryMap Map<String, String> map,@Header("token") String token);
+
+    @GET(ApiConstant.orderQueryIntegralInfoUser)
+    Observable<String> orderQueryIntegralInfoUser( @QueryMap Map<String, String> map,@Header("token") String token);
+
+    @GET(ApiConstant.integralGetMyIntegral)
+    Observable<String> integralGetMyIntegral( @QueryMap Map<String, String> map,@Header("token") String token);
+
+    @GET(ApiConstant.integralGetMyIntegralDetail)
+    Observable<String> integralGetMyIntegralDetail( @QueryMap Map<String, String> map,@Header("token") String token);
+
+    @GET(ApiConstant.vipGetMyVip)
+    Observable<String> vipGetMyVip( @QueryMap Map<String, String> map,@Header("token") String token);
     /**
      * 下载文件
      *

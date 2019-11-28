@@ -142,7 +142,7 @@
             android:label="@string/home_OnlineBooking_app"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.d_housepropertyproject.ui.mainfgt.apartment.act.Act_CustomerService"
+            android:name="com.example.d_housepropertyproject.ui.mainfgt.apartment.act.Act_HousePropertyCustomerService"
             android:label="@string/home_CustomerService_app"
             android:screenOrientation="portrait" />
         <activity

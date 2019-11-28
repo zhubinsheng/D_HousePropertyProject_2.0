@@ -12,8 +12,10 @@ public class ApiConstant {
 //    public static final String ROOT_URL = "http://app.dingduoduo.net.cn/";
     //外网测试
 //    public static final String ROOT_URL = "http://www.dingduoduo.net.cn/dev/";
-    // 本地服务器
-    public static String ROOT_URL = "http://192.168.2.240:802/";
+    // 本地服务器1
+    public static String ROOT_URL1 = "http://192.168.2.240:8802/";
+    // 本地服务器2
+    public static String ROOT_URL2 = "http://192.168.2.240:802/";
     //户型
     public static final String houseTypeProject = "houseType/project/";
     //户型详情
@@ -105,7 +107,7 @@ public class ApiConstant {
     //获取所有下级区域
     public static final String areagetByParentId = "area/getByParentId/";
     //商品列表
-    public static final String goodsQueryListUser = "goods/query/list/user/";
+    public static final String goodsQueryListUser = "goods/query/list/user";
     //商品详情
     public static final String goodsQueryInfoStoreUser = "goods/query/info/store/user";
     //积分商品详情
@@ -126,5 +128,15 @@ public class ApiConstant {
     public static final String orderQueryStoreInfoUser = "order/query/store/info/user";
     //设置信息
     public static final String orderQueryOrderset = "order/query/orderset";
+    //积分订单列表
+    public static final String orderQueryIntegralListUser = "order/query/integral/list/user";
+    //积分订单详情
+    public static final String orderQueryIntegralInfoUser = "order/query/integral/info/user";
+    //获取我的积分
+    public static final String integralGetMyIntegral = "integral/getMyIntegral";
+    //获取我的积分明细
+    public static final String integralGetMyIntegralDetail = "integral/getMyIntegralDetail";
+    //获取我的会员
+    public static final String vipGetMyVip = "vip/getMyVip";
 }
 

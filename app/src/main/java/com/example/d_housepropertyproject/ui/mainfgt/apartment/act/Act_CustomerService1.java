@@ -6,6 +6,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.d_housepropertyproject.R;
 import com.example.d_housepropertyproject.net.http.HttpHelper;
@@ -27,7 +28,7 @@ import butterknife.OnClick;
 /**
  * 主界面户型=>户型详情=>客服
  */
-public class Act_CustomerService extends BaseActivity implements BaseQuickAdapter.OnItemClickListener {
+public class Act_CustomerService1 extends BaseActivity implements BaseQuickAdapter.OnItemClickListener {
     @BindView(R.id.min_Historical_RecyclerView)
     RecyclerView myRecyclerView;
     @BindView(R.id.min_Historical_refreshLayout)
@@ -35,7 +36,7 @@ public class Act_CustomerService extends BaseActivity implements BaseQuickAdapte
 
     @Override
     public int initLayoutId() {
-        return R.layout.act_customerservice;
+        return R.layout.act_housepropertycustomerservice;
     }
 
     @Override
@@ -100,7 +101,7 @@ public class Act_CustomerService extends BaseActivity implements BaseQuickAdapte
                 }
                 if (adapter == null) {
                     adapter = new CustomerServiceAdapter(datas);
-                    adapter.setOnItemClickListener(Act_CustomerService.this);
+                    adapter.setOnItemClickListener(Act_CustomerService1.this);
                     myRecyclerView.setAdapter(adapter);
                 } else {
                     adapter.notifyDataSetChanged();

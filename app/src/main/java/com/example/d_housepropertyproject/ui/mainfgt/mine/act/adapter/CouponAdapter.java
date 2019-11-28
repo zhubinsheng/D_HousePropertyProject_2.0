@@ -39,19 +39,26 @@ public class CouponAdapter extends BaseMultiItemQuickAdapter<CouponBean, BaseVie
                     price.setTextColor(mContext.getResources().getColor(R.color.mycolor1));
                     pricedayang.setTextColor(mContext.getResources().getColor(R.color.mycolor1));
                 } else if (item.getType().equals("3")) {
-                    helper.setText(R.id.tv_type, "房产优惠券");
+                    helper.setText(R.id.tv_type, "商品优惠券");
                     price.setTextColor(mContext.getResources().getColor(R.color.mycolor2));
                     pricedayang.setTextColor(mContext.getResources().getColor(R.color.mycolor2));
                 }
                 break;
             case CouponBean.IMG:
-
+                if (item.getType().equals("1")) {
+                    helper.setText(R.id.tv_type, "参与看房团活动获得");
+                } else if (item.getType().equals("3")) {
+                    helper.setText(R.id.tv_type, "参与商品活动获得");
+                }
                 break;
             case CouponBean.IMG_TEXT:
-
+                if (item.getType().equals("1")) {
+                    helper.setText(R.id.tv_type, "参与看房团活动获得");
+                } else if (item.getType().equals("3")) {
+                    helper.setText(R.id.tv_type, "参与商品活动获得");
+                }
                 break;
         }
         helper.setText(R.id.price, item.getPrice() + "");
-
     }
 }

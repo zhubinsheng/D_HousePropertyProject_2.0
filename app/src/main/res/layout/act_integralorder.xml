@@ -63,6 +63,7 @@
                 android:paddingRight="@dimen/dp_10">
 
                 <TextView
+                    android:id="@+id/oder_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="订单号：654654546545646545645"
@@ -76,7 +77,7 @@
                     android:orientation="horizontal">
 
                     <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/image"
+                        android:id="@+id/oder_image"
                         android:layout_width="@dimen/dip_80"
                         android:layout_height="@dimen/dip_80"
                         android:background="#D8D8D8"
@@ -97,7 +98,7 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/tv_name"
+                                android:id="@+id/oder_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="农夫山泉饮用天然水4L *4/箱取"
@@ -118,7 +119,7 @@
                                     android:textSize="@dimen/fond_12sp" />
 
                                 <TextView
-                                    android:id="@+id/currentPrice"
+                                    android:id="@+id/tv_price"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:paddingLeft="@dimen/dip_2"
@@ -147,6 +148,7 @@
                                     android:textSize="@dimen/fond_12sp" />
 
                                 <TextView
+                                    android:id="@+id/oder_time"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="2019.11.11   21:36:55"
@@ -170,6 +172,7 @@
                         android:textSize="@dimen/fond_12sp" />
 
                     <TextView
+                        android:id="@+id/oder_linkman"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -191,6 +194,7 @@
                         android:textSize="@dimen/fond_12sp" />
 
                     <TextView
+                        android:id="@+id/oder_address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"

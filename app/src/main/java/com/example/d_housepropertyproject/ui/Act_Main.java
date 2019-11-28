@@ -100,23 +100,23 @@ public class Act_Main extends BaseActivity {
                 setCurrent(0);
                 break;
             case R.id.main_tab_Message:
-//                MyApplication.onBackStatus = false;
-//                if (MyApplication.getLoGinBean() == null) {
-//                    Intent intent = new Intent();
-//                    intent.setClass(getApplicationContext(), Act_Login.class);
-//                    startActivityForResult(intent, 10);
-//                    return;
-//                }
+                MyApplication.onBackStatus = false;
+                if (MyApplication.getLoGinBean() == null) {
+                    Intent intent = new Intent();
+                    intent.setClass(getApplicationContext(), Act_Login.class);
+                    startActivityForResult(intent, 10);
+                    return;
+                }
                 setCurrent(1);
                 break;
             case R.id.main_tab_mine:
-//                MyApplication.onBackStatus = false;
-//                if (MyApplication.getLoGinBean() == null) {
-//                    Intent intent = new Intent();
-//                    intent.setClass(getApplicationContext(), Act_Login.class);
-//                    startActivityForResult(intent, 10);
-//                    return;
-//                }
+                MyApplication.onBackStatus = false;
+                if (MyApplication.getLoGinBean() == null) {
+                    Intent intent = new Intent();
+                    intent.setClass(getApplicationContext(), Act_Login.class);
+                    startActivityForResult(intent, 10);
+                    return;
+                }
                 setCurrent(2);
                 break;
         }

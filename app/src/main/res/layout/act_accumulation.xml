@@ -81,9 +81,9 @@
                                 android:textSize="@dimen/fond_12sp" />
 
                             <TextView
+                                android:id="@+id/tv_totalIntegral"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="54654"
                                 android:textColor="#FA5A37"
                                 android:textSize="@dimen/fond_12sp" />
                         </LinearLayout>

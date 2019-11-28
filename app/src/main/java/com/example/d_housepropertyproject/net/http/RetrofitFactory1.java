@@ -1,5 +1,6 @@
 package com.example.d_housepropertyproject.net.http;
 
+import com.lykj.aextreme.afinal.utils.Debug;
 import com.orhanobut.logger.Logger;
 
 import java.io.IOException;
@@ -11,7 +12,8 @@ import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-public class RetrofitFactory {
+
+public class RetrofitFactory1 {
     //baseUrl
     private Retrofit retrofit;
     public Retrofit getRetrofit(){
@@ -23,7 +25,7 @@ public class RetrofitFactory {
                     .build();
             //初始化Retrofit
             retrofit = new Retrofit.Builder()
-                    .baseUrl(ApiConstant.ROOT_URL1)
+                    .baseUrl(ApiConstant.ROOT_URL2)
                     .addConverterFactory(StringConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(client)
@@ -40,13 +42,12 @@ public class RetrofitFactory {
                 .build();
         //初始化Retrofit
         Retrofit retrofit1 = new Retrofit.Builder()
-                .baseUrl(ApiConstant.ROOT_URL1)
+                .baseUrl(ApiConstant.ROOT_URL2)
                 .addConverterFactory(StringConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)
                 .build();
-
         return retrofit1;
     }
 

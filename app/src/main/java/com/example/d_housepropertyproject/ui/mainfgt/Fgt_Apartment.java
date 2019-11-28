@@ -52,18 +52,18 @@ public class Fgt_Apartment extends BaseFragment {
     @Override
     public void initData() {
         setTitle(R.string.home_OnlineBooking_name);
-//        datas = new ArrayList<>();
-//        apartmentAdapter = new ApartmentAdapter(datas, context);
-//        apartmentAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-//            switch (view.getId()) {
-//                case R.id.item_apptment_text:
-//                    Intent intent = new Intent();
-//                    intent.putExtra("id", datas.get(position).getId());
-//                    startAct(intent, Act_Ap_UnitDetails.class);
-//                    break;
-//            }
-//        });
-//        updateUI();
+        datas = new ArrayList<>();
+        apartmentAdapter = new ApartmentAdapter(datas, context);
+        apartmentAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            switch (view.getId()) {
+                case R.id.item_apptment_text:
+                    Intent intent = new Intent();
+                    intent.putExtra("id", datas.get(position).getId());
+                    startAct(intent, Act_Ap_UnitDetails.class);
+                    break;
+            }
+        });
+        updateUI();
     }
 
     @Override
