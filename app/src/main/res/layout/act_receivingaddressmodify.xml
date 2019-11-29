@@ -19,6 +19,7 @@
             android:src="@mipmap/icon_blck_back" />
 
         <TextView
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -28,12 +29,12 @@
             android:textSize="@dimen/fond_21sp" />
 
         <TextView
+            android:id="@+id/tv_DelLinkman"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingRight="@dimen/dp_10"
-            android:paddingLeft="@dimen/dp_10"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:padding="@dimen/dp_10"
             android:text="删除"
             android:textColor="#909090" />
     </RelativeLayout>
@@ -67,6 +68,7 @@
                     android:textSize="@dimen/fond_14sp" />
 
                 <EditText
+                    android:id="@+id/et_linkman"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
@@ -92,6 +94,7 @@
                     android:textSize="@dimen/fond_14sp" />
 
                 <EditText
+                    android:id="@+id/ed_phone"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
@@ -117,6 +120,7 @@
                     android:textSize="@dimen/fond_14sp" />
 
                 <TextView
+                    android:id="@+id/tv_region"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
@@ -140,8 +144,8 @@
                     android:text="详细地址"
                     android:textColor="@color/min_color"
                     android:textSize="@dimen/fond_14sp" />
-
-                <TextView
+                <EditText
+                    android:id="@+id/tv_address"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
@@ -166,11 +170,12 @@
                     android:textColor="@color/min_color"
                     android:textSize="@dimen/fond_14sp" />
 
-                <CheckBox
+                <TextView
+                    android:id="@+id/tv_checkbox"
                     android:layout_width="@dimen/dip_15"
                     android:layout_height="@dimen/dip_15"
                     android:layout_marginRight="@dimen/dip_20"
-                    android:background="@drawable/selec_checkbox"
+                    android:background="@drawable/selec_radio"
                     android:button="@null" />
             </LinearLayout>
         </LinearLayout>

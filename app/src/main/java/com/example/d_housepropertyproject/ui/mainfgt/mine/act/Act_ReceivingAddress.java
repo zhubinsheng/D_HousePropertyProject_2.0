@@ -1,15 +1,23 @@
 package com.example.d_housepropertyproject.ui.mainfgt.mine.act;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.d_housepropertyproject.R;
+import com.example.d_housepropertyproject.net.http.HttpHelper;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.adapter.ReceivingAddressAdapter;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.MyIncomeBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.ReceivingAddressBean;
+import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lykj.aextreme.afinal.common.BaseActivity;
+import com.lykj.aextreme.afinal.utils.Debug;
+import com.lykj.aextreme.afinal.utils.MyToast;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
@@ -62,15 +70,29 @@ public class Act_ReceivingAddress extends BaseActivity {
         ExchangeRecordsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private List<ReceivingAddressBean> dataAll = new ArrayList<>();
+    private List<ReceivingAddressBean.ResultBean> dataAll = new ArrayList<>();
+    private ReceivingAddressAdapter addressAdapter;
+    private int positionInext = 0;
 
     @Override
     public void initData() {
-        for (int i = 0; i < 10; i++) {
-            dataAll.add(new ReceivingAddressBean());
-        }
-        ReceivingAddressAdapter addressAdapter = new ReceivingAddressAdapter(dataAll);
+        addressAdapter = new ReceivingAddressAdapter(dataAll);
         ExchangeRecordsRecyclerView.setAdapter(addressAdapter);
+        addressAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            switch (view.getId()) {
+                case R.id.tv_bianji:
+                    Intent intent = new Intent();
+                    intent.putExtra("bean", dataAll.get(position));
+                    intent.setClass(this, Act_ReceivingAddressModify.class);
+                    startActivityForResult(intent, 10);
+                    break;
+                case R.id.item_addr:
+                    loding.show();
+                    linkmanSetDefaultLinkman(position);
+                    break;
+            }
+        });
+        linkmanGetMyLinkmanList();
     }
 
     @Override
@@ -99,6 +121,77 @@ public class Act_ReceivingAddress extends BaseActivity {
             case R.id.newAddr://新地址
                 startAct(Act_ReceivingAddressModify.class);
                 break;
+        }
+    }
+
+    /**
+     * 获取我的收货地址
+     */
+    public void linkmanGetMyLinkmanList() {
+        HttpHelper.linkmanGetMyLinkmanList(context, new HttpHelper.HttpUtilsCallBack<String>() {
+            @Override
+            public void onFailure(String failure) {
+                MyToast.show(context, failure);
+                loding.dismiss();
+            }
+
+            @Override
+            public void onSucceed(String succeed) {
+                loding.dismiss();
+                Gson gson = new Gson();
+                ReceivingAddressBean entity = gson.fromJson(succeed, ReceivingAddressBean.class);
+                if (entity.getCode() == 20000) {
+                    dataAll.addAll(entity.getResult());
+                    addressAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                loding.dismiss();
+                MyToast.show(context, error);
+            }
+        });
+    }
+
+    /**
+     * 获取我的收货地址
+     */
+    public void linkmanSetDefaultLinkman(int position) {
+        HttpHelper.linkmanSetDefaultLinkman(Act_ReceivingAddress.this, dataAll.get(positionInext).getId(), new HttpHelper.HttpUtilsCallBack<String>() {
+            @Override
+            public void onFailure(String failure) {
+                MyToast.show(context, failure);
+                loding.dismiss();
+            }
+
+            @Override
+            public void onSucceed(String succeed) {
+                loding.dismiss();
+                Gson gson = new Gson();
+                ReceivingAddressBean entity = gson.fromJson(succeed, ReceivingAddressBean.class);
+                if (entity.getCode() == 20000) {
+                    dataAll.get(position).setIsdefault("1");
+                    dataAll.get(positionInext).setIsdefault("0");
+                    addressAdapter.notifyDataSetChanged();
+                    positionInext = position;
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                loding.dismiss();
+                MyToast.show(context, error);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 10 && resultCode == 10) {
+            dataAll.clear();
+            linkmanGetMyLinkmanList();
         }
     }
 }

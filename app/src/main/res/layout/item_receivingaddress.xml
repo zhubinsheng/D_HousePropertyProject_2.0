@@ -4,63 +4,81 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical">
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dip_60">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_10">
+        <TextView
+            android:id="@+id/tv_checkbox"
+            android:layout_width="@dimen/dip_15"
+            android:layout_height="@dimen/dip_15"
+            android:layout_gravity="center"
+            android:background="@drawable/selec_radio" />
+        <RelativeLayout
+            android:id="@+id/item_addr"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dip_60">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:orientation="vertical">
-
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="顾凯凯  13666666666"
-                android:textColor="#1D1D1D"
-                android:textSize="@dimen/fond_14sp" />
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:orientation="vertical">
 
-            <TextView
+                <TextView
+                    android:id="@+id/tv_linkmanPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="顾凯凯  13666666666"
+                    android:textColor="#1D1D1D"
+                    android:textSize="@dimen/fond_14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dip_5"
+                    android:text="四川成都新都区木兰镇中国塑料城9栋23号"
+                    android:textColor="#1D1D1D"
+                    android:textSize="@dimen/fond_10sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/dip_5"
-                android:text="四川成都新都区木兰镇中国塑料城9栋23号"
-                android:textColor="#1D1D1D"
-                android:textSize="@dimen/fond_10sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="@dimen/dp_10"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="@dimen/dip_0.1"
-                android:layout_marginTop="@dimen/dp_10"
-                android:layout_marginBottom="@dimen/dp_10"
                 android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp_10"
-                android:background="#CFCFCF" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="编辑"
-                android:textSize="@dimen/fond_12sp" />
-        </LinearLayout>
-    </RelativeLayout>
+                <TextView
+                    android:layout_width="@dimen/dip_0.1"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:background="#CFCFCF" />
+
+                <TextView
+                    android:id="@+id/tv_bianji"
+                    android:layout_width="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:text="编辑"
+                    android:textSize="@dimen/fond_12sp" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_0.1"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginRight="@dimen/dp_10"
-        android:layout_height="@dimen/dip_0.1"
         android:background="#CFCFCF" />
 </LinearLayout>

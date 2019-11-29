@@ -10,10 +10,12 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.example.d_housepropertyproject.R;
+import com.example.d_housepropertyproject.net.http.HttpHelper;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.dailog.adapter.AddrSelectionAdapter;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.dailog.bean.areagetByParentIdBean;
 import com.google.gson.Gson;
 import com.lykj.aextreme.afinal.common.BaseDialog;
+import com.lykj.aextreme.afinal.utils.Debug;
 import com.lykj.aextreme.afinal.utils.MyToast;
 
 import java.util.ArrayList;
@@ -84,7 +86,6 @@ public class Dlg_AddressSelection extends BaseDialog {
             areaAdapter.notifyDataSetChanged();
             areagetByParentId(provinceData.get(position).getCodeid() + "");
         });
-
         cityAdapter = new AddrSelectionAdapter(cityData);
         RecyclerView_city.setAdapter(cityAdapter);
         //市点击事件
@@ -115,7 +116,6 @@ public class Dlg_AddressSelection extends BaseDialog {
 
     String areaId = "";
     private int ProvinceIndext = 0, cityIndext = 0, areaIndext = 0;
-
     @Override
     protected void initData() {
         stStatus = "1";
@@ -134,51 +134,50 @@ public class Dlg_AddressSelection extends BaseDialog {
                     return;
                 }
                 dismiss();
-                onBackText.onBackItem(areaId, tv_province.getText().toString() + tv_city.getText().toString() + tv_area.getText().toString());
+                if (onBackText != null) {
+                    onBackText.onBackItem(areaId, tv_province.getText().toString() + tv_city.getText().toString() + tv_area.getText().toString());
+                }
                 break;
-
         }
     }
+
     /**
      * 添加联系人
      */
     public void areagetByParentId(String parentId) {
-//        HttpHelper.areagetByParentId(parentId, new HttpHelper.HttpUtilsCallBack<String>() {
-//            @Override
-//            public void onFailure(String failure) {
-//                MyToast.show(getContext(), failure);
-//            }
-//
-//            @Override
-//            public void onSucceed(String succeed) {
-//                Gson gson = new Gson();
-//                areagetByParentIdBean entity = gson.fromJson(succeed, areagetByParentIdBean.class);
-//                if (entity.getCode() == 20000) {
-//                    switch (stStatus) {
-//                        case "1"://添加省数据
-//                            provinceData.addAll(entity.getResult());
-//                            ProvinceAdapter.notifyDataSetChanged();
-//                            break;
-//                        case "2"://添加市数据
-//                            cityData.addAll(entity.getResult());
-//                            cityAdapter.notifyDataSetChanged();
-//                            break;
-//                        case "3"://添加区数据
-//                            areaData.addAll(entity.getResult());
-//                            areaAdapter.notifyDataSetChanged();
-//                            break;
-//                    }
-//
-//
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onError(String error) {
-//                MyToast.show(getContext(), error);
-//            }
-//        });
+        HttpHelper.areagetByParentId(parentId, new HttpHelper.HttpUtilsCallBack<String>() {
+            @Override
+            public void onFailure(String failure) {
+                MyToast.show(getContext(), failure);
+            }
+
+            @Override
+            public void onSucceed(String succeed) {
+                Gson gson = new Gson();
+                areagetByParentIdBean entity = gson.fromJson(succeed, areagetByParentIdBean.class);
+                if (entity.getCode() == 20000) {
+                    switch (stStatus) {
+                        case "1"://添加省数据
+                            provinceData.addAll(entity.getResult());
+                            ProvinceAdapter.notifyDataSetChanged();
+                            break;
+                        case "2"://添加市数据
+                            cityData.addAll(entity.getResult());
+                            cityAdapter.notifyDataSetChanged();
+                            break;
+                        case "3"://添加区数据
+                            areaData.addAll(entity.getResult());
+                            areaAdapter.notifyDataSetChanged();
+                            break;
+                    }
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                MyToast.show(getContext(), error);
+            }
+        });
     }
 
     public interface onBackText {

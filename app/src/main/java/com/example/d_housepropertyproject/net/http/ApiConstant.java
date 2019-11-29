@@ -138,5 +138,15 @@ public class ApiConstant {
     public static final String integralGetMyIntegralDetail = "integral/getMyIntegralDetail";
     //获取我的会员
     public static final String vipGetMyVip = "vip/getMyVip";
+    //获取我的收货地址
+    public static final String linkmanGetMyLinkmanList = "linkman/getMyLinkmanList";
+    //设置默认收货地址
+    public static final String linkmanSetDefaultLinkman = "linkman/setDefaultLinkman/";
+    //删除收货地址
+    public static final String linkmanDelLinkman = "linkman/delLinkman/";
+    //添加收货地址
+    public static final String linkmanAddLinkman = "linkman/addLinkman";
+    //更新收货地址
+    public static final String linkmanUpdateLinkman = "linkman/updateLinkman";
 }
 
