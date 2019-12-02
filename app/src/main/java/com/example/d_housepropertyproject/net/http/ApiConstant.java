@@ -136,6 +136,8 @@ public class ApiConstant {
     public static final String integralGetMyIntegral = "integral/getMyIntegral";
     //获取我的积分明细
     public static final String integralGetMyIntegralDetail = "integral/getMyIntegralDetail";
+    //用户积分商品下单
+    public static final String orderSubmitIntegral = "order/submit/integral";
     //获取我的会员
     public static final String vipGetMyVip = "vip/getMyVip";
     //获取我的收货地址
@@ -148,5 +150,7 @@ public class ApiConstant {
     public static final String linkmanAddLinkman = "linkman/addLinkman";
     //更新收货地址
     public static final String linkmanUpdateLinkman = "linkman/updateLinkman";
+    //购买会员
+    public static final String vipPay = "vip/pay";
 }
 

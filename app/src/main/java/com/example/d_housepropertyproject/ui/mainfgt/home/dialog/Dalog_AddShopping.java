@@ -183,7 +183,9 @@ public class Dalog_AddShopping extends BaseDialog {
                 }
             }
         }
+        Debug.e("--------------attrs==="+attrs.size()+"------------size==="+getCustomerBean().getResult().getPAttrs().size());
         if (attrs.size() == getCustomerBean().getResult().getPAttrs().size()) {
+
         } else {
             return true;
         }

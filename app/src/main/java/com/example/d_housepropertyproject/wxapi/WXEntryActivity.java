@@ -131,7 +131,6 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
                 finish();
                 MyToast.show(getApplicationContext(), failure);
             }
-
             @Override
             public void onSucceed(String succeed) {
                 Gson gson = new Gson();
@@ -142,7 +141,6 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
                 }
                 finish();
             }
-
             @Override
             public void onError(String error) {
                 finish();
@@ -150,5 +148,4 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
             }
         });
     }
-
 }

@@ -88,9 +88,8 @@
                         android:textColor="#FF999999"
                         android:textSize="@dimen/fond_9sp" />
                 </LinearLayout>
-
-
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/shopping_zan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

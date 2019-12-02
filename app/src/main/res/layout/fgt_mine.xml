@@ -79,6 +79,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dip_15"
+                android:layout_marginBottom="@dimen/dip_6"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -90,33 +91,17 @@
                     android:layout_marginRight="@dimen/dip_3"
                     android:layout_weight="1">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:drawablePadding="@dimen/dip_10"
-                            android:text="13"
-                            android:textColor="#000000"
-                            android:textSize="@dimen/fond_20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:paddingTop="@dimen/dip_5"
-                            android:text="我的订单"
-                            android:textColor="#9F9F9F"
-                            android:textSize="@dimen/fond_14sp" />
-                    </LinearLayout>
+                        android:layout_gravity="center"
+                        android:drawableTop="@mipmap/icon_dingdan"
+                        android:text="我的订单"
+                        android:textColor="#9F9F9F"
+                        android:textSize="@dimen/fond_14sp" />
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:id="@+id/integral"
                     android:layout_width="0dip"
@@ -125,32 +110,16 @@
                     android:layout_marginRight="@dimen/dip_3"
                     android:layout_weight="1">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:drawablePadding="@dimen/dip_10"
-                            android:text="655"
-                            android:textColor="#000000"
-                            android:textSize="@dimen/fond_20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:paddingTop="@dimen/dip_5"
-                            android:text="积分"
-                            android:textColor="#9F9F9F"
-                            android:textSize="@dimen/fond_14sp" />
-                    </LinearLayout>
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:drawableTop="@mipmap/icon_jifen"
+                        android:text="积分"
+                        android:textColor="#9F9F9F"
+                        android:textSize="@dimen/fond_14sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -161,32 +130,17 @@
                     android:layout_marginRight="@dimen/dip_3"
                     android:layout_weight="1">
 
-                    <LinearLayout
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:drawablePadding="@dimen/dip_10"
-                            android:text="0"
-                            android:textColor="#000000"
-                            android:textSize="@dimen/fond_20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:paddingTop="@dimen/dip_5"
-                            android:text="地址"
-                            android:textColor="#9F9F9F"
-                            android:textSize="@dimen/fond_14sp" />
-                    </LinearLayout>
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:drawableTop="@mipmap/icon_dizhi"
+                        android:text="地址"
+                        android:textColor="#9F9F9F"
+                        android:textSize="@dimen/fond_14sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -197,34 +151,19 @@
                     android:layout_marginRight="@dimen/dip_3"
                     android:layout_weight="1">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:drawablePadding="@dimen/dip_10"
-                            android:text="13"
-                            android:textColor="#000000"
-                            android:textSize="@dimen/fond_20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:paddingTop="@dimen/dip_5"
-                            android:text="优惠券"
-                            android:textColor="#9F9F9F"
-                            android:textSize="@dimen/fond_14sp" />
-                    </LinearLayout>
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:drawableTop="@mipmap/icon_youhuijuan"
+                        android:text="优惠券"
+                        android:textColor="#9F9F9F"
+                        android:textSize="@dimen/fond_14sp" />
                 </RelativeLayout>
             </LinearLayout>
+
             <RelativeLayout
                 android:id="@+id/myVip"
                 android:layout_width="match_parent"
@@ -255,6 +194,7 @@
                         android:textColor="#F3E2D3"
                         android:textSize="@dimen/fond_14sp" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -262,28 +202,30 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/dp_10"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dip_5"
+                        android:paddingRight="@dimen/dip_5"
                         android:text="查看会员权益"
                         android:textColor="@color/white"
-                        android:paddingRight="@dimen/dip_5"
                         android:textSize="@dimen/fond_12sp" />
+
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_marginRight="@dimen/dp_10"
                         android:layout_height="@dimen/dip_15"
                         android:layout_gravity="center"
+                        android:layout_marginRight="@dimen/dp_10"
                         android:src="@mipmap/icon_right" />
                 </LinearLayout>
             </RelativeLayout>
 
             <TextView
                 android:id="@+id/mine_user_agreement"
-                android:layout_marginTop="@dimen/dip_5"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dip_50"
+                android:layout_marginTop="@dimen/dip_5"
                 android:drawableLeft="@mipmap/icon_min_user_agreement"
                 android:drawableRight="@mipmap/icon_right"
                 android:drawablePadding="@dimen/dip_10"

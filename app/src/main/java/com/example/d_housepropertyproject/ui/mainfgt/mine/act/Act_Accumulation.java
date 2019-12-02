@@ -87,6 +87,7 @@ public class Act_Accumulation extends BaseActivity {
         adapter = new AccumulationAdapter(listDatas);
         adapter.setOnItemClickListener((adapter, view, position) -> {
             Intent intent = new Intent();
+            intent.putExtra("Integral",tv_totalIntegral.getText().toString());
             intent.putExtra("goodId", listDatas.get(position).getId());
             startAct(intent, Act_GiftDetails.class);
         });
@@ -127,6 +128,33 @@ public class Act_Accumulation extends BaseActivity {
                 break;
         }
     }
+    /**
+     * 获取我的积分
+     */
+    public void integralGetMyIntegral() {
+        HttpHelper.integralGetMyIntegral(context, new HttpHelper.HttpUtilsCallBack<String>() {
+            @Override
+            public void onFailure(String failure) {
+                MyToast.show(context, failure);
+                loding.dismiss();
+            }
+            @Override
+            public void onSucceed(String succeed) {
+                loding.dismiss();
+                Gson gson = new Gson();
+                IntegralGetMyIntegralBean entity = gson.fromJson(succeed, IntegralGetMyIntegralBean.class);
+                if (entity.getCode() == 20000) {
+                    tv_totalIntegral.setText(entity.getResult().getTotalIntegral() + "");
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                loding.dismiss();
+                MyToast.show(context, error);
+            }
+        });
+    }
 
     private int page_num = 1;
 
@@ -151,38 +179,10 @@ public class Act_Accumulation extends BaseActivity {
                 Gson gson = new Gson();
                 RecommendingCommoditiesBean entity = gson.fromJson(succeed, RecommendingCommoditiesBean.class);
                 if (entity.getCode() == 20000) {
-                    if (entity.getResult().getPageNum() <= page_num) {
+                    if ( entity.getResult().getPageNum()<=page_num) {
                         listDatas.addAll(entity.getResult().getList());
                     }
                     adapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onError(String error) {
-                loding.dismiss();
-                MyToast.show(context, error);
-            }
-        });
-    }
-
-    /**
-     * 获取我的积分
-     */
-    public void integralGetMyIntegral() {
-        HttpHelper.integralGetMyIntegral(context, new HttpHelper.HttpUtilsCallBack<String>() {
-            @Override
-            public void onFailure(String failure) {
-                MyToast.show(context, failure);
-                loding.dismiss();
-            }
-            @Override
-            public void onSucceed(String succeed) {
-                loding.dismiss();
-                Gson gson = new Gson();
-                IntegralGetMyIntegralBean entity = gson.fromJson(succeed, IntegralGetMyIntegralBean.class);
-                if (entity.getCode() == 20000) {
-                    tv_totalIntegral.setText(entity.getResult().getTotalIntegral() + "");
                 }
             }
 

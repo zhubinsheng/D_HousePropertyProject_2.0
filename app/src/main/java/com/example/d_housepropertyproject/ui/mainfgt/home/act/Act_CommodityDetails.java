@@ -145,7 +145,6 @@ public class Act_CommodityDetails extends BaseAct {
                 MyToast.show(context, failure);
                 loding.dismiss();
             }
-
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();
@@ -173,6 +172,7 @@ public class Act_CommodityDetails extends BaseAct {
                     imageListAdapter.notifyDataSetChanged();
                     price.setText(entity.getResult().getSalePrice() + "");
                     salePrice.setText("市场价:" + entity.getResult().getPrice() + "/" + entity.getResult().getUnit());
+                    unit.setText("/"+entity.getResult().getUnit());
                     name.setText(entity.getResult().getName());
                     if (entity.getResult().getTime() == null) {
                         time.setVisibility(View.GONE);

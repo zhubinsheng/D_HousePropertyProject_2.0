@@ -238,7 +238,7 @@ public class RecommendingCommoditiesBean {
             private String id;
             private String name;
             private String pic;
-            private double salePrice;
+            private int salePrice;
             private double price;
             private String unit;
             private String newStatus;
@@ -268,11 +268,11 @@ public class RecommendingCommoditiesBean {
                 this.pic = pic;
             }
 
-            public double getSalePrice() {
+            public int getSalePrice() {
                 return salePrice;
             }
 
-            public void setSalePrice(double salePrice) {
+            public void setSalePrice(int salePrice) {
                 this.salePrice = salePrice;
             }
 

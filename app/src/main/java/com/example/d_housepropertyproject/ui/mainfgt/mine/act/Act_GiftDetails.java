@@ -3,6 +3,7 @@ package com.example.d_housepropertyproject.ui.mainfgt.mine.act;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.d_housepropertyproject.R;
@@ -10,6 +11,9 @@ import com.example.d_housepropertyproject.net.http.HttpHelper;
 import com.example.d_housepropertyproject.tool.GlideImageLoader;
 import com.example.d_housepropertyproject.ui.mainfgt.home.adapter.ImageListAdapter;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.GoodsQueryInfoIntegralUserBean;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.linkmanAddLinkmanBean;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.orderSubmitIntegralBean;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.dailog.Dilog_Exchange;
 import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lykj.aextreme.afinal.common.BaseActivity;
@@ -26,7 +30,7 @@ import butterknife.OnClick;
 /**
  * 积分礼品详情
  */
-public class Act_GiftDetails extends BaseActivity {
+public class Act_GiftDetails extends BaseActivity implements Dilog_Exchange.BackCommit {
     @BindView(R.id.banner)
     Banner banner;
     @BindView(R.id.imageRecyclerView)
@@ -41,6 +45,9 @@ public class Act_GiftDetails extends BaseActivity {
     TextView linkman;
     @BindView(R.id.address)
     TextView address;
+    @BindView(R.id.bt_Integral)
+    TextView bt_Integral;
+    private Dilog_Exchange dilogExchange;
 
     @Override
     public int initLayoutId() {
@@ -54,6 +61,7 @@ public class Act_GiftDetails extends BaseActivity {
     }
 
     private String goodId;
+    private String Integral;
 
     @Override
     public void initView() {
@@ -61,6 +69,10 @@ public class Act_GiftDetails extends BaseActivity {
         //绑定初始化ButterKnife
         ButterKnife.bind(this);
         goodId = getIntent().getStringExtra("goodId");
+        Integral = getIntent().getStringExtra("Integral");
+        dilogExchange = new Dilog_Exchange(this);
+        dilogExchange.setTouchCancle(true);
+        dilogExchange.setBackCommit(this);
     }
 
     private String des;
@@ -78,6 +90,7 @@ public class Act_GiftDetails extends BaseActivity {
         imageRecyclerView.setAdapter(imageListAdapter);
         goodsQueryInfoIntegralUser();
     }
+
     @Override
     public void updateUI() {
 
@@ -95,10 +108,23 @@ public class Act_GiftDetails extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick(R.id.min_Historical_Record_back)
-    public void onClick() {
-        finish();
+    @OnClick({R.id.min_Historical_Record_back, R.id.bt_Integral})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.min_Historical_Record_back:
+                finish();
+                break;
+            case R.id.bt_Integral:
+                if (bt_Integral.isSelected()) {
+                    dilogExchange.show();
+                } else {
+                    MyToast.show(context, "您的积分不足，暂不能兑换！");
+                }
+                break;
+        }
     }
+
+    private GoodsQueryInfoIntegralUserBean entity;
 
     /**
      * 商品列表
@@ -110,11 +136,12 @@ public class Act_GiftDetails extends BaseActivity {
                 MyToast.show(context, failure);
                 loding.dismiss();
             }
+
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();
                 Gson gson = new Gson();
-                GoodsQueryInfoIntegralUserBean entity = gson.fromJson(succeed, GoodsQueryInfoIntegralUserBean.class);
+                entity = gson.fromJson(succeed, GoodsQueryInfoIntegralUserBean.class);
                 if (entity.getCode() == 20000) {
                     //banner图
                     if (entity.getResult().getPic().contains(";http")) {
@@ -154,6 +181,13 @@ public class Act_GiftDetails extends BaseActivity {
                     salePrice.setText("剩余" + entity.getResult().getStock() + entity.getResult().getUnit());
                     linkman.setText(entity.getResult().getLinkman() + "  " + entity.getResult().getPhone());
                     address.setText(entity.getResult().getAddress());
+                    if (entity.getResult().getSalePrice() > Integer.valueOf(Integral)) {
+                        bt_Integral.setSelected(false);
+                        bt_Integral.setText("积分不足");
+                    } else {
+                        bt_Integral.setSelected(true);
+                        bt_Integral.setText("立即兑换");
+                    }
                 }
             }
 
@@ -165,5 +199,40 @@ public class Act_GiftDetails extends BaseActivity {
         });
     }
 
+    /**
+     * 用户积分商品下单
+     */
+    public void commitorderSubmitIntegral(String linkmanId, String num, String productId) {
+        HttpHelper.orderSubmitIntegral(linkmanId, num, productId, new HttpHelper.HttpUtilsCallBack<String>() {
+            @Override
+            public void onFailure(String failure) {
+                MyToast.show(context, failure);
+                loding.dismiss();
+            }
 
+            @Override
+            public void onSucceed(String succeed) {
+                loding.dismiss();
+                Gson gson = new Gson();
+                orderSubmitIntegralBean entity = gson.fromJson(succeed, orderSubmitIntegralBean.class);
+                if (entity.getCode() == 20000) {
+                    dilogExchange.dismiss();
+                    finish();
+                    MyToast.show(getApplicationContext(), "兑换成功！");
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                loding.dismiss();
+                MyToast.show(context, error);
+            }
+        });
+    }
+
+    @Override
+    public void commit(int number) {
+        loding.show();
+        commitorderSubmitIntegral(entity.getResult().getLinkmanId(), number + "", entity.getResult().getId());
+    }
 }

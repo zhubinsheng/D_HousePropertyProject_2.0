@@ -1,4 +1,5 @@
 package com.example.d_housepropertyproject.ui;
+
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.example.d_housepropertyproject.R;
 import com.example.d_housepropertyproject.bean.CodeBean;
 import com.example.d_housepropertyproject.bean.RegisterAndLoginBean;
@@ -23,14 +25,18 @@ import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lykj.aextreme.afinal.common.BaseActivity;
 import com.lykj.aextreme.afinal.utils.ACache;
+import com.lykj.aextreme.afinal.utils.Debug;
 import com.lykj.aextreme.afinal.utils.MyToast;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+
 import org.greenrobot.eventbus.EventBus;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 /**
  * 登录
  */
@@ -272,7 +278,6 @@ public class Act_Login extends BaseActivity {
                 RegisterAndLoginBean entity = gson.fromJson(succeed, RegisterAndLoginBean.class);
                 if (entity.getCode() == 20000) {
                     aCache.put("logn", succeed);
-                    MyToast.show(context, "登录" + entity.getMessage());
                     Intent intent = new Intent();
                     setResult(10, intent);
                     MyToast.show(context, "登录" + entity.getMessage());
@@ -302,10 +307,10 @@ public class Act_Login extends BaseActivity {
                 MyToast.show(context, failure);
                 loding.dismiss();
             }
-
             @Override
             public void onSucceed(String succeed) {
                 Gson gson = new Gson();
+                Debug.e("--------------"+succeed);
                 RegisterAndLoginBean entity = gson.fromJson(succeed, RegisterAndLoginBean.class);
                 if (entity.getCode() == 20000) {
                     aCache.put("logn", succeed);
@@ -315,7 +320,6 @@ public class Act_Login extends BaseActivity {
                 }
                 loding.dismiss();
             }
-
             @Override
             public void onError(String error) {
                 loding.dismiss();
@@ -323,13 +327,10 @@ public class Act_Login extends BaseActivity {
             }
         });
     }
-
-
     /**
      * 切换字体状态
      */
     private int indext = 0;
-
     public void setCholseStatus(int status) {
         tabTv[indext].setTextSize(14);
         tabTv[indext].setTextColor(getResources().getColor(R.color.login_color));
@@ -358,7 +359,6 @@ public class Act_Login extends BaseActivity {
         req.state = "wechat_sdk_demo_test";
         WXapi.sendReq(req);
     }
-
     /**
      * 根据不同状态设置不同颜色
      */
@@ -370,7 +370,6 @@ public class Act_Login extends BaseActivity {
             lgSubmission.setBackgroundDrawable(getResources().getDrawable(R.drawable.lg_login_false));
         }
     }
-
     /**
      * 检查非空
      */
@@ -396,8 +395,6 @@ public class Act_Login extends BaseActivity {
         }
         return true;
     }
-
-
     @Override
     public void onStop() {
         super.onStop();

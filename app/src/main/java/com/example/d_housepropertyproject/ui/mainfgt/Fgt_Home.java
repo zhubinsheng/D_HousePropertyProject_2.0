@@ -22,6 +22,7 @@ import com.example.d_housepropertyproject.ui.mainfgt.apartment.act.Act_Ap_UnitDe
 import com.example.d_housepropertyproject.ui.mainfgt.apartment.act.Act_HousePropertyCustomerService;
 import com.example.d_housepropertyproject.ui.mainfgt.bean.HomeBannerBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.Act_BookingProperty;
+import com.example.d_housepropertyproject.ui.mainfgt.home.act.Act_CommodityDetails;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.Act_HouseInspection;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.Act_MakeMoney;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.Act_PreferentialInformation;
@@ -31,8 +32,11 @@ import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.Popular_recom
 import com.example.d_housepropertyproject.ui.mainfgt.home.adapter.HomeGridViewAdapter;
 import com.example.d_housepropertyproject.ui.mainfgt.home.adapter.HomeGridViewAdapter1;
 import com.example.d_housepropertyproject.ui.mainfgt.home.adapter.Popular_recommendaAdapter;
+import com.example.d_housepropertyproject.ui.mainfgt.home.adapter.RecommendingCommoditiesAdapter;
 import com.example.d_housepropertyproject.ui.mainfgt.home.bean.HomeByidBean;
+import com.example.d_housepropertyproject.ui.mainfgt.home.bean.RecommendingCommoditiesBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.Act_MemberCenter;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.adapter.AccumulationAdapter;
 import com.google.gson.Gson;
 import com.lykj.aextreme.afinal.common.BaseFragment;
 import com.lykj.aextreme.afinal.utils.Debug;
@@ -47,11 +51,13 @@ import com.stx.xhb.xbanner.XBanner;
 import com.stx.xhb.xbanner.transformers.Transformer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+
 /**
  * 主页
  */
@@ -68,12 +74,14 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
     SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.RecommendingCommodities)
     RecyclerView RecommendingCommodities;
+
     @Override
     public int initLayoutId() {
         return R.layout.fgt_home;
     }
 
     private Unbinder unbinder;
+
     @Override
     public void initView() {
         image.setOnClickListener(v -> {
@@ -100,6 +108,7 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
     List<Popular_recommendaBean> data;
     HomeGridViewAdapter adapter;
     Popular_recommendaAdapter popular_recommendaAdapter;
+
     /**
      * 初始化XBanner
      */
@@ -130,11 +139,13 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
         mBanner.setIsClipChildrenMode(true);
         mBanner.setData(list, stData);
     }
+
     private String gridName[] = {"爱订房产", "爱订商城", "赚钱", "优惠信息", "咨询", "会员"};
     private int gridImg[] = {R.mipmap.icon_booking_property, R.mipmap.icon_loveshoppng_mall, R.mipmap.icon_qianbao,
             R.mipmap.icon_preferential_information, R.mipmap.icon_consultation, R.mipmap.icon_vip1};
     List<HomeGridViewBean> gridDatas = new ArrayList<>();
     HomeGridViewAdapter1 adapter1;
+
     @Override
     public void initData() {
         for (int i = 0; i < gridImg.length; i++) {
@@ -165,27 +176,28 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
         mRefreshLayout.setOnRefreshListener(refreshlayout -> {
             myRefreshlayout = true;
             postBackData();
+            GetPlatformFile();
+            page_num = 1;
+            listDatas.clear();
+            goodsQueryListUser();
         });
         myRefreshlayout = false;
         postBackData();
         GetPlatformFile();
         RecommendingCommodities.setLayoutManager(new GridLayoutManager(getContext(), 2));
         RecommendingCommodities.setNestedScrollingEnabled(false);
-//        List<RecommendingCommoditiesBean> datas = new ArrayList<>();
-//        for (int i = 0; i < 10; i++) {
-//            datas.add(new RecommendingCommoditiesBean());
-//        }
-//        RecommendingCommoditiesAdapter adapter = new RecommendingCommoditiesAdapter(datas);
-//        adapter.setOnItemClickListener((adapter2, view, position) -> {
-//            startAct(Act_CommodityDetails.class);
-//        });
-//        RecommendingCommodities.setAdapter(adapter);
+        accumulationAdapter = new RecommendingCommoditiesAdapter(listDatas);
+        accumulationAdapter.setOnItemClickListener((adapter2, view, position) -> {
+            Intent intent = new Intent();
+            intent.putExtra("goodId", listDatas.get(position).getId());
+            startAct(intent, Act_CommodityDetails.class);
+        });
+        RecommendingCommodities.setAdapter(accumulationAdapter);
         myGridView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    Debug.e("-----------" + newState);
                 }
             }
             @Override
@@ -198,6 +210,7 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
 //                }
             }
         });
+        goodsQueryListUser();
     }
 
     private boolean myRefreshlayout = false;
@@ -345,6 +358,7 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
     List<HomeBannerBean.ResultBean.FileListBean.Qualification07Bean> list = new ArrayList<>();
 
     public void GetPlatformFile() {
+        list.clear();
         HttpHelper.GetPlatformFile(context, "4", new HttpHelper.HttpUtilsCallBack<String>() {
             @Override
             public void onFailure(String failure) {
@@ -364,6 +378,42 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
                 initBanner(mBanner);
             }
 
+            @Override
+            public void onError(String error) {
+                loding.dismiss();
+                MyToast.show(context, error);
+            }
+        });
+    }
+    private int page_num = 1;
+    List<RecommendingCommoditiesBean.ResultBean.ListBean> listDatas = new ArrayList<>();
+    RecommendingCommoditiesAdapter accumulationAdapter;
+    /**
+     * 商品列表
+     */
+    public void goodsQueryListUser() {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("page_num", page_num + "");
+        hashMap.put("page_size", "10");
+        hashMap.put("type", "p");
+        HttpHelper.goodsQueryListUser(context, hashMap, new HttpHelper.HttpUtilsCallBack<String>() {
+            @Override
+            public void onFailure(String failure) {
+                MyToast.show(context, failure);
+                loding.dismiss();
+            }
+            @Override
+            public void onSucceed(String succeed) {
+                loding.dismiss();
+                Gson gson = new Gson();
+                RecommendingCommoditiesBean entity = gson.fromJson(succeed, RecommendingCommoditiesBean.class);
+                if (entity.getCode() == 20000) {
+                    if ( entity.getResult().getPageNum()<=page_num) {
+                        listDatas.addAll(entity.getResult().getList());
+                    }
+                    accumulationAdapter.notifyDataSetChanged();
+                }
+            }
             @Override
             public void onError(String error) {
                 loding.dismiss();

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,10 @@ public class Act_ReceivingAddressModify extends BaseActivity implements Dlg_Addr
     TextView newAddr;
     @BindView(R.id.tv_title)
     TextView tv_title;
+    @BindView(R.id.tv_DelLinkman)
+    TextView tv_DelLinkman;
+    @BindView(R.id.addr_status)
+    LinearLayout addr_status;
 
     @Override
     public int initLayoutId() {
@@ -80,7 +85,11 @@ public class Act_ReceivingAddressModify extends BaseActivity implements Dlg_Addr
                 tvChecoe.setSelected(false);
             }
             tv_title.setText("编辑地址");
+            tv_DelLinkman.setVisibility(View.VISIBLE);
+            addr_status.setVisibility(View.VISIBLE);
         } else {
+            addr_status.setVisibility(View.GONE);
+            tv_DelLinkman.setVisibility(View.GONE);
             tv_title.setText("收货地址");
         }
     }
@@ -125,7 +134,7 @@ public class Act_ReceivingAddressModify extends BaseActivity implements Dlg_Addr
                 break;
             case R.id.newAddr://保存地址
                 if (getIntent().getSerializableExtra("bean") != null) {
-                    linkmanUpdateLinkman();
+                    linkmanUpdateLinkman(resultBean.getId());
                 } else {
                     linkmanAddLinkman();
                 }
@@ -143,6 +152,7 @@ public class Act_ReceivingAddressModify extends BaseActivity implements Dlg_Addr
                 MyToast.show(context, failure);
                 loding.dismiss();
             }
+
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();
@@ -153,6 +163,7 @@ public class Act_ReceivingAddressModify extends BaseActivity implements Dlg_Addr
                     finish();
                 }
             }
+
             @Override
             public void onError(String error) {
                 loding.dismiss();
@@ -160,12 +171,13 @@ public class Act_ReceivingAddressModify extends BaseActivity implements Dlg_Addr
             }
         });
     }
-
     @Override
     public void onBackItem(String areaId, String addr) {
         tvRegion.setText(addr);
     }
+
     private String stLinkman, phone, address, addressDetail;
+
     /**
      * 添加收货地址
      */
@@ -180,6 +192,10 @@ public class Act_ReceivingAddressModify extends BaseActivity implements Dlg_Addr
         }
         if (TextUtils.isEmpty(phone)) {
             MyToast.show(Act_ReceivingAddressModify.this, "请输入联系电话");
+            return;
+        }
+        if (phone.length() != 11) {
+            MyToast.show(Act_ReceivingAddressModify.this, "请输入正确手机号码");
             return;
         }
         if (TextUtils.isEmpty(address)) {
@@ -197,6 +213,7 @@ public class Act_ReceivingAddressModify extends BaseActivity implements Dlg_Addr
                 MyToast.show(context, failure);
                 loding.dismiss();
             }
+
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();
@@ -207,6 +224,7 @@ public class Act_ReceivingAddressModify extends BaseActivity implements Dlg_Addr
                     finish();
                 }
             }
+
             @Override
             public void onError(String error) {
                 loding.dismiss();
@@ -218,7 +236,7 @@ public class Act_ReceivingAddressModify extends BaseActivity implements Dlg_Addr
     /**
      * 更新收货地址
      */
-    public void linkmanUpdateLinkman() {
+    public void linkmanUpdateLinkman(String id) {
         stLinkman = etLinkman.getText().toString();
         phone = edPhone.getText().toString();
         address = newAddr.getText().toString();
@@ -240,7 +258,7 @@ public class Act_ReceivingAddressModify extends BaseActivity implements Dlg_Addr
             return;
         }
         loding.show();
-        HttpHelper.linkmanUpdateLinkman(address, addressDetail, stLinkman, phone, new HttpHelper.HttpUtilsCallBack<String>() {
+        HttpHelper.linkmanUpdateLinkman(id,address, addressDetail, stLinkman, phone, new HttpHelper.HttpUtilsCallBack<String>() {
             @Override
             public void onFailure(String failure) {
                 MyToast.show(context, failure);

@@ -236,6 +236,14 @@ public interface HttpService {
 
     @POST(ApiConstant.linkmanUpdateLinkman)
     Observable<String> linkmanUpdateLinkman(@Body RequestBody requestBody, @Header("token") String token);
+
+    @POST(ApiConstant.vipPay)
+    Observable<String> vipPay(@QueryMap Map<String, String> map,  @Header("token") String token);
+
+    @POST(ApiConstant.orderSubmitIntegral)
+    Observable<String> orderSubmitIntegral(@Body RequestBody requestBody, @Header("token") String token);
+
+
     /**
      * 下载文件
      * @param fileUrl

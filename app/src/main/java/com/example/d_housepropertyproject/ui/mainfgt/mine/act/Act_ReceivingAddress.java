@@ -88,18 +88,19 @@ public class Act_ReceivingAddress extends BaseActivity {
                     break;
                 case R.id.item_addr:
                     loding.show();
+                    if (positionInext == position) {
+                        return;
+                    }
                     linkmanSetDefaultLinkman(position);
                     break;
             }
         });
         linkmanGetMyLinkmanList();
     }
-
     @Override
     public void updateUI() {
 
     }
-
     @Override
     public void onNoInterNet() {
 
@@ -119,7 +120,7 @@ public class Act_ReceivingAddress extends BaseActivity {
                 finish();
                 break;
             case R.id.newAddr://新地址
-                startAct(Act_ReceivingAddressModify.class);
+                startActivityForResult(Act_ReceivingAddressModify.class, 10);
                 break;
         }
     }
@@ -143,6 +144,11 @@ public class Act_ReceivingAddress extends BaseActivity {
                 if (entity.getCode() == 20000) {
                     dataAll.addAll(entity.getResult());
                     addressAdapter.notifyDataSetChanged();
+                    for (int i = 0; i < dataAll.size(); i++) {
+                        if (dataAll.get(i).getIsdefault().equals("1")) {
+                            positionInext = i;
+                        }
+                    }
                 }
             }
 
@@ -155,7 +161,7 @@ public class Act_ReceivingAddress extends BaseActivity {
     }
 
     /**
-     * 获取我的收货地址
+     * 设置默认收货地址
      */
     public void linkmanSetDefaultLinkman(int position) {
         HttpHelper.linkmanSetDefaultLinkman(Act_ReceivingAddress.this, dataAll.get(positionInext).getId(), new HttpHelper.HttpUtilsCallBack<String>() {

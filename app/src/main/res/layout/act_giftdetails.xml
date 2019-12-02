@@ -194,6 +194,7 @@
             android:background="@color/white">
 
             <TextView
+                android:id="@+id/bt_Integral"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dip_35"
                 android:layout_centerVertical="true"

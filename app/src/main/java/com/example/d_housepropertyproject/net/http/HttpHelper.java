@@ -34,6 +34,7 @@ import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.CertificateVe
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.ExchangeRecordsBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.GoodsQueryInfoIntegralUserBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.IntegralGetMyIntegralBean;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.JiFenVo;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.MyIncomeBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.OrderBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.OrderDetaileBean;
@@ -44,6 +45,7 @@ import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.UserUntiedBea
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.judgeinitBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.linkmanAddLinkmanBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.linkmanSetDefaultLinkmanBean;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.orderSubmitIntegralBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.dailog.bean.areagetByParentIdBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.actfgt.fgthouseinspection.bean.HouseInspectionChlideBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.actfgt.fgthouseinspection.bean.UserEvaluateBean;
@@ -1908,7 +1910,6 @@ public class HttpHelper {
         HttpService httpService = RetrofitFactory.getRetrofit(15l, 15l).create(HttpService.class);
         Gson gson = new Gson();
         String json = gson.toJson(postJudgeAddBean);
-        Debug.e("-----------------" + json);
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
         httpService.judgeAdd(body, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
@@ -2712,12 +2713,13 @@ public class HttpHelper {
     /**
      * 更新收货地址
      */
-    public static void linkmanUpdateLinkman(String address, String addressDetail, String linkman, String phone, final HttpUtilsCallBack<String> callBack) {
+    public static void linkmanUpdateLinkman(String id, String address, String addressDetail, String linkman, String phone, final HttpUtilsCallBack<String> callBack) {
         linkmanVOBean voBean = new linkmanVOBean();
         voBean.setAddress(address);
         voBean.setAddressDetail(addressDetail);
         voBean.setLinkman(linkman);
         voBean.setPhone(phone);
+        voBean.setId(id);
         Gson gson = new Gson();
         String linkmanVO = gson.toJson(voBean);
         Map<String, String> map = new HashMap<>();
@@ -2754,6 +2756,84 @@ public class HttpHelper {
                     }
                 });
     }
+
+    /**
+     * 购买会员
+     */
+    public static void vipPay(String payment, String userId, final HttpUtilsCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("payment", payment);
+        hashMap.put("userId", userId);
+        HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
+        httpService.vipPay(hashMap, "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+                    @Override
+                    public void onNext(String succeed) {
+//                        Gson gson = new Gson();
+//                        linkmanAddLinkmanBean entity = gson.fromJson(succeed, linkmanAddLinkmanBean.class);
+//                        if (entity.getCode() == 20000) {
+//                            callBack.onSucceed(succeed);
+//                        } else {
+//                            callBack.onError(entity.getMessage());
+//                        }
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        callBack.onFailure(httpFailureMsg());
+                    }
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+    /**
+     * 用户积分商品下单
+     */
+    public static void orderSubmitIntegral(String linkmanId, String num, String productId, final HttpUtilsCallBack<String> callBack) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("linkmanId", linkmanId);
+        map.put("num", num);
+        map.put("productId", productId);
+        Gson gson = new Gson();
+        String json = gson.toJson(map);
+        HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
+        httpService.orderSubmitIntegral(body, "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(String succeed) {
+                        Gson gson = new Gson();
+                        orderSubmitIntegralBean entity = gson.fromJson(succeed, orderSubmitIntegralBean.class);
+                        if (entity.getCode() == 20000) {
+                            callBack.onSucceed(succeed);
+                        } else {
+                            callBack.onError(entity.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callBack.onFailure(httpFailureMsg());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
     /**
      * 删除收货地址
      */
@@ -2771,13 +2851,12 @@ public class HttpHelper {
                     @Override
                     public void onNext(String succeed) {
                         Gson gson = new Gson();
-                        Debug.e("-----------设置默认收货地址===succeed==" + succeed);
-//                        linkmanSetDefaultLinkmanBean entity = gson.fromJson(succeed, linkmanSetDefaultLinkmanBean.class);
-//                        if (entity.getCode() == 20000) {
-//                            callBack.onSucceed(succeed);
-//                        } else {
-//                            callBack.onError(entity.getMessage() + "");
-//                        }
+                        linkmanSetDefaultLinkmanBean entity = gson.fromJson(succeed, linkmanSetDefaultLinkmanBean.class);
+                        if (entity.getCode() == 20000) {
+                            callBack.onSucceed(succeed);
+                        } else {
+                            callBack.onError(entity.getMessage() + "");
+                        }
                     }
 
                     @Override
