@@ -170,7 +170,7 @@ public interface HttpService {
 
 
     @GET(ApiConstant.goodsQueryListUser)
-    Observable<String> goodsQueryListUser(@QueryMap Map<String, String> map, @Header("token") String token);
+    Observable<String> goodsQueryListUser(@QueryMap Map<String, String> map);
 
 
     @GET(ApiConstant.goodsQueryInfoStoreUser)
@@ -238,7 +238,10 @@ public interface HttpService {
     Observable<String> linkmanUpdateLinkman(@Body RequestBody requestBody, @Header("token") String token);
 
     @POST(ApiConstant.vipPay)
-    Observable<String> vipPay(@QueryMap Map<String, String> map,  @Header("token") String token);
+    Observable<String> vipPay(@QueryMap Map<String, String> map, @Header("token") String token);
+
+    @GET(ApiConstant.vipGetVipRemark)
+    Observable<String> vipGetVipRemark(@QueryMap Map<String, String> map, @Header("token") String token);
 
     @POST(ApiConstant.orderSubmitIntegral)
     Observable<String> orderSubmitIntegral(@Body RequestBody requestBody, @Header("token") String token);
@@ -246,6 +249,7 @@ public interface HttpService {
 
     /**
      * 下载文件
+     *
      * @param fileUrl
      * @return
      */

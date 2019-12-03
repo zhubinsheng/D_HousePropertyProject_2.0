@@ -152,5 +152,7 @@ public class ApiConstant {
     public static final String linkmanUpdateLinkman = "linkman/updateLinkman";
     //购买会员
     public static final String vipPay = "vip/pay";
+    //获取会员描述
+    public static final String vipGetVipRemark = "vip/getVipRemark";
 }
 

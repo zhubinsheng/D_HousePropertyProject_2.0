@@ -42,6 +42,8 @@ import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.OrderQuerySto
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.ReceivingAddressBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.UserGetUserBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.UserUntiedBean;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.VipGetMyVipBean;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.VipGetVipRemarkBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.judgeinitBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.linkmanAddLinkmanBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.linkmanSetDefaultLinkmanBean;
@@ -1986,7 +1988,7 @@ public class HttpHelper {
      */
     public static void goodsQueryListUser(Context context, HashMap<String, String> hashMap, final HttpUtilsCallBack<String> callBack) {
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
-        httpService.goodsQueryListUser(hashMap, "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+        httpService.goodsQueryListUser(hashMap)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -2027,7 +2029,7 @@ public class HttpHelper {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("id", goodId);
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
-        httpService.goodsQueryInfoStoreUser(hashMap, "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+        httpService.goodsQueryInfoStoreUser(hashMap, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -2074,7 +2076,7 @@ public class HttpHelper {
         json = json.replace("\"mm\"", attrs);
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
-        httpService.pmsgoodsqueryproductinfo(body, "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+        httpService.pmsgoodsqueryproductinfo(body, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -2206,7 +2208,7 @@ public class HttpHelper {
 //        hashMap.put("page", page);
 //        hashMap.put("size", "10");
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
-        httpService.couponGetMyCouponList(hashMap, "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+        httpService.couponGetMyCouponList(hashMap, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -2258,7 +2260,7 @@ public class HttpHelper {
             }
         }
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
-        httpService.orderQueryStoreListUser(hashMap, "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+        httpService.orderQueryStoreListUser(hashMap, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -2296,7 +2298,7 @@ public class HttpHelper {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("id", id);
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
-        httpService.orderQueryStoreInfoUser(hashMap, "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+        httpService.orderQueryStoreInfoUser(hashMap, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -2333,7 +2335,7 @@ public class HttpHelper {
      */
     public static void orderQueryOrderset(final HttpUtilsCallBack<String> callBack) {
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
-        httpService.orderQueryOrderset("e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+        httpService.orderQueryOrderset(MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -2373,7 +2375,7 @@ public class HttpHelper {
         map.put("page_num", page_num + "");
         map.put("page_size", "10");
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
-        httpService.orderQueryIntegralListUser(map, "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+        httpService.orderQueryIntegralListUser(map, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -2450,7 +2452,7 @@ public class HttpHelper {
     public static void integralGetMyIntegral(Context context, final HttpUtilsCallBack<String> callBack) {
         Map<String, String> map = new HashMap<>();
         HttpService httpService = RetrofitFactory.getRetrofit(15l, 15l).create(HttpService.class);
-        httpService.integralGetMyIntegral(map, "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+        httpService.integralGetMyIntegral(map, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -2487,7 +2489,7 @@ public class HttpHelper {
     public static void integralGetMyIntegralDetail(Context context, final HttpUtilsCallBack<String> callBack) {
         Map<String, String> map = new HashMap<>();
         HttpService httpService = RetrofitFactory.getRetrofit(15l, 15l).create(HttpService.class);
-        httpService.integralGetMyIntegralDetail(map, "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+        httpService.integralGetMyIntegralDetail(map, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -2524,7 +2526,7 @@ public class HttpHelper {
     public static void vipGetMyVip(Context context, final HttpUtilsCallBack<String> callBack) {
         Map<String, String> map = new HashMap<>();
         HttpService httpService = RetrofitFactory.getRetrofit(15l, 15l).create(HttpService.class);
-        httpService.vipGetMyVip(map, "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+        httpService.vipGetMyVip(map, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -2536,13 +2538,12 @@ public class HttpHelper {
                     @Override
                     public void onNext(String succeed) {
                         Gson gson = new Gson();
-                        Debug.e("--------------获取我的会员===succeed==" + succeed);
-//                        MyIncomeBean entity = gson.fromJson(succeed, MyIncomeBean.class);
-//                        if (entity.getCode() == 20000) {
-//                            callBack.onSucceed(succeed);
-//                        } else {
-//                            callBack.onError(entity.getMessage() + "");
-//                        }
+                        VipGetMyVipBean entity = gson.fromJson(succeed, VipGetMyVipBean.class);
+                        if (entity.getCode() == 20000) {
+                            callBack.onSucceed(succeed);
+                        } else {
+                            callBack.onError(entity.getMessage() + "");
+                        }
                     }
 
                     @Override
@@ -2562,7 +2563,7 @@ public class HttpHelper {
     public static void linkmanGetMyLinkmanList(Context context, final HttpUtilsCallBack<String> callBack) {
         Map<String, String> map = new HashMap<>();
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
-        httpService.linkmanGetMyLinkmanList(map, "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+        httpService.linkmanGetMyLinkmanList(map, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -2598,7 +2599,7 @@ public class HttpHelper {
      */
     public static void linkmanSetDefaultLinkman(Context context, String id, final HttpUtilsCallBack<String> callBack) {
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
-        httpService.linkmanSetDefaultLinkman(id, "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+        httpService.linkmanSetDefaultLinkman(id, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -2634,7 +2635,7 @@ public class HttpHelper {
      */
     public static void areagetByParentId(String parentId, final HttpUtilsCallBack<String> callBack) {
         HttpService httpService = RetrofitFactory.getRetrofit(15l, 15l).create(HttpService.class);
-        httpService.areagetByParentId(parentId, "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+        httpService.areagetByParentId(parentId, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -2679,7 +2680,7 @@ public class HttpHelper {
         map.put("linkmanVO ", linkmanVO);
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), linkmanVO);
-        httpService.linkmanAddLinkman(body, "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+        httpService.linkmanAddLinkman(body, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -2726,7 +2727,7 @@ public class HttpHelper {
         map.put("linkmanVO ", linkmanVO);
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), linkmanVO);
-        httpService.linkmanUpdateLinkman(body, "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+        httpService.linkmanUpdateLinkman(body, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -2765,13 +2766,14 @@ public class HttpHelper {
         hashMap.put("payment", payment);
         hashMap.put("userId", userId);
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
-        httpService.vipPay(hashMap, "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+        httpService.vipPay(hashMap, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                     }
+
                     @Override
                     public void onNext(String succeed) {
 //                        Gson gson = new Gson();
@@ -2782,15 +2784,54 @@ public class HttpHelper {
 //                            callBack.onError(entity.getMessage());
 //                        }
                     }
+
                     @Override
                     public void onError(Throwable e) {
                         callBack.onFailure(httpFailureMsg());
                     }
+
                     @Override
                     public void onComplete() {
                     }
                 });
     }
+
+    /**
+     * 获取会员描述
+     */
+    public static void vipGetVipRemark(Context context, final HttpUtilsCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        HttpService httpService = RetrofitFactory.getRetrofit(15l, 15l).create(HttpService.class);
+        httpService.vipGetVipRemark(hashMap, MyApplication.getLoGinBean().getResult().getToken())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(String succeed) {
+                        Gson gson = new Gson();
+                        VipGetVipRemarkBean entity = gson.fromJson(succeed, VipGetVipRemarkBean.class);
+                        if (entity.getCode() == 20000) {
+                            callBack.onSucceed(succeed);
+                        } else {
+                            callBack.onError(entity.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callBack.onFailure(httpFailureMsg());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
     /**
      * 用户积分商品下单
      */
@@ -2803,7 +2844,7 @@ public class HttpHelper {
         String json = gson.toJson(map);
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
-        httpService.orderSubmitIntegral(body, "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+        httpService.orderSubmitIntegral(body, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -2839,7 +2880,7 @@ public class HttpHelper {
      */
     public static void linkmanDelLinkman(Context context, String id, final HttpUtilsCallBack<String> callBack) {
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
-        httpService.linkmanDelLinkman(id, "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+        httpService.linkmanDelLinkman(id, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -2883,7 +2924,7 @@ public class HttpHelper {
         json = json.replace("\"attrs0\"", attrs);
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
-        httpService.pmsOrderAddBasket(body, "1")
+        httpService.pmsOrderAddBasket(body, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -2895,6 +2936,7 @@ public class HttpHelper {
                     @Override
                     public void onNext(String succeed) {
                         Gson gson = new Gson();
+                        Debug.e("---------------添加购物车==" + succeed);
                         pmsOrderAddBasketBean entity = gson.fromJson(succeed, pmsOrderAddBasketBean.class);
                         if (entity.getCode() == 20000) {
                             callBack.onSucceed(succeed);
@@ -2905,6 +2947,7 @@ public class HttpHelper {
 
                     @Override
                     public void onError(Throwable e) {
+                        Debug.e("---------------添加购物车==" + e.getMessage());
                         callBack.onFailure(httpFailureMsg());
                     }
 
@@ -2921,7 +2964,7 @@ public class HttpHelper {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("id", goodId);
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
-        httpService.goodsQueryInfoIntegralUser(hashMap, "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+        httpService.goodsQueryInfoIntegralUser(hashMap, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {

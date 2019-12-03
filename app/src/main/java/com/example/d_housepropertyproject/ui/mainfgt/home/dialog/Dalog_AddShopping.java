@@ -183,7 +183,7 @@ public class Dalog_AddShopping extends BaseDialog {
                 }
             }
         }
-        Debug.e("--------------attrs==="+attrs.size()+"------------size==="+getCustomerBean().getResult().getPAttrs().size());
+        Debug.e("---------------attrs==" + attrs.size() + "-----------PAttrs==" + getCustomerBean().getResult().getPAttrs().size());
         if (attrs.size() == getCustomerBean().getResult().getPAttrs().size()) {
 
         } else {
@@ -218,9 +218,11 @@ public class Dalog_AddShopping extends BaseDialog {
                 loding.dismiss();
                 MyToast.show(getContext(), failure);
             }
+
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();
+
                 Gson gson = new Gson();
                 pmsOrderAddBasketBean entity = gson.fromJson(succeed, pmsOrderAddBasketBean.class);
                 if (entity.getCode() == 20000) {
@@ -228,7 +230,7 @@ public class Dalog_AddShopping extends BaseDialog {
                         customerBean.getResult().setGoodnum(Integer.valueOf(num.getText().toString()));
                         Intent intent = new Intent();
                         intent.putExtra("datas", customerBean);
-                        intent.putExtra("basketIdItem1",entity.getResult());
+                        intent.putExtra("basketIdItem1", entity.getResult());
                         intent.setClass(getContext(), Act_ConfirmationOfOrder.class);
                         getContext().startActivity(intent);
                     } else {

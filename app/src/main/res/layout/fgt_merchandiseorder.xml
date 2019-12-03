@@ -13,6 +13,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <include
+                android:id="@+id/view_nonett"
+                layout="@layout/view_nonett"
+                android:visibility="gone" />
+
+            <include
+                android:id="@+id/view_noteoder"
+                layout="@layout/view_noteoder"
+                android:visibility="gone" />
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/consultation_MyRecyclerView"
                 android:layout_width="match_parent"

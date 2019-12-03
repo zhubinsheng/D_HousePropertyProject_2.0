@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.d_housepropertyproject.R;
@@ -16,6 +17,7 @@ import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.bean.couponGet
 import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lykj.aextreme.afinal.common.BaseFragment;
+import com.lykj.aextreme.afinal.utils.Debug;
 import com.lykj.aextreme.afinal.utils.MyToast;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -38,9 +40,13 @@ import static com.zhouyou.http.EasyHttp.getContext;
 public class Fgt_Coupon extends BaseFragment implements BaseQuickAdapter.OnItemChildClickListener {
     @BindView(R.id.min_Order_RecyclerView)
     RecyclerView myRecyclerView;
-//    @BindView(R.id.min_Order_refreshLayout)
-//    SmartRefreshLayout mRefreshLayout;
+    @BindView(R.id.noteIntenet)
+    RelativeLayout view_nonett;
+    @BindView(R.id.noteOder)
+    RelativeLayout view_noteoder;
+
     private String title;
+
     public Fgt_Coupon(String title1) {
         title = title1;
     }
@@ -65,22 +71,6 @@ public class Fgt_Coupon extends BaseFragment implements BaseQuickAdapter.OnItemC
         ImmersionBar.with(this).statusBarDarkFont(true).init();
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         myRecyclerView.setLayoutManager(layoutManager);
-//        //内容跟随偏移
-//        mRefreshLayout.setEnableHeaderTranslationContent(true);
-//        //设置 Header 为 Material风格
-//        mRefreshLayout.setRefreshHeader(new MaterialHeader(context).setShowBezierWave(false));
-//        //设置 Footer 为 球脉冲
-//        mRefreshLayout.setRefreshFooter(new BallPulseFooter(context).setSpinnerStyle(SpinnerStyle.Scale));
-//        mRefreshLayout.setOnRefreshListener(refreshlayout -> {
-//            page = 1;
-//            couponGetCouponList();
-//            refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
-//        });
-//        mRefreshLayout.setOnLoadMoreListener(refreshlayout -> {
-//            page++;
-//            couponGetCouponList();
-//            refreshlayout.finishLoadMore(2000/*,false*/);//传入false表示加载失败
-//        });
         switch (title) {
             case "未使用":
                 fettle = "1";
@@ -154,48 +144,61 @@ public class Fgt_Coupon extends BaseFragment implements BaseQuickAdapter.OnItemC
             public void onFailure(String failure) {
                 loding.dismiss();
                 MyToast.show(getContext(), failure);
+                view_nonett.setVisibility(View.VISIBLE);
+                view_noteoder.setVisibility(View.GONE);
+                myRecyclerView.setVisibility(View.GONE);
             }
+
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();
                 Gson gson = new Gson();
                 couponGetCouponListBean entity = gson.fromJson(succeed, couponGetCouponListBean.class);
                 if (entity.getCode() == 20000) {
-                        for (int i = 0; i < entity.getResult().getCoupon().size(); i++) {
-                            switch (title) {
-                                case "未使用":
-                                    bean = new CouponBean(CouponBean.TEXT);
-                                    break;
-                                case "已使用":
-                                    bean = new CouponBean(CouponBean.IMG);
-                                    break;
-                                case "已失效":
-                                    bean = new CouponBean(CouponBean.IMG_TEXT);
-                                    break;
-                            }
-                            bean.setCreated(entity.getResult().getCoupon().get(i).getCreated());
-                            bean.setCreatedby(entity.getResult().getCoupon().get(i).getCreatedby());
-                            bean.setUpdated(entity.getResult().getCoupon().get(i).getUpdated() + "");
-                            bean.setUpdatedby(entity.getResult().getCoupon().get(i).getCreatedby());
-                            bean.setId(entity.getResult().getCoupon().get(i).getId());
-                            bean.setIdInfo(entity.getResult().getCoupon().get(i).getIdInfo());
-                            bean.setIdOrder(entity.getResult().getCoupon().get(i).getIdOrder() + "");
-                            bean.setIdUser(entity.getResult().getCoupon().get(i).getIdUser());
-                            bean.setPrice(entity.getResult().getCoupon().get(i).getPrice());
-                            bean.setTimeUsed(entity.getResult().getCoupon().get(i).getTimeUsed() + "");
-                            bean.setFettle(entity.getResult().getCoupon().get(i).getFettle());
-                            bean.setIsactive(entity.getResult().getCoupon().get(i).getIsactive());
-                            bean.setTimeOverdate(entity.getResult().getCoupon().get(i).getTimeOverdate());
-                            bean.setSuitable(entity.getResult().getCoupon().get(i).getSuitable());
-                            bean.setType(entity.getResult().getCoupon().get(i).getType());
-                            couponDatas.add(bean);
+                    for (int i = 0; i < entity.getResult().getCoupon().size(); i++) {
+                        switch (title) {
+                            case "未使用":
+                                bean = new CouponBean(CouponBean.TEXT);
+                                break;
+                            case "已使用":
+                                bean = new CouponBean(CouponBean.IMG);
+                                break;
+                            case "已失效":
+                                bean = new CouponBean(CouponBean.IMG_TEXT);
+                                break;
+                        }
+                        bean.setCreated(entity.getResult().getCoupon().get(i).getCreated());
+                        bean.setCreatedby(entity.getResult().getCoupon().get(i).getCreatedby());
+                        bean.setUpdated(entity.getResult().getCoupon().get(i).getUpdated() + "");
+                        bean.setUpdatedby(entity.getResult().getCoupon().get(i).getCreatedby());
+                        bean.setId(entity.getResult().getCoupon().get(i).getId());
+                        bean.setIdInfo(entity.getResult().getCoupon().get(i).getIdInfo());
+                        bean.setIdOrder(entity.getResult().getCoupon().get(i).getIdOrder() + "");
+                        bean.setIdUser(entity.getResult().getCoupon().get(i).getIdUser());
+                        bean.setPrice(entity.getResult().getCoupon().get(i).getPrice());
+                        bean.setTimeUsed(entity.getResult().getCoupon().get(i).getTimeUsed() + "");
+                        bean.setFettle(entity.getResult().getCoupon().get(i).getFettle());
+                        bean.setIsactive(entity.getResult().getCoupon().get(i).getIsactive());
+                        bean.setTimeOverdate(entity.getResult().getCoupon().get(i).getTimeOverdate());
+                        bean.setSuitable(entity.getResult().getCoupon().get(i).getSuitable());
+                        bean.setType(entity.getResult().getCoupon().get(i).getType());
+                        couponDatas.add(bean);
+                    }
+                    if (couponDatas.size() == 0) {
+                        view_nonett.setVisibility(View.GONE);
+                        view_noteoder.setVisibility(View.VISIBLE);
+                        myRecyclerView.setVisibility(View.GONE);
                     }
                     orderAdapter.notifyDataSetChanged();
                 }
             }
+
             @Override
             public void onError(String error) {
                 loding.dismiss();
+                view_nonett.setVisibility(View.VISIBLE);
+                view_noteoder.setVisibility(View.GONE);
+                myRecyclerView.setVisibility(View.GONE);
                 MyToast.show(getContext(), error);
             }
         });

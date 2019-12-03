@@ -5,14 +5,14 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.d_housepropertyproject.R;
 import com.example.d_housepropertyproject.net.http.HttpHelper;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.adapter.ExchangeRecordsAdapter;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.ExchangeRecordsBean;
-import com.example.d_housepropertyproject.ui.mainfgt.mine.act.merchandiseorder.Act_MerchandiseOrderDetails;
-import com.example.d_housepropertyproject.ui.mainfgt.mine.act.merchandiseorder.bean.orderQueryOrdersetBean;
 import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lykj.aextreme.afinal.common.BaseActivity;
@@ -37,6 +37,10 @@ public class Act_ExchangeRecords extends BaseActivity {
     SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.ExchangeRecords_RecyclerView)
     RecyclerView ExchangeRecordsRecyclerView;
+    @BindView(R.id.view_nonett)
+    RelativeLayout view_nonett;
+    @BindView(R.id.view_noteoder)
+    RelativeLayout view_noteoder;
     @Override
     public int initLayoutId() {
         return R.layout.act_exchangerecords;
@@ -72,8 +76,10 @@ public class Act_ExchangeRecords extends BaseActivity {
         });
         ExchangeRecordsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
+
     private List<ExchangeRecordsBean.ResultBean.ListBean> dataAll = new ArrayList<>();
     private ExchangeRecordsAdapter adapter;
+
     @Override
     public void initData() {
         adapter = new ExchangeRecordsAdapter(dataAll);
@@ -85,25 +91,31 @@ public class Act_ExchangeRecords extends BaseActivity {
         ExchangeRecordsRecyclerView.setAdapter(adapter);
         orderQueryIntegralListUser();
     }
+
     @Override
     public void updateUI() {
 
     }
+
     @Override
     public void onNoInterNet() {
 
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
     }
+
     @OnClick(R.id.min_Historical_Record_back)
     public void onClick() {
         finish();
     }
+
     private int page_num = 1;
+
     /**
      * 积分订单列表
      */
@@ -113,7 +125,11 @@ public class Act_ExchangeRecords extends BaseActivity {
             public void onFailure(String failure) {
                 loding.dismiss();
                 MyToast.show(Act_ExchangeRecords.this, failure);
+                view_nonett.setVisibility(View.VISIBLE);
+                view_noteoder.setVisibility(View.GONE);
+                ExchangeRecordsRecyclerView.setVisibility(View.GONE);
             }
+
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();
@@ -124,12 +140,15 @@ public class Act_ExchangeRecords extends BaseActivity {
                         dataAll.addAll(entity.getResult().getList());
                     }
                     adapter.notifyDataSetChanged();
+
                 }
             }
             @Override
             public void onError(String error) {
                 loding.dismiss();
-                MyToast.show(Act_ExchangeRecords.this, error);
+                view_nonett.setVisibility(View.GONE);
+                view_noteoder.setVisibility(View.VISIBLE);
+                ExchangeRecordsRecyclerView.setVisibility(View.GONE);
             }
         });
     }

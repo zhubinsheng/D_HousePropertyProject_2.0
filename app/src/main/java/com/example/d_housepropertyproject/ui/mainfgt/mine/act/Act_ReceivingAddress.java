@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.d_housepropertyproject.R;
@@ -38,7 +39,10 @@ public class Act_ReceivingAddress extends BaseActivity {
     SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.ExchangeRecords_RecyclerView)
     RecyclerView ExchangeRecordsRecyclerView;
-
+    @BindView(R.id.view_nonett)
+    RelativeLayout view_nonett;
+    @BindView(R.id.view_noteoder)
+    RelativeLayout view_noteoder;
     @Override
     public int initLayoutId() {
         return R.layout.act_receivingaddress;
@@ -87,10 +91,10 @@ public class Act_ReceivingAddress extends BaseActivity {
                     startActivityForResult(intent, 10);
                     break;
                 case R.id.item_addr:
-                    loding.show();
                     if (positionInext == position) {
                         return;
                     }
+                    loding.show();
                     linkmanSetDefaultLinkman(position);
                     break;
             }
@@ -134,6 +138,9 @@ public class Act_ReceivingAddress extends BaseActivity {
             public void onFailure(String failure) {
                 MyToast.show(context, failure);
                 loding.dismiss();
+                view_nonett.setVisibility(View.VISIBLE);
+                view_noteoder.setVisibility(View.GONE);
+                ExchangeRecordsRecyclerView.setVisibility(View.GONE);
             }
 
             @Override
@@ -149,6 +156,11 @@ public class Act_ReceivingAddress extends BaseActivity {
                             positionInext = i;
                         }
                     }
+                    if(dataAll.size()==0){
+                        view_nonett.setVisibility(View.GONE);
+                        view_noteoder.setVisibility(View.VISIBLE);
+                        ExchangeRecordsRecyclerView.setVisibility(View.GONE);
+                    }
                 }
             }
 
@@ -156,6 +168,9 @@ public class Act_ReceivingAddress extends BaseActivity {
             public void onError(String error) {
                 loding.dismiss();
                 MyToast.show(context, error);
+                view_nonett.setVisibility(View.GONE);
+                view_noteoder.setVisibility(View.VISIBLE);
+                ExchangeRecordsRecyclerView.setVisibility(View.GONE);
             }
         });
     }

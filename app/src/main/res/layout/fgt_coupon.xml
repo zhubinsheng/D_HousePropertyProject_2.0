@@ -7,7 +7,7 @@
 
     <include
         android:id="@+id/noteOder"
-        layout="@layout/view_noteoder"
+        layout="@layout/view_notedata"
         android:visibility="gone" />
 
     <include

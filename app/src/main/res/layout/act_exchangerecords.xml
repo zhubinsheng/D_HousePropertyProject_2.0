@@ -30,10 +30,21 @@
         android:id="@+id/min_SmartRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/ExchangeRecords_RecyclerView"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+            <include
+                android:id="@+id/view_nonett"
+                android:visibility="gone"
+                layout="@layout/view_nonett"/>
+            <include
+                android:id="@+id/view_noteoder"
+                android:visibility="gone"
+                layout="@layout/view_notedata"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/ExchangeRecords_RecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

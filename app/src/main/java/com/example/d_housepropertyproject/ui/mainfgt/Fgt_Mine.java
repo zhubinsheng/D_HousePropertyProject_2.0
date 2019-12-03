@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -31,6 +32,7 @@ import com.example.d_housepropertyproject.ui.mainfgt.mine.act.Act_MemberCenter;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.Act_MyOrder;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.Act_PersonalInformation;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.Act_ReceivingAddress;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.MyIncomeBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.UserGetUserBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.dailog.Dilog_Login_Cler;
 import com.google.gson.Gson;
@@ -62,6 +64,12 @@ public class Fgt_Mine extends BaseFragment implements Dilog_Login_Cler.OnBackCen
     TextView mine_banbenhao;
     @BindView(R.id.min_SmartRefreshLayout)
     SmartRefreshLayout mRefreshLayout;
+    @BindView(R.id.img_vipimg)
+    ImageView img_vipimg;
+    @BindView(R.id.tv_vipStatus)
+    TextView tv_vipStatus;
+    @BindView(R.id.tvMineStatus)
+    TextView tvMineStatus;
     Unbinder unbinder1;
     private Dilog_Login_Cler dilog_login_cler;
 
@@ -100,6 +108,7 @@ public class Fgt_Mine extends BaseFragment implements Dilog_Login_Cler.OnBackCen
     public void initData() {
         hideHeader();
         postBackData();
+        vipGetMyVip();
         updateUI();
         myRefreshlayout = false;
         mine_banbenhao.setText("当前版本号：" + MyUtils.getVerName(getContext()));
@@ -138,7 +147,7 @@ public class Fgt_Mine extends BaseFragment implements Dilog_Login_Cler.OnBackCen
 //    public void onClick() {
 //
 //    }
-    @OnClick({R.id.profile_image, R.id.mine_order, R.id.mine_user_agreement, R.id.myVip,R.id.integral,R.id.address,
+    @OnClick({R.id.profile_image, R.id.mine_order, R.id.mine_user_agreement, R.id.myVip, R.id.integral, R.id.address,
             R.id.mine_certificate_qualification, R.id.mine_contact_customer_service, R.id.mine_problem_feedback,
             R.id.mine_about_us, R.id.mine_check_update, R.id.mine_clear_cache, R.id.user_data, R.id.mine_Sign_out,
             R.id.Coupon})
@@ -367,6 +376,43 @@ public class Fgt_Mine extends BaseFragment implements Dilog_Login_Cler.OnBackCen
                     showLoding.show();
                 } else {
                     MyToast.show(context, "您的版本已经是最新版本、无需更新！");
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                loding.dismiss();
+                MyToast.show(context, error);
+            }
+        });
+    }
+
+    /**
+     * 获取我的会员
+     */
+    public void vipGetMyVip() {
+        HttpHelper.vipGetMyVip(context, new HttpHelper.HttpUtilsCallBack<String>() {
+            @Override
+            public void onFailure(String failure) {
+                MyToast.show(context, failure);
+                loding.dismiss();
+            }
+
+            @Override
+            public void onSucceed(String succeed) {
+                loding.dismiss();
+                Gson gson = new Gson();
+                MyIncomeBean entity = gson.fromJson(succeed, MyIncomeBean.class);
+                if (entity.getCode() == 20000) {
+                    if (entity.getResult() != null) {
+                        tv_vipStatus.setText("黄金会员");
+                        tvMineStatus.setText("查看会员权益");
+                        img_vipimg.setVisibility(View.VISIBLE);
+                    } else {
+                        tv_vipStatus.setText("加入会员享受更多优惠");
+                        img_vipimg.setVisibility(View.GONE);
+                        tvMineStatus.setText("加入会员");
+                    }
                 }
             }
 

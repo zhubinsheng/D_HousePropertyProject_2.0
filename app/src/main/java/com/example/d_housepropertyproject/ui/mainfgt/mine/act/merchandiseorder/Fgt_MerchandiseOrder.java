@@ -1,7 +1,11 @@
 package com.example.d_housepropertyproject.ui.mainfgt.mine.act.merchandiseorder;
+
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.RelativeLayout;
+
 import com.example.d_housepropertyproject.R;
 import com.example.d_housepropertyproject.net.http.HttpHelper;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.OrderQueryStoreListUserBean;
@@ -10,13 +14,16 @@ import com.example.d_housepropertyproject.ui.mainfgt.mine.act.merchandiseorder.a
 import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lykj.aextreme.afinal.common.BaseFragment;
+import com.lykj.aextreme.afinal.utils.Debug;
 import com.lykj.aextreme.afinal.utils.MyToast;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -28,16 +35,24 @@ public class Fgt_MerchandiseOrder extends BaseFragment {
     SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.consultation_MyRecyclerView)
     RecyclerView consultation_MyRecyclerView;
+    @BindView(R.id.view_nonett)
+    RelativeLayout view_nonett;
+    @BindView(R.id.view_noteoder)
+    RelativeLayout view_noteoder;
+
     public static Fgt_MerchandiseOrder getInstance(String status) {
         Fgt_MerchandiseOrder sf = new Fgt_MerchandiseOrder();
         sf.status = status;
         return sf;
     }
+
     @Override
     public int initLayoutId() {
         return R.layout.fgt_merchandiseorder;
     }
+
     private int page_num = 1;
+
     @Override
     public void initView() {
         hideHeader();
@@ -62,7 +77,9 @@ public class Fgt_MerchandiseOrder extends BaseFragment {
         });
         consultation_MyRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
+
     MerchandiseOrderAdapter adapter;
+
     @Override
     public void initData() {
         adapter = new MerchandiseOrderAdapter(datas);
@@ -115,17 +132,18 @@ public class Fgt_MerchandiseOrder extends BaseFragment {
      */
     OrderQueryStoreListUserBean entity;
     List<OrderQueryStoreListUserContext> datas = new ArrayList<>();
+
     public void orderQueryStoreListUser() {
         HttpHelper.orderQueryStoreListUser(page_num + "", status, new HttpHelper.HttpUtilsCallBack<String>() {
             @Override
             public void onFailure(String failure) {
                 loding.dismiss();
                 MyToast.show(getContext(), failure);
-//                noData.setVisibility(View.VISIBLE);
-//                noOder.setVisibility(View.GONE);
-//                netStatus.setVisibility(View.VISIBLE);
-//                consultation_MyRecyclerView.setVisibility(View.GONE);
+                view_nonett.setVisibility(View.VISIBLE);
+                view_noteoder.setVisibility(View.GONE);
+                consultation_MyRecyclerView.setVisibility(View.GONE);
             }
+
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();
@@ -184,24 +202,20 @@ public class Fgt_MerchandiseOrder extends BaseFragment {
                         }
                     }
                     adapter.notifyDataSetChanged();
-//                    if (datas.size() == 0) {
-//                        noData.setVisibility(View.VISIBLE);
-//                        noOder.setVisibility(View.VISIBLE);
-//                        netStatus.setVisibility(View.GONE);
-//                        consultation_MyRecyclerView.setVisibility(View.GONE);
-//                    } else {
-//                        noData.setVisibility(View.GONE);
-//                        noOder.setVisibility(View.GONE);
-//                        netStatus.setVisibility(View.GONE);
-//                        consultation_MyRecyclerView.setVisibility(View.VISIBLE);
-//                    }
-//
+                    if (datas.size() == 0) {
+                        view_nonett.setVisibility(View.GONE);
+                        view_noteoder.setVisibility(View.VISIBLE);
+                        consultation_MyRecyclerView.setVisibility(View.GONE);
+                    }
                 }
             }
 
             @Override
             public void onError(String error) {
                 loding.dismiss();
+                view_nonett.setVisibility(View.GONE);
+                view_noteoder.setVisibility(View.VISIBLE);
+                consultation_MyRecyclerView.setVisibility(View.GONE);
                 MyToast.show(getContext(), error);
             }
         });

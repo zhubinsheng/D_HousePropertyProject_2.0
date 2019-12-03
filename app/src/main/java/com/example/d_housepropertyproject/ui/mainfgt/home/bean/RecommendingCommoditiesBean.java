@@ -1,11 +1,9 @@
 package com.example.d_housepropertyproject.ui.mainfgt.home.bean;
-
 import java.util.List;
-
 public class RecommendingCommoditiesBean {
 
     /**
-     * result : {"total":"1","list":[{"id":"1162279429576982529","name":"索尼合资 MTA16 Pro","pic":"http://116.62.242.76:8080/group1/M00/00/05/rBA9Jl1WaEOAJzxSAAG411yIEPs750.png","salePrice":1668,"price":1988,"unit":"台","newStatus":"1","stock":null}],"pageNum":1,"pageSize":10,"size":1,"startRow":1,"endRow":1,"pages":1,"prePage":0,"nextPage":0,"isFirstPage":true,"isLastPage":true,"hasPreviousPage":false,"hasNextPage":false,"navigatePages":8,"navigatepageNums":[1],"navigateFirstPage":1,"navigateLastPage":1}
+     * result : {"total":"2","list":[{"id":"1201774832454144001","name":"zxq积分测试商品1","pic":"http://192.168.2.201:8080/group1/M00/00/1E/wKgCyV3mF6SAVY63AAEbZFjfksY794.jpg","salePrice":31,"price":null,"unit":"瓶装1","newStatus":"0","stock":null},{"id":"1162279429576982529","name":"索尼合资 MTA16 Pro","pic":"http://116.62.242.76:8080/group1/M00/00/05/rBA9Jl1WaEOAJzxSAAG411yIEPs750.png","salePrice":1501.2,"price":1988,"unit":"台","newStatus":"1","stock":null}],"pageNum":1,"pageSize":10,"size":2,"startRow":1,"endRow":2,"pages":1,"prePage":0,"nextPage":0,"isFirstPage":true,"isLastPage":true,"hasPreviousPage":false,"hasNextPage":false,"navigatePages":8,"navigatepageNums":[1],"navigateFirstPage":1,"navigateLastPage":1}
      * message : 成功
      * code : 20000
      */
@@ -40,13 +38,13 @@ public class RecommendingCommoditiesBean {
 
     public static class ResultBean {
         /**
-         * total : 1
-         * list : [{"id":"1162279429576982529","name":"索尼合资 MTA16 Pro","pic":"http://116.62.242.76:8080/group1/M00/00/05/rBA9Jl1WaEOAJzxSAAG411yIEPs750.png","salePrice":1668,"price":1988,"unit":"台","newStatus":"1","stock":null}]
+         * total : 2
+         * list : [{"id":"1201774832454144001","name":"zxq积分测试商品1","pic":"http://192.168.2.201:8080/group1/M00/00/1E/wKgCyV3mF6SAVY63AAEbZFjfksY794.jpg","salePrice":31,"price":null,"unit":"瓶装1","newStatus":"0","stock":null},{"id":"1162279429576982529","name":"索尼合资 MTA16 Pro","pic":"http://116.62.242.76:8080/group1/M00/00/05/rBA9Jl1WaEOAJzxSAAG411yIEPs750.png","salePrice":1501.2,"price":1988,"unit":"台","newStatus":"1","stock":null}]
          * pageNum : 1
          * pageSize : 10
-         * size : 1
+         * size : 2
          * startRow : 1
-         * endRow : 1
+         * endRow : 2
          * pages : 1
          * prePage : 0
          * nextPage : 0
@@ -225,24 +223,24 @@ public class RecommendingCommoditiesBean {
 
         public static class ListBean {
             /**
-             * id : 1162279429576982529
-             * name : 索尼合资 MTA16 Pro
-             * pic : http://116.62.242.76:8080/group1/M00/00/05/rBA9Jl1WaEOAJzxSAAG411yIEPs750.png
-             * salePrice : 1668.0
-             * price : 1988.0
-             * unit : 台
-             * newStatus : 1
+             * id : 1201774832454144001
+             * name : zxq积分测试商品1
+             * pic : http://192.168.2.201:8080/group1/M00/00/1E/wKgCyV3mF6SAVY63AAEbZFjfksY794.jpg
+             * salePrice : 31.0
+             * price : null
+             * unit : 瓶装1
+             * newStatus : 0
              * stock : null
              */
 
             private String id;
             private String name;
             private String pic;
-            private int salePrice;
-            private double price;
+            private double salePrice;
+            private Object price;
             private String unit;
             private String newStatus;
-            private int stock;
+            private Object stock;
 
             public String getId() {
                 return id;
@@ -268,19 +266,19 @@ public class RecommendingCommoditiesBean {
                 this.pic = pic;
             }
 
-            public int getSalePrice() {
+            public double getSalePrice() {
                 return salePrice;
             }
 
-            public void setSalePrice(int salePrice) {
+            public void setSalePrice(double salePrice) {
                 this.salePrice = salePrice;
             }
 
-            public double getPrice() {
+            public Object getPrice() {
                 return price;
             }
 
-            public void setPrice(double price) {
+            public void setPrice(Object price) {
                 this.price = price;
             }
 
@@ -300,11 +298,11 @@ public class RecommendingCommoditiesBean {
                 this.newStatus = newStatus;
             }
 
-            public int  getStock() {
+            public Object getStock() {
                 return stock;
             }
 
-            public void setStock(int stock) {
+            public void setStock(Object stock) {
                 this.stock = stock;
             }
         }

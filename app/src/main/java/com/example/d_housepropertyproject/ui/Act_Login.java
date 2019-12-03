@@ -166,10 +166,6 @@ public class Act_Login extends BaseActivity {
                     MyToast.show(context, "您输入的手机号码不能少于11位、请重新输入！");
                     return;
                 }
-//                if (MyUtil.isMobile((lgPhone.getText().toString())) != true) {
-//                    MyToast.show(context, "您输入的手机号码不合规、请重新输入！");
-//                    return;
-//                }
                 if (indext == 0) {
                     if (lgYzm.getText().toString().length() != 6) {
                         MyToast.show(context, "您输入的验证码少于六位、请重新输入！");
@@ -310,7 +306,6 @@ public class Act_Login extends BaseActivity {
             @Override
             public void onSucceed(String succeed) {
                 Gson gson = new Gson();
-                Debug.e("--------------"+succeed);
                 RegisterAndLoginBean entity = gson.fromJson(succeed, RegisterAndLoginBean.class);
                 if (entity.getCode() == 20000) {
                     aCache.put("logn", succeed);

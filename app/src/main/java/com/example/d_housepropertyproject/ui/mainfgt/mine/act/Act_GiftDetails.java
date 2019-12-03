@@ -136,7 +136,6 @@ public class Act_GiftDetails extends BaseActivity implements Dilog_Exchange.Back
                 MyToast.show(context, failure);
                 loding.dismiss();
             }
-
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();

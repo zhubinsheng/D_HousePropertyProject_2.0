@@ -43,11 +43,27 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/dip_60">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/ExchangeRecords_RecyclerView"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent">
+
+                <include
+                    android:id="@+id/view_nonett"
+                    layout="@layout/view_nonett"
+                    android:visibility="gone" />
+
+                <include
+                    android:id="@+id/view_noteoder"
+                    layout="@layout/view_notedata"
+                    android:visibility="gone" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/ExchangeRecords_RecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </RelativeLayout>
         </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dip_60"
