@@ -243,10 +243,14 @@ public interface HttpService {
     @GET(ApiConstant.vipGetVipRemark)
     Observable<String> vipGetVipRemark(@QueryMap Map<String, String> map, @Header("token") String token);
 
+    @POST(ApiConstant.orderUpdateCancel)
+    Observable<String> orderUpdateCancel(@QueryMap Map<String, String> map, @Header("token") String token);
+
     @POST(ApiConstant.orderSubmitIntegral)
     Observable<String> orderSubmitIntegral(@Body RequestBody requestBody, @Header("token") String token);
 
-
+    @GET(ApiConstant.couponGetCouponInfoList)
+    Observable<String> couponGetCouponInfoList( @Header("token") String token);
     /**
      * 下载文件
      *

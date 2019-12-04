@@ -1,87 +1,69 @@
 package com.example.d_housepropertyproject.ui.mainfgt.mine.act.merchandiseorder.adapter;
+
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.d_housepropertyproject.R;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.OrderQueryStoreListUserContext;
+import com.lykj.aextreme.afinal.utils.Debug;
 import com.makeramen.roundedimageview.RoundedImageView;
+
 import java.util.List;
+
 public class MerchandiseOrderAdapter extends BaseMultiItemQuickAdapter<OrderQueryStoreListUserContext, BaseViewHolder> {
     private MerchandiseOrderAdapter.onBackItem onBackItem;
+
     public void setOnBackItem(MerchandiseOrderAdapter.onBackItem onBackItem) {
         this.onBackItem = onBackItem;
     }
+
     public MerchandiseOrderAdapter(List<OrderQueryStoreListUserContext> data) {
         super(data);
-        addItemType(OrderQueryStoreListUserContext.TYPE1, R.layout.item_merchandiseorder1);//待发货\待付款\已付款\//待签收
-        addItemType(OrderQueryStoreListUserContext.TYPE2, R.layout.item_merchandiseorder2);//已收货、待退款
-        addItemType(OrderQueryStoreListUserContext.TYPE3, R.layout.item_merchandiseorder3);//已完成、已关闭、已取消
+        addItemType(OrderQueryStoreListUserContext.TYPE1, R.layout.item_merchandiseorder1);//待付款
+        addItemType(OrderQueryStoreListUserContext.TYPE2, R.layout.item_merchandiseorder2);//待收货
+        addItemType(OrderQueryStoreListUserContext.TYPE3, R.layout.item_merchandiseorder3);//待发货、已完成、已取消、已关闭
     }
+
     @Override
     protected void convert(BaseViewHolder helper, OrderQueryStoreListUserContext item) {
         switch (helper.getItemViewType()) {
-            case OrderQueryStoreListUserContext.TYPE1://待发货\待付款\已付款\//待签收
-                helper.addOnClickListener(R.id.cancel_oder);
-                if (item.getPay_status().equals("s")) {
+            case OrderQueryStoreListUserContext.TYPE1://待收货
+                helper.getView(R.id.Status).setVisibility(View.GONE);
+                helper.setText(R.id.Pay_status, "待收货");
+                helper.addOnClickListener(R.id.bt_ViewLogistics);
+                helper.addOnClickListener(R.id.bt_ConfirmReceipt);
+                break;
+            case OrderQueryStoreListUserContext.TYPE2://待付款
+                if (item.getPay_status().equals("p")) {//待付款
+                    helper.getView(R.id.Status).setVisibility(View.GONE);
+                    helper.setText(R.id.Pay_status, "待付款");
+                    helper.addOnClickListener(R.id.cancel_oder);//取消订单
+                } else {//已付款
                     helper.setText(R.id.Pay_status, "已付款");
-                } else {
-                    helper.setText(R.id.Pay_status, "未付款");
+                    helper.getView(R.id.Status).setVisibility(View.GONE);
+                    helper.getView(R.id.cancel_oder).setVisibility(View.GONE);
                 }
-                helper.setText(R.id.firmName, item.getFirmName());
+                break;
+            case OrderQueryStoreListUserContext.TYPE3://待发货、已完成、已取消、已关闭
                 switch (item.getStatus()) {
                     case "d"://待发货
-                        helper.setText(R.id.Status, "待发货");
-                        break;
-                    case "p"://待付款
-                        helper.setText(R.id.Status, "待付款");
-                        break;
-                    case "t"://已付款
-                        helper.setText(R.id.Status, "已付款");
-                        break;
-                    case "j"://待签收
-                        helper.getView(R.id.cancel_oder).setVisibility(View.GONE);
-                        helper.setText(R.id.Status, "待签收");
-                        break;
-                }
-                break;
-            case OrderQueryStoreListUserContext.TYPE2://已收货、待退款
-                helper.setText(R.id.firmName, item.getFirmName());
-                switch (item.getStatus()) {
-                    case "a"://已收货
-                        helper.setText(R.id.Status, "已收货");
-                        break;
-                    case "x"://待退款
-                        helper.setText(R.id.Status, "待退款");
-                        break;
-                }
-                if (item.getPay_status().equals("s")) {
-                    helper.setText(R.id.Pay_status, "已付款");
-                } else {
-                    helper.setText(R.id.Pay_status, "未付款");
-                }
-                break;
-            case OrderQueryStoreListUserContext.TYPE3://已完成、已关闭、已取消
-                helper.setText(R.id.firmName, item.getFirmName());
-                helper.addOnClickListener(R.id.delete_oder);
-                helper.getView(R.id.Pay_status).setVisibility(View.GONE);
-                switch (item.getStatus()) {
-                    case "f"://已取消
-                        helper.setText(R.id.Status, "已取消");
-                        helper.getView(R.id.Pay_status).setVisibility(View.VISIBLE);
-                        if (item.getPay_status().equals("s")) {
-                            helper.setText(R.id.Pay_status, "已付款");
-                        } else {
-                            helper.setText(R.id.Pay_status, "未付款");
-                        }
+                        helper.getView(R.id.Status).setVisibility(View.GONE);
+                        helper.setText(R.id.Pay_status, "待发货");
                         break;
                     case "s"://已完成
+                        helper.getView(R.id.Pay_status).setVisibility(View.GONE);
                         helper.setText(R.id.Status, "已完成");
-                        helper.getView(R.id.delete_oder).setVisibility(View.GONE);
+                        break;
+                    case "f"://已取消
+                        helper.getView(R.id.Pay_status).setVisibility(View.GONE);
+                        helper.setText(R.id.Status, "已取消");
                         break;
                     case "c"://已关闭
+                        helper.getView(R.id.Pay_status).setVisibility(View.GONE);
                         helper.setText(R.id.Status, "已关闭");
                         break;
                 }

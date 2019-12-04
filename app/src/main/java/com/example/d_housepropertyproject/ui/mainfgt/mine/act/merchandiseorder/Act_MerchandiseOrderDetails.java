@@ -89,7 +89,6 @@ public class Act_MerchandiseOrderDetails extends BaseAct {
                 long remainingSeconds = seconds % 60;
                 oderTime.setText("请在" + String.valueOf(minutes) + "分" + String.valueOf(remainingSeconds) + "秒内完成支付");
             }
-
             @Override
             public void onFinish() {
                 finish();
@@ -117,7 +116,6 @@ public class Act_MerchandiseOrderDetails extends BaseAct {
                 loding.dismiss();
                 MyToast.show(Act_MerchandiseOrderDetails.this, failure);
             }
-
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();
@@ -134,7 +132,6 @@ public class Act_MerchandiseOrderDetails extends BaseAct {
                     time.setText(MyTimeUtils.dateToStampTimeHH(entity.getResult().getTime()));
                 }
             }
-
             @Override
             public void onError(String error) {
                 loding.dismiss();

@@ -39,6 +39,7 @@
             android:background="#efefef" />
 
         <RelativeLayout
+            android:id="@+id/bt_AddressSelection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -62,17 +63,17 @@
                     android:paddingLeft="@dimen/dp_10">
 
                     <TextView
+                        android:id="@+id/linkmanPhone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="顾凯凯 13666666666"
                         android:textColor="@color/min_color"
                         android:textSize="@dimen/fond_12sp" />
 
                     <TextView
+                        android:id="@+id/address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="@dimen/dip_5"
-                        android:text="四川成都新都区 中国塑料城9栋23号"
                         android:textColor="@color/min_color"
                         android:textSize="@dimen/fond_12sp" />
                 </LinearLayout>

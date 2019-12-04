@@ -8,16 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.d_housepropertyproject.R;
 import com.example.d_housepropertyproject.net.http.HttpHelper;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.adapter.ReceivingAddressAdapter;
-import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.MyIncomeBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.ReceivingAddressBean;
 import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lykj.aextreme.afinal.common.BaseActivity;
-import com.lykj.aextreme.afinal.utils.Debug;
 import com.lykj.aextreme.afinal.utils.MyToast;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -43,6 +40,8 @@ public class Act_ReceivingAddress extends BaseActivity {
     RelativeLayout view_nonett;
     @BindView(R.id.view_noteoder)
     RelativeLayout view_noteoder;
+    private boolean choseStatus = false;
+
     @Override
     public int initLayoutId() {
         return R.layout.act_receivingaddress;
@@ -61,11 +60,12 @@ public class Act_ReceivingAddress extends BaseActivity {
         ButterKnife.bind(this);
         //刷新
         mRefreshLayout.setEnableRefresh(true);//是否启用下拉刷新功能
-        mRefreshLayout.setEnableLoadMore(true);//是否启用上拉加载功能
+        mRefreshLayout.setEnableLoadMore(false);//是否启用上拉加载功能
         mRefreshLayout.setEnableHeaderTranslationContent(true);  //内容跟随偏移
         mRefreshLayout.setRefreshHeader(new MaterialHeader(context).setShowBezierWave(false));  //设置 Header 为 Material风格
         mRefreshLayout.setRefreshFooter(new BallPulseFooter(context).setSpinnerStyle(SpinnerStyle.Scale));    //设置 Footer 为 球脉冲
         mRefreshLayout.setOnRefreshListener(refreshlayout -> {
+            linkmanGetMyLinkmanList();
             refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
         });
         mRefreshLayout.setOnLoadMoreListener(refreshlayout -> {
@@ -80,12 +80,17 @@ public class Act_ReceivingAddress extends BaseActivity {
 
     @Override
     public void initData() {
+        if (getIntent().getStringExtra("status") != null && getIntent().getStringExtra("status").equals("choseAddress")) {
+            choseStatus = true;
+        } else {
+            choseStatus = false;
+        }
         addressAdapter = new ReceivingAddressAdapter(dataAll);
         ExchangeRecordsRecyclerView.setAdapter(addressAdapter);
         addressAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            Intent intent = new Intent();
             switch (view.getId()) {
                 case R.id.tv_bianji:
-                    Intent intent = new Intent();
                     intent.putExtra("bean", dataAll.get(position));
                     intent.setClass(this, Act_ReceivingAddressModify.class);
                     startActivityForResult(intent, 10);
@@ -101,10 +106,12 @@ public class Act_ReceivingAddress extends BaseActivity {
         });
         linkmanGetMyLinkmanList();
     }
+
     @Override
     public void updateUI() {
 
     }
+
     @Override
     public void onNoInterNet() {
 
@@ -156,7 +163,7 @@ public class Act_ReceivingAddress extends BaseActivity {
                             positionInext = i;
                         }
                     }
-                    if(dataAll.size()==0){
+                    if (dataAll.size() == 0) {
                         view_nonett.setVisibility(View.GONE);
                         view_noteoder.setVisibility(View.VISIBLE);
                         ExchangeRecordsRecyclerView.setVisibility(View.GONE);
@@ -196,9 +203,14 @@ public class Act_ReceivingAddress extends BaseActivity {
                     dataAll.get(positionInext).setIsdefault("0");
                     addressAdapter.notifyDataSetChanged();
                     positionInext = position;
+                    if (choseStatus) {
+                        Intent intent = new Intent();
+                        intent.putExtra("bean", dataAll.get(position));
+                        setResult(10, intent);
+                        finish();
+                    }
                 }
             }
-
             @Override
             public void onError(String error) {
                 loding.dismiss();

@@ -11,6 +11,7 @@ import com.example.d_housepropertyproject.net.http.HttpHelper;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.OrderQueryStoreListUserBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.OrderQueryStoreListUserContext;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.merchandiseorder.adapter.MerchandiseOrderAdapter;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.dailog.Dilog_Login_Cler;
 import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lykj.aextreme.afinal.common.BaseFragment;
@@ -52,7 +53,6 @@ public class Fgt_MerchandiseOrder extends BaseFragment {
     }
 
     private int page_num = 1;
-
     @Override
     public void initView() {
         hideHeader();
@@ -77,9 +77,7 @@ public class Fgt_MerchandiseOrder extends BaseFragment {
         });
         consultation_MyRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
-
     MerchandiseOrderAdapter adapter;
-
     @Override
     public void initData() {
         adapter = new MerchandiseOrderAdapter(datas);
@@ -92,10 +90,16 @@ public class Fgt_MerchandiseOrder extends BaseFragment {
                     startActivityForResult(intent, 10);
                     break;
                 case R.id.cancel_oder://取消订单
-//                    Dilog_Login_Cler cler = new Dilog_Login_Cler(getContext(), () -> {
-//                        pmsorderupdatecancel(position);
-//                    }, "您确认要取消该订单么？");
-//                    cler.show();
+                    Dilog_Login_Cler cler = new Dilog_Login_Cler(getContext(), () -> {
+                        orderUpdateCancel(datas.get(position).getId());
+                    }, "您确认要取消该订单么？");
+                    cler.show();
+                    break;
+                case R.id.bt_ViewLogistics://查看物流
+
+                    break;
+                case R.id.bt_ConfirmReceipt://确认收货
+
                     break;
                 case R.id.delete_oder://删除订单
 //                    Dilog_Login_Cler cler1 = new Dilog_Login_Cler(getContext(), () -> {
@@ -132,7 +136,6 @@ public class Fgt_MerchandiseOrder extends BaseFragment {
      */
     OrderQueryStoreListUserBean entity;
     List<OrderQueryStoreListUserContext> datas = new ArrayList<>();
-
     public void orderQueryStoreListUser() {
         HttpHelper.orderQueryStoreListUser(page_num + "", status, new HttpHelper.HttpUtilsCallBack<String>() {
             @Override
@@ -154,20 +157,19 @@ public class Fgt_MerchandiseOrder extends BaseFragment {
                         OrderQueryStoreListUserContext bean = null;
                         for (int i = 0; i < entity.getResult().getList().size(); i++) {
                             switch (entity.getResult().getList().get(i).getStatus()) {
-                                case "d"://待发货
-                                case "p"://待付款
-                                case "t"://已付款
-                                case "j"://待签收
+                                case "j"://待收货
                                     bean = new OrderQueryStoreListUserContext(OrderQueryStoreListUserContext.TYPE1);
                                     break;
-                                case "f"://已取消
+                                case "d"://待发货
+                                    bean = new OrderQueryStoreListUserContext(OrderQueryStoreListUserContext.TYPE2);
+//                                    if (entity.getResult().getList().get(i).getPay_status().equals("p")) {//待付款
+//                                    } else {//已付款
+//                                    }
+                                    break;
                                 case "s"://已完成
+                                case "f"://已取消
                                 case "c"://已关闭
                                     bean = new OrderQueryStoreListUserContext(OrderQueryStoreListUserContext.TYPE3);
-                                    break;
-                                case "x"://待退款
-                                case "a"://已签收
-                                    bean = new OrderQueryStoreListUserContext(OrderQueryStoreListUserContext.TYPE2);
                                     break;
                             }
                             bean.setId(entity.getResult().getList().get(i).getId());
@@ -220,4 +222,39 @@ public class Fgt_MerchandiseOrder extends BaseFragment {
             }
         });
     }
+
+    /**
+     * 取消订单
+     */
+    public void orderUpdateCancel(String id) {
+        HttpHelper.orderUpdateCancel(getContext(), id, new HttpHelper.HttpUtilsCallBack<String>() {
+            @Override
+            public void onFailure(String failure) {
+                loding.dismiss();
+                MyToast.show(getContext(), failure);
+                view_nonett.setVisibility(View.VISIBLE);
+                view_noteoder.setVisibility(View.GONE);
+                consultation_MyRecyclerView.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onSucceed(String succeed) {
+                loding.dismiss();
+                Gson gson = new Gson();
+                entity = gson.fromJson(succeed, OrderQueryStoreListUserBean.class);
+                if (entity.getCode() == 20000) {
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                loding.dismiss();
+                view_nonett.setVisibility(View.GONE);
+                view_noteoder.setVisibility(View.VISIBLE);
+                consultation_MyRecyclerView.setVisibility(View.GONE);
+                MyToast.show(getContext(), error);
+            }
+        });
+    }
+
 }

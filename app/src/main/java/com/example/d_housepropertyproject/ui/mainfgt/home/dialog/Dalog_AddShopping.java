@@ -112,7 +112,6 @@ public class Dalog_AddShopping extends BaseDialog {
                 }
             }
         });
-
         dlogRecyclerView = getView(R.id.dlog_RecyclerView);
         dlogRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
@@ -183,7 +182,6 @@ public class Dalog_AddShopping extends BaseDialog {
                 }
             }
         }
-        Debug.e("---------------attrs==" + attrs.size() + "-----------PAttrs==" + getCustomerBean().getResult().getPAttrs().size());
         if (attrs.size() == getCustomerBean().getResult().getPAttrs().size()) {
 
         } else {
@@ -222,7 +220,6 @@ public class Dalog_AddShopping extends BaseDialog {
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();
-
                 Gson gson = new Gson();
                 pmsOrderAddBasketBean entity = gson.fromJson(succeed, pmsOrderAddBasketBean.class);
                 if (entity.getCode() == 20000) {

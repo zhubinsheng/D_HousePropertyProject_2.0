@@ -6,10 +6,16 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.d_housepropertyproject.R;
+import com.example.d_housepropertyproject.net.http.HttpHelper;
+import com.example.d_housepropertyproject.tool.GlideImageLoader;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.GoodsQueryInfoIntegralUserBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.adapter.ClipCouponsAdapter;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.bean.ClipCouponsBean;
+import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lykj.aextreme.afinal.common.BaseActivity;
+import com.lykj.aextreme.afinal.utils.Debug;
+import com.lykj.aextreme.afinal.utils.MyToast;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
@@ -63,18 +69,15 @@ public class Act_ClipCoupons extends BaseActivity implements BaseQuickAdapter.On
         });
     }
 
-    List<ClipCouponsBean> data;
+    List<ClipCouponsBean.ResultBean> dataList = new ArrayList<>();
+    private ClipCouponsAdapter adapter;
 
     @Override
     public void initData() {
-        data = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            ClipCouponsBean bean = new ClipCouponsBean();
-            data.add(bean);
-        }
-        ClipCouponsAdapter adapter = new ClipCouponsAdapter(data);
+        adapter = new ClipCouponsAdapter(dataList);
         adapter.setOnItemChildClickListener(this);
         myRecyclerView.setAdapter(adapter);
+        couponGetCouponInfoList();
     }
 
     @Override
@@ -96,12 +99,42 @@ public class Act_ClipCoupons extends BaseActivity implements BaseQuickAdapter.On
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
         switch (view.getId()) {
             case R.id.item_ClipCoupons_cb:
-                if (data.get(position).isStatus()) {
-                    data.get(position).setStatus(false);
-                } else {
-                    data.get(position).setStatus(true);
-                }
+//                if (data.get(position).isStatus()) {
+//                    data.get(position).setStatus(false);
+//                } else {
+//                    data.get(position).setStatus(true);
+//                }
                 break;
         }
+    }
+
+
+    /**
+     * 获取优惠券list
+     */
+    public void couponGetCouponInfoList() {
+        HttpHelper.couponGetCouponInfoList(context, new HttpHelper.HttpUtilsCallBack<String>() {
+            @Override
+            public void onFailure(String failure) {
+                MyToast.show(context, failure);
+                loding.dismiss();
+            }
+
+            @Override
+            public void onSucceed(String succeed) {
+                loding.dismiss();
+                Gson gson = new Gson();
+                ClipCouponsBean entity = gson.fromJson(succeed, ClipCouponsBean.class);
+                if (entity.getCode() == 20000) {
+                    dataList.addAll(entity.getResult());
+                    adapter.notifyDataSetChanged();
+                }
+            }
+            @Override
+            public void onError(String error) {
+                loding.dismiss();
+                MyToast.show(context, error);
+            }
+        });
     }
 }

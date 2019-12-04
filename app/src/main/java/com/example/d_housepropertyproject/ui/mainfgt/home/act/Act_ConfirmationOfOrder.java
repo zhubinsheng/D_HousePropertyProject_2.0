@@ -1,6 +1,8 @@
 package com.example.d_housepropertyproject.ui.mainfgt.home.act;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -14,17 +16,18 @@ import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.GoodsQueryInf
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.PostBasketBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.pmsordersubmitbasketBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.dialog.Dilog_Pay;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.Act_ReceivingAddress;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.ReceivingAddressBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.act.Act_ClipCoupons;
 import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lykj.aextreme.afinal.common.BaseActivity;
+import com.lykj.aextreme.afinal.utils.Debug;
 import com.lykj.aextreme.afinal.utils.MyToast;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +58,10 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
     TextView oderAllPrice;
     @BindView(R.id.et_Remark)
     EditText et_Remark;
+    @BindView(R.id.linkmanPhone)
+    TextView linkmanPhone;
+    @BindView(R.id.address)
+    TextView address;
     private Dilog_Pay dilogPay;
     private String basketIdItem1 = "";
 
@@ -110,7 +117,7 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
     }
 
     @OnClick({R.id.Cash_WithdrawalSuccess_back, R.id.choseCoupon,
-            R.id.dlg_jian, R.id.dlg_add, R.id.but_commit})
+            R.id.dlg_jian, R.id.dlg_add, R.id.but_commit, R.id.bt_AddressSelection})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.Cash_WithdrawalSuccess_back:
@@ -135,13 +142,23 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
                 oderAllPrice.setText(money1 + "");
                 break;
             case R.id.but_commit://确认订单
+                if (TextUtils.isEmpty(linkman)) {
+                    MyToast.show(getContext(), "请选联系人");
+                    return;
+                }
                 dilogPay.show();
+                break;
+            case R.id.bt_AddressSelection://地址选择
+                Intent intent = new Intent();
+                intent.setClass(this, Act_ReceivingAddress.class);
+                intent.putExtra("status", "choseAddress");
+                startActivityForResult(intent, 10);
                 break;
         }
     }
 
     List<PostBasketBean.BasketBean> basket = new ArrayList<>();
-    private String linkman = "1";
+    private String linkman = "";
 
     /**
      * 下单购物车信息
@@ -151,10 +168,6 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
      * linkman//联系人id
      */
     public void pmsordersubmitbasket() {
-//        if (TextUtils.isEmpty(linkman)) {
-//            MyToast.show(getContext(), "请选联系人");
-//            return;
-//        }
         basket.clear();
         PostBasketBean.BasketBean basketBean = new PostBasketBean.BasketBean();
         List<String> basketIdDatas = new ArrayList<>();
@@ -206,6 +219,7 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
         stPay = "zfb";
         pmsordersubmitbasket();
     }
+
     /**
      * 微信商品支付
      */
@@ -234,7 +248,9 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
             }
         });
     }
+
     private IWXAPI iwxapi; //微信支付api
+
     /**
      * 调起微信支付的方法
      **/
@@ -251,5 +267,16 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
         request.timeStamp = wxBean.getResult().getTimestamp();
         request.sign = wxBean.getResult().getSign();
         iwxapi.sendReq(request);//发送调起微信的请求
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 10 && resultCode == 10) {
+            ReceivingAddressBean.ResultBean bean = (ReceivingAddressBean.ResultBean) data.getSerializableExtra("bean");
+            linkman = bean.getId();
+            linkmanPhone.setText(bean.getLinkman() + "  " + bean.getPhone());
+            address.setText(bean.getAddress());
+        }
     }
 }

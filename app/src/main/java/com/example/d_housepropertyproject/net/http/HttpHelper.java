@@ -51,6 +51,7 @@ import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.orderSubmitIn
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.dailog.bean.areagetByParentIdBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.actfgt.fgthouseinspection.bean.HouseInspectionChlideBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.actfgt.fgthouseinspection.bean.UserEvaluateBean;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.bean.ClipCouponsBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.bean.HouseInspectionOrderDetailsBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.bean.couponGetCouponListBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.merchandiseorder.bean.MyOrderDetaleBean;
@@ -2122,7 +2123,7 @@ public class HttpHelper {
         String json = gson.toJson(basketBean);
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
-        httpService.ordersubmitbasket(body, "1")
+        httpService.ordersubmitbasket(body, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -2160,7 +2161,7 @@ public class HttpHelper {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("id", id);
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
-        httpService.traWxUnified_orderApp(hashMap, "1")
+        httpService.traWxUnified_orderApp(hashMap, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -2413,7 +2414,7 @@ public class HttpHelper {
         Map<String, String> map = new HashMap<>();
         map.put("id ", id);
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
-        httpService.orderQueryIntegralInfoUser(map, "e1952c6e-0427-4c86-b3e3-d773c32a58bb")
+        httpService.orderQueryIntegralInfoUser(map, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -2833,6 +2834,45 @@ public class HttpHelper {
     }
 
     /**
+     * 取消订单
+     */
+    public static void orderUpdateCancel(Context context, String id, final HttpUtilsCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("id", id);
+        HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
+        httpService.orderUpdateCancel(hashMap, MyApplication.getLoGinBean().getResult().getToken())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(String succeed) {
+                        Debug.e("------------取消订单==succeed==" + succeed);
+                        Gson gson = new Gson();
+//                        VipGetVipRemarkBean entity = gson.fromJson(succeed, VipGetVipRemarkBean.class);
+//                        if (entity.getCode() == 20000) {
+//                            callBack.onSucceed(succeed);
+//                        } else {
+//                            callBack.onError(entity.getMessage());
+//                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Debug.e("------------取消订单==onError==" + e.getMessage());
+                        callBack.onFailure(httpFailureMsg());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
+    /**
      * 用户积分商品下单
      */
     public static void orderSubmitIntegral(String linkmanId, String num, String productId, final HttpUtilsCallBack<String> callBack) {
@@ -2997,6 +3037,41 @@ public class HttpHelper {
                 });
     }
 
+
+    /**
+     * 获取优惠券list
+     */
+    public static void couponGetCouponInfoList(Context context, final HttpUtilsCallBack<String> callBack) {
+        HttpService httpService = RetrofitFactory.getRetrofit(15l, 15l).create(HttpService.class);
+        httpService.couponGetCouponInfoList(MyApplication.getLoGinBean().getResult().getToken())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(String succeed) {
+                        Gson gson = new Gson();
+                        ClipCouponsBean entity = gson.fromJson(succeed, ClipCouponsBean.class);
+                        if (entity.getCode() == 20000) {
+                            callBack.onSucceed(succeed);
+                        } else {
+                            callBack.onError(entity.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callBack.onFailure(httpFailureMsg());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
 
     public interface HttpUtilsCallBack<T> {
         public void onFailure(String failure);

@@ -154,5 +154,9 @@ public class ApiConstant {
     public static final String vipPay = "vip/pay";
     //获取会员描述
     public static final String vipGetVipRemark = "vip/getVipRemark";
+    //取消订单
+    public static final String orderUpdateCancel = "order/update/cancel";
+    //获取优惠券list
+    public static final String couponGetCouponInfoList = "coupon/getCouponInfoList";
 }
 

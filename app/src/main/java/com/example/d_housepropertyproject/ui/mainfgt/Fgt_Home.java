@@ -250,7 +250,6 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
         super.onDestroyView();
         unbinder1.unbind();
     }
-
     /**
      * 点击
      */
