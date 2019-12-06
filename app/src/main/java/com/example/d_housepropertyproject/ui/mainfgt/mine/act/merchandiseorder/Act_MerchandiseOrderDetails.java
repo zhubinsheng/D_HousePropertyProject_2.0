@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.d_housepropertyproject.R;
@@ -48,6 +50,10 @@ public class Act_MerchandiseOrderDetails extends BaseAct {
     TextView time;
     @BindView(R.id.oderTime)
     TextView oderTime;
+    @BindView(R.id.oder_payView)
+    RelativeLayout oderPayView;
+    @BindView(R.id.tv_shouhuo)
+    TextView tvShouhuo;
     private CountDownTimer mTimer;
 
     @Override
@@ -89,6 +95,7 @@ public class Act_MerchandiseOrderDetails extends BaseAct {
                 long remainingSeconds = seconds % 60;
                 oderTime.setText("请在" + String.valueOf(minutes) + "分" + String.valueOf(remainingSeconds) + "秒内完成支付");
             }
+
             @Override
             public void onFinish() {
                 finish();
@@ -116,6 +123,7 @@ public class Act_MerchandiseOrderDetails extends BaseAct {
                 loding.dismiss();
                 MyToast.show(Act_MerchandiseOrderDetails.this, failure);
             }
+
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();
@@ -130,8 +138,23 @@ public class Act_MerchandiseOrderDetails extends BaseAct {
                     linkmanphone.setText(entity.getResult().getLinkman() + " " + entity.getResult().getPhone());
                     address.setText(entity.getResult().getAddress());
                     time.setText(MyTimeUtils.dateToStampTimeHH(entity.getResult().getTime()));
+                    switch (entity.getResult().getStatus()) {
+                        case "j"://待收货
+                            tvShouhuo.setVisibility(View.VISIBLE);
+                            oderPayView.setVisibility(View.GONE);
+                            break;
+                        case "d"://待发货
+                            tvShouhuo.setVisibility(View.GONE);
+                            oderPayView.setVisibility(View.VISIBLE);
+                            break;
+                        default:
+                            tvShouhuo.setVisibility(View.GONE);
+                            oderPayView.setVisibility(View.GONE);
+                            break;
+                    }
                 }
             }
+
             @Override
             public void onError(String error) {
                 loding.dismiss();
@@ -182,8 +205,21 @@ public class Act_MerchandiseOrderDetails extends BaseAct {
         ButterKnife.bind(this);
     }
 
-    @OnClick(R.id.consultation_back)
-    public void onClick() {
-        finish();
+    @OnClick({R.id.consultation_back, R.id.oder_cancle, R.id.tv_shouhuo})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.consultation_back:
+                finish();
+                break;
+            case R.id.oder_cancle://取消订单
+
+                break;
+            case R.id.oder_pay://立即支付
+
+                break;
+            case R.id.tv_shouhuo://确认收货
+
+                break;
+        }
     }
 }

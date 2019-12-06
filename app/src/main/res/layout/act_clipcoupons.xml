@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/white"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -26,14 +26,6 @@
             android:text="@string/min_ClipCoupons_name"
             android:textColor="@color/min_color"
             android:textSize="@dimen/fond_21sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:padding="@dimen/dip_10"
-            android:text="确定"
-            android:textColor="#5C96FF" />
     </RelativeLayout>
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
@@ -41,9 +33,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/min_ClipCoupons_RecyclerView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/min_ClipCoupons_RecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <include
+                android:id="@+id/noteOder"
+                layout="@layout/view_notedata"
+                android:visibility="gone" />
+
+            <include
+                android:id="@+id/noteIntenet"
+                layout="@layout/view_nonett"
+                android:visibility="gone" />
+        </LinearLayout>
+
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

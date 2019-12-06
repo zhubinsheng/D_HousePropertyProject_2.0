@@ -172,7 +172,7 @@ public class Fgt_Mine extends BaseFragment implements Dilog_Login_Cler.OnBackCen
                 startAct(Act_Coupon.class);
                 break;
             case R.id.myVip://会员中心
-                startAct(Act_MemberCenter.class);
+                startActivityForResult(Act_MemberCenter.class, 11);
                 break;
             case R.id.mine_user_agreement://用户协议
                 startAct(Act_UserAgreement.class);
@@ -224,10 +224,10 @@ public class Fgt_Mine extends BaseFragment implements Dilog_Login_Cler.OnBackCen
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 10 && resultCode == 10) {
             updateUI();
+        } else if (requestCode == 11 && resultCode == 11) {
+            vipGetMyVip();
         }
-
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO: inflate a fragment view

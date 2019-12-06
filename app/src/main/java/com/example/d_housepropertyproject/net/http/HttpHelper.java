@@ -10,6 +10,8 @@ import com.example.d_housepropertyproject.bean.RegisterAndLoginBean;
 import com.example.d_housepropertyproject.bean.SySAppVersionBean;
 import com.example.d_housepropertyproject.bean.UserBindWechatBean;
 import com.example.d_housepropertyproject.bean.linkmanVOBean;
+import com.example.d_housepropertyproject.bean.vipAliUnifiedOrderBean;
+import com.example.d_housepropertyproject.bean.vipPayVOBean;
 import com.example.d_housepropertyproject.commt.MyApplication;
 import com.example.d_housepropertyproject.ui.Act_Main;
 import com.example.d_housepropertyproject.ui.mainfgt.apartment.bean.Ap_UnitDetailsBean1;
@@ -2115,10 +2117,11 @@ public class HttpHelper {
      * BasketId购物车id
      * linkman//联系人id
      */
-    public static void pmsordersubmitbasket(String linkman, List<PostBasketBean.BasketBean> basket, final HttpUtilsCallBack<String> callBack) {
+    public static void pmsordersubmitbasket(String linkman, List<PostBasketBean.BasketBean> basket, String couponId, final HttpUtilsCallBack<String> callBack) {
         PostBasketBean basketBean = new PostBasketBean();
         basketBean.setLinkmanId(String.valueOf(linkman));//联系人id
         basketBean.setBasket(basket);
+        basketBean.setCouponId(couponId);
         Gson gson = new Gson();
         String json = gson.toJson(basketBean);
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
@@ -2204,10 +2207,11 @@ public class HttpHelper {
      */
     public static void couponGetMyCouponList(Context context, String fettle, String page, String searchValue, final HttpUtilsCallBack<String> callBack) {
         HashMap<String, String> hashMap = new HashMap<>();
-//        hashMap.put("searchValue", searchValue);
+        hashMap.put("type", "3");
         hashMap.put("fettle", fettle);
 //        hashMap.put("page", page);
 //        hashMap.put("size", "10");
+        Debug.e("----------------Token==="+ MyApplication.getLoGinBean().getResult().getToken());
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
         httpService.couponGetMyCouponList(hashMap, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
@@ -2759,43 +2763,6 @@ public class HttpHelper {
                 });
     }
 
-    /**
-     * 购买会员
-     */
-    public static void vipPay(String payment, String userId, final HttpUtilsCallBack<String> callBack) {
-        HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("payment", payment);
-        hashMap.put("userId", userId);
-        HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
-        httpService.vipPay(hashMap, MyApplication.getLoGinBean().getResult().getToken())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<String>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                    }
-
-                    @Override
-                    public void onNext(String succeed) {
-//                        Gson gson = new Gson();
-//                        linkmanAddLinkmanBean entity = gson.fromJson(succeed, linkmanAddLinkmanBean.class);
-//                        if (entity.getCode() == 20000) {
-//                            callBack.onSucceed(succeed);
-//                        } else {
-//                            callBack.onError(entity.getMessage());
-//                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        callBack.onFailure(httpFailureMsg());
-                    }
-
-                    @Override
-                    public void onComplete() {
-                    }
-                });
-    }
 
     /**
      * 获取会员描述
@@ -3055,6 +3022,91 @@ public class HttpHelper {
                     public void onNext(String succeed) {
                         Gson gson = new Gson();
                         ClipCouponsBean entity = gson.fromJson(succeed, ClipCouponsBean.class);
+                        if (entity.getCode() == 20000) {
+                            callBack.onSucceed(succeed);
+                        } else {
+                            callBack.onError(entity.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callBack.onFailure(httpFailureMsg());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
+    /**
+     * 支付宝统一下单
+     */
+    public static void vipAliUnifiedOrder(String returnUrl, String vipId, final HttpUtilsCallBack<String> callBack) {
+        vipPayVOBean voBean = new vipPayVOBean();
+        voBean.setReturnUrl(returnUrl);
+        voBean.setVipId(vipId);
+        Gson gson = new Gson();
+        String linkmanVO = gson.toJson(voBean);
+        Map<String, String> map = new HashMap<>();
+        map.put("vipPayVO", linkmanVO);
+        HttpService httpService = RetrofitFactory.getRetrofit(15l, 15l).create(HttpService.class);
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), linkmanVO);
+        httpService.vipAliUnifiedOrder(body, MyApplication.getLoGinBean().getResult().getToken())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+                    @Override
+                    public void onNext(String succeed) {
+                        Gson gson = new Gson();
+                        vipAliUnifiedOrderBean entity = gson.fromJson(succeed, vipAliUnifiedOrderBean.class);
+                        if (entity.getCode() == 20000) {
+                            callBack.onSucceed(succeed);
+                        } else {
+                            callBack.onError(entity.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callBack.onFailure(httpFailureMsg());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
+    /**
+     * 微信统一下单
+     */
+    public static void vipWxfiedOrder( String vipId, final HttpUtilsCallBack<String> callBack) {
+        vipPayVOBean voBean = new vipPayVOBean();
+        voBean.setVipId(vipId);
+        Gson gson = new Gson();
+        String linkmanVO = gson.toJson(voBean);
+        Map<String, String> map = new HashMap<>();
+        map.put("vipPayVO", linkmanVO);
+        HttpService httpService = RetrofitFactory.getRetrofit(15l, 15l).create(HttpService.class);
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), linkmanVO);
+        httpService.vipWxfiedOrder(body, MyApplication.getLoGinBean().getResult().getToken())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+                    @Override
+                    public void onNext(String succeed) {
+                        Gson gson = new Gson();
+                        TransactionWXUnifiedOrderBean entity = gson.fromJson(succeed, TransactionWXUnifiedOrderBean.class);
                         if (entity.getCode() == 20000) {
                             callBack.onSucceed(succeed);
                         } else {

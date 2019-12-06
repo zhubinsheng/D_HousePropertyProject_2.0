@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.alipay.sdk.app.PayTask;
 import com.example.d_housepropertyproject.R;
+import com.example.d_housepropertyproject.commt.MyApplication;
 import com.example.d_housepropertyproject.net.http.HttpHelper;
 import com.example.d_housepropertyproject.tool.AuthResult;
 import com.example.d_housepropertyproject.tool.PayResult;
@@ -133,7 +134,7 @@ public class Act_PaymentOrder extends BaseActivity {
      */
     public void transactionWXUnifiedOrder(String id_order, String ip) {
         loding.show();
-        HttpHelper.transactionWXUnifiedOrder(this,id_order, ip, new HttpHelper.HttpUtilsCallBack<String>() {
+        HttpHelper.transactionWXUnifiedOrder(this, id_order, ip, new HttpHelper.HttpUtilsCallBack<String>() {
             @Override
             public void onFailure(String failure) {
                 MyToast.show(context, failure);
@@ -163,7 +164,7 @@ public class Act_PaymentOrder extends BaseActivity {
      */
     public void transactionAliUnifiedOrder(String id_order) {
         loding.show();
-        HttpHelper.transactionAliUnifiedOrder(this,id_order, new HttpHelper.HttpUtilsCallBack<String>() {
+        HttpHelper.transactionAliUnifiedOrder(this, id_order, new HttpHelper.HttpUtilsCallBack<String>() {
             @Override
             public void onFailure(String failure) {
                 MyToast.show(context, failure);
@@ -194,6 +195,7 @@ public class Act_PaymentOrder extends BaseActivity {
      * 调起微信支付的方法
      **/
     private void toWXPay(TransactionWXUnifiedOrderBean wxBean) {
+        MyApplication.payWxStatus = "fangchan";
         iwxapi = WXAPIFactory.createWXAPI(context, wxBean.getResult().getAppid(), false);//填写自己的APPID
         iwxapi.registerApp(wxBean.getResult().getAppid()); //注册appid  appid可以在开发平台获取
         PayReq request = new PayReq(); //调起微信APP的对象

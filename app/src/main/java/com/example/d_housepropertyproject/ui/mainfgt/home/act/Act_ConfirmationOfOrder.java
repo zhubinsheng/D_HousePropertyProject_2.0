@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.d_housepropertyproject.R;
+import com.example.d_housepropertyproject.commt.MyApplication;
 import com.example.d_housepropertyproject.net.http.HttpHelper;
 import com.example.d_housepropertyproject.ui.mainfgt.apartment.bean.TransactionWXUnifiedOrderBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.GoodsQueryInfoStoreUserBean;
@@ -19,6 +20,7 @@ import com.example.d_housepropertyproject.ui.mainfgt.home.dialog.Dilog_Pay;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.Act_ReceivingAddress;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.ReceivingAddressBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.act.Act_ClipCoupons;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.bean.couponGetCouponListBean;
 import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lykj.aextreme.afinal.common.BaseActivity;
@@ -62,6 +64,10 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
     TextView linkmanPhone;
     @BindView(R.id.address)
     TextView address;
+    @BindView(R.id.tv_number)
+    TextView tv_number;
+    @BindView(R.id.choseCoupon)
+    TextView choseCoupon;
     private Dilog_Pay dilogPay;
     private String basketIdItem1 = "";
 
@@ -95,8 +101,11 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
         name.setText(bean.getResult().getName());
         price.setText(bean.getResult().getSalePrice() + "");
         price1.setText("市场价:" + bean.getResult().getPrice() + "/" + bean.getResult().getUnit());
-        dlgNumber.setText(bean.getResult().getGoodnum() + "");
+//        dlgNumber.setText(bean.getResult().getGoodnum() + "");
         unit.setText("/" + bean.getResult().getUnit());
+        tv_number.setText("x" + bean.getResult().getGoodnum());
+        numPrice = (bean.getResult().getSalePrice() * bean.getResult().getGoodnum());
+        oderAllPrice.setText(numPrice + "");
     }
 
     @Override
@@ -124,7 +133,7 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
                 finish();
                 break;
             case R.id.choseCoupon:
-                startAct(Act_ClipCoupons.class);
+                startActivityForResult(Act_ClipCoupons.class, 11);
                 break;
             case R.id.dlg_jian:
                 if (bean.getResult().getGoodnum() == 1) {
@@ -158,7 +167,7 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
     }
 
     List<PostBasketBean.BasketBean> basket = new ArrayList<>();
-    private String linkman = "";
+    private String linkman = "", couponId = "";
 
     /**
      * 下单购物车信息
@@ -171,14 +180,13 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
         basket.clear();
         PostBasketBean.BasketBean basketBean = new PostBasketBean.BasketBean();
         List<String> basketIdDatas = new ArrayList<>();
-        numPrice += (bean.getResult().getSalePrice() * bean.getResult().getGoodnum());
         basketIdDatas.add(basketIdItem1);
         basketBean.setBasketId(basketIdDatas);
         basketBean.setRemark(et_Remark.getText().toString());
         basketBean.setFirmId(Long.valueOf(bean.getResult().getFirmId()));
         basket.add(basketBean);
         loding.show();
-        HttpHelper.pmsordersubmitbasket(linkman, basket, new HttpHelper.HttpUtilsCallBack<String>() {
+        HttpHelper.pmsordersubmitbasket(linkman, basket, couponId, new HttpHelper.HttpUtilsCallBack<String>() {
             @Override
             public void onFailure(String failure) {
                 loding.dismiss();
@@ -210,12 +218,14 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
 
     @Override
     public void onPayWx() {
+        dilogPay.dismiss();
         stPay = "wx";
         pmsordersubmitbasket();
     }
 
     @Override
     public void onPayZFB() {
+        dilogPay.dismiss();
         stPay = "zfb";
         pmsordersubmitbasket();
     }
@@ -248,13 +258,12 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
             }
         });
     }
-
     private IWXAPI iwxapi; //微信支付api
-
     /**
      * 调起微信支付的方法
      **/
     private void toWXPay(TransactionWXUnifiedOrderBean wxBean) {
+        MyApplication.payWxStatus = "shopping";
         iwxapi = WXAPIFactory.createWXAPI(context, wxBean.getResult().getAppid(), false);//填写自己的APPID
         iwxapi.registerApp(wxBean.getResult().getAppid()); //注册appid  appid可以在开发平台获取
         PayReq request = new PayReq(); //调起微信APP的对象
@@ -268,7 +277,6 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
         request.sign = wxBean.getResult().getSign();
         iwxapi.sendReq(request);//发送调起微信的请求
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -277,6 +285,15 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
             linkman = bean.getId();
             linkmanPhone.setText(bean.getLinkman() + "  " + bean.getPhone());
             address.setText(bean.getAddress());
+        } else if (requestCode == 11 && resultCode == 11) {
+            couponGetCouponListBean.ResultBean.CouponBean bean = (couponGetCouponListBean.ResultBean.CouponBean) data.getSerializableExtra("bean");
+            couponId = bean.getId();
+            choseCoupon.setTextColor(getResources().getColor(R.color.mycolor2));
+            choseCoupon.setText("满" + bean.getSuitable() + "减" + bean.getPrice() + "元优惠券");
+            if (numPrice > Double.valueOf(bean.getSuitable())) {
+                numPrice = numPrice - Double.valueOf(bean.getPrice());
+            }
+            oderAllPrice.setText(numPrice + "");
         }
     }
 }

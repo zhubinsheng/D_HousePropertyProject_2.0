@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.StrictMode;
+
 import com.example.d_housepropertyproject.bean.RegisterAndLoginBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.UserGetUserBean;
 import com.lykj.aextreme.afinal.common.BaseApplication;
@@ -21,6 +22,7 @@ import com.zhouyou.http.EasyHttp;
  */
 
 public class MyApplication extends BaseApplication {
+    public static String payWxStatus = "";
     private static MyApplication app;
     public static boolean onBackStatus = false;
     public static boolean onWXLoginStatus = false;

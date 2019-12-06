@@ -150,13 +150,15 @@ public class ApiConstant {
     public static final String linkmanAddLinkman = "linkman/addLinkman";
     //更新收货地址
     public static final String linkmanUpdateLinkman = "linkman/updateLinkman";
-    //购买会员
-    public static final String vipPay = "vip/pay";
     //获取会员描述
     public static final String vipGetVipRemark = "vip/getVipRemark";
     //取消订单
     public static final String orderUpdateCancel = "order/update/cancel";
     //获取优惠券list
     public static final String couponGetCouponInfoList = "coupon/getCouponInfoList";
+    //支付宝统一下单
+    public static final String vipAliUnifiedOrder = "vip/ali/unifiedOrder";
+    //微信统一下单
+    public static final String vipWxfiedOrder = "vip/wx/unifiedOrder";
 }
 

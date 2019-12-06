@@ -1,37 +1,25 @@
 package com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt;
-
 import android.annotation.SuppressLint;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.RelativeLayout;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.d_housepropertyproject.R;
 import com.example.d_housepropertyproject.net.http.HttpHelper;
-import com.example.d_housepropertyproject.ui.mainfgt.apartment.bean.TransactionWXUnifiedOrderBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.adapter.CouponAdapter;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.CouponBean;
-import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.act.Act_ClipCoupons;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.bean.couponGetCouponListBean;
 import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lykj.aextreme.afinal.common.BaseFragment;
-import com.lykj.aextreme.afinal.utils.Debug;
 import com.lykj.aextreme.afinal.utils.MyToast;
-import com.scwang.smartrefresh.header.MaterialHeader;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
-import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-import static com.zhouyou.http.EasyHttp.getContext;
 
 /**
  * 我的订单fragment

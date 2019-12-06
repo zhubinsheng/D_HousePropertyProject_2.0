@@ -206,7 +206,6 @@
                                     android:textSize="@dimen/fond_12sp"
                                     android:textStyle="bold" />
                             </LinearLayout>
-
                             <TextView
                                 android:id="@+id/price1"
                                 android:layout_width="wrap_content"
@@ -216,13 +215,27 @@
                                 android:textSize="@dimen/fond_10sp" />
                         </LinearLayout>
 
+                        <TextView
+                            android:id="@+id/tv_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_gravity="center"
+                            android:paddingLeft="@dimen/dip_3"
+                            android:paddingRight="@dimen/dip_3"
+                            android:text="x1"
+                            android:textColor="@color/login_send_hid_color"
+                            android:textSize="@dimen/sp_16" />
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_alignParentBottom="true"
                             android:layout_marginRight="@dimen/dip_10"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
                             <ImageView
                                 android:id="@+id/dlg_jian"

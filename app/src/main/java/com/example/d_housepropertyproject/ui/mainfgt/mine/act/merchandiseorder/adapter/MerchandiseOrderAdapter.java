@@ -39,10 +39,12 @@ public class MerchandiseOrderAdapter extends BaseMultiItemQuickAdapter<OrderQuer
                 break;
             case OrderQueryStoreListUserContext.TYPE2://待付款
                 if (item.getPay_status().equals("p")) {//待付款
+                    helper.getView(R.id.yifukuan).setVisibility(View.GONE);
                     helper.getView(R.id.Status).setVisibility(View.GONE);
                     helper.setText(R.id.Pay_status, "待付款");
                     helper.addOnClickListener(R.id.cancel_oder);//取消订单
                 } else {//已付款
+                    helper.getView(R.id.yifukuan).setVisibility(View.VISIBLE);
                     helper.setText(R.id.Pay_status, "已付款");
                     helper.getView(R.id.Status).setVisibility(View.GONE);
                     helper.getView(R.id.cancel_oder).setVisibility(View.GONE);

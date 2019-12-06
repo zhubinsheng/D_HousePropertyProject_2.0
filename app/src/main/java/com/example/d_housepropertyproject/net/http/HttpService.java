@@ -237,9 +237,6 @@ public interface HttpService {
     @POST(ApiConstant.linkmanUpdateLinkman)
     Observable<String> linkmanUpdateLinkman(@Body RequestBody requestBody, @Header("token") String token);
 
-    @POST(ApiConstant.vipPay)
-    Observable<String> vipPay(@QueryMap Map<String, String> map, @Header("token") String token);
-
     @GET(ApiConstant.vipGetVipRemark)
     Observable<String> vipGetVipRemark(@QueryMap Map<String, String> map, @Header("token") String token);
 
@@ -250,7 +247,13 @@ public interface HttpService {
     Observable<String> orderSubmitIntegral(@Body RequestBody requestBody, @Header("token") String token);
 
     @GET(ApiConstant.couponGetCouponInfoList)
-    Observable<String> couponGetCouponInfoList( @Header("token") String token);
+    Observable<String> couponGetCouponInfoList(@Header("token") String token);
+
+    @POST(ApiConstant.vipAliUnifiedOrder)
+    Observable<String> vipAliUnifiedOrder(@Body RequestBody requestBody, @Header("token") String token);
+
+    @POST(ApiConstant.vipWxfiedOrder)
+    Observable<String> vipWxfiedOrder(@Body RequestBody requestBody, @Header("token") String token);
     /**
      * 下载文件
      *

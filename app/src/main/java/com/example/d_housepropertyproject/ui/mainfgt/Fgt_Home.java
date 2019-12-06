@@ -18,6 +18,7 @@ import com.example.d_housepropertyproject.R;
 import com.example.d_housepropertyproject.commt.MyApplication;
 import com.example.d_housepropertyproject.net.http.ApiConstant;
 import com.example.d_housepropertyproject.net.http.HttpHelper;
+import com.example.d_housepropertyproject.ui.Act_Login;
 import com.example.d_housepropertyproject.ui.mainfgt.apartment.act.Act_Ap_UnitDetails;
 import com.example.d_housepropertyproject.ui.mainfgt.apartment.act.Act_HousePropertyCustomerService;
 import com.example.d_housepropertyproject.ui.mainfgt.bean.HomeBannerBean;
@@ -57,6 +58,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+
+import static com.zhouyou.http.EasyHttp.getContext;
 
 /**
  * 主页
@@ -188,6 +191,12 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
         RecommendingCommodities.setNestedScrollingEnabled(false);
         accumulationAdapter = new RecommendingCommoditiesAdapter(listDatas);
         accumulationAdapter.setOnItemClickListener((adapter2, view, position) -> {
+            if (MyApplication.getLoGinBean() == null) {
+                Intent intent = new Intent();
+                intent.setClass(getContext(), Act_Login.class);
+                startActivityForResult(intent, 10);
+                return;
+            }
             Intent intent = new Intent();
             intent.putExtra("goodId", listDatas.get(position).getId());
             startAct(intent, Act_CommodityDetails.class);
@@ -200,6 +209,7 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                 }
             }
+
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -250,6 +260,7 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
         super.onDestroyView();
         unbinder1.unbind();
     }
+
     /**
      * 点击
      */
@@ -275,12 +286,16 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
                 startAct(Act_HousePropertyCustomerService.class);
                 break;
             case 5://会员
+                if (MyApplication.getLoGinBean() == null) {
+                    Intent intent = new Intent();
+                    intent.setClass(getContext(), Act_Login.class);
+                    startActivityForResult(intent, 10);
+                    return;
+                }
                 startAct(Act_MemberCenter.class);
                 break;
         }
     };
-
-
     /**
      * 获取数据
      */
@@ -384,9 +399,11 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
             }
         });
     }
+
     private int page_num = 1;
     List<RecommendingCommoditiesBean.ResultBean.ListBean> listDatas = new ArrayList<>();
     RecommendingCommoditiesAdapter accumulationAdapter;
+
     /**
      * 商品列表
      */
@@ -401,18 +418,20 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
                 MyToast.show(context, failure);
                 loding.dismiss();
             }
+
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();
                 Gson gson = new Gson();
                 RecommendingCommoditiesBean entity = gson.fromJson(succeed, RecommendingCommoditiesBean.class);
                 if (entity.getCode() == 20000) {
-                    if ( entity.getResult().getPageNum()<=page_num) {
+                    if (entity.getResult().getPageNum() <= page_num) {
                         listDatas.addAll(entity.getResult().getList());
                     }
                     accumulationAdapter.notifyDataSetChanged();
                 }
             }
+
             @Override
             public void onError(String error) {
                 loding.dismiss();

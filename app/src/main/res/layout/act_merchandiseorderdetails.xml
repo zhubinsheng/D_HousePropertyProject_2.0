@@ -317,11 +317,14 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/oder_payView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dip_50"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:visibility="gone">
 
         <TextView
+            android:id="@+id/oder_cancle"
             android:layout_width="@dimen/dip_140"
             android:layout_height="@dimen/dip_30"
             android:layout_centerVertical="true"
@@ -331,7 +334,9 @@
             android:text="取消订单"
             android:textColor="#979797"
             android:textSize="@dimen/fond_14sp" />
+
         <TextView
+            android:id="@+id/oder_pay"
             android:layout_width="@dimen/dip_140"
             android:layout_height="@dimen/dip_30"
             android:layout_alignParentRight="true"
@@ -344,4 +349,20 @@
             android:textColor="@color/white"
             android:textSize="@dimen/fond_14sp" />
     </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_shouhuo"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_height="@dimen/dip_30"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/dip_20"
+        android:layout_marginRight="@dimen/dip_20"
+        android:background="@drawable/boder2"
+        android:gravity="center"
+        android:text="确认收货"
+        android:textColor="@color/white"
+        android:textSize="@dimen/fond_14sp" />
 </RelativeLayout>

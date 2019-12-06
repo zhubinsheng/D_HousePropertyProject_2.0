@@ -7,7 +7,9 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.d_housepropertyproject.R;
 import com.example.d_housepropertyproject.commt.BaseAct;
+import com.example.d_housepropertyproject.commt.MyApplication;
 import com.example.d_housepropertyproject.net.http.HttpHelper;
+import com.example.d_housepropertyproject.ui.Act_Login;
 import com.example.d_housepropertyproject.ui.mainfgt.bean.HomeBannerBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.adapter.RecommendingCommoditiesAdapter;
 import com.example.d_housepropertyproject.ui.mainfgt.home.bean.RecommendingCommoditiesBean;
@@ -83,6 +85,12 @@ public class Act_ShoppingCenter extends BaseAct {
         shoppingCenter_RecyclerView.setNestedScrollingEnabled(false);
         adapter = new RecommendingCommoditiesAdapter(listDatas);
         adapter.setOnItemClickListener((adapter1, view, position) -> {
+            if (MyApplication.getLoGinBean() == null) {
+                Intent intent = new Intent();
+                intent.setClass(getContext(), Act_Login.class);
+                startActivityForResult(intent, 10);
+                return;
+            }
             Intent intent = new Intent();
             intent.putExtra("goodId", listDatas.get(position).getId());
             startAct(intent, Act_CommodityDetails.class);

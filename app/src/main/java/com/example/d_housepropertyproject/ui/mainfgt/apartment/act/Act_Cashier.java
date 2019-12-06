@@ -4,11 +4,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.example.d_housepropertyproject.R;
+import com.example.d_housepropertyproject.commt.MyApplication;
 import com.example.d_housepropertyproject.net.http.ApiConstant;
 import com.example.d_housepropertyproject.tool.MyUtils;
 import com.example.d_housepropertyproject.ui.Act_Main;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.Act_HouseOrder;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.Act_MerchandiseOrder;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lykj.aextreme.afinal.common.BaseActivity;
 
@@ -48,14 +51,15 @@ public class Act_Cashier extends BaseActivity {
         //绑定初始化ButterKnife
         ButterKnife.bind(this);
         CashierOder.setSelected(true);
-        CashierOder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (getIntent().getStringExtra("cashistatus") != null) {
+        CashierOder.setOnClickListener(v -> {
+            if (getIntent().getStringExtra("cashistatus") != null||getIntent().getStringExtra("status") != null) {
+                if (MyApplication.payWxStatus.equals("fangchan")) {
                     startAct(Act_HouseOrder.class);
-                } else {
-                    finish();
+                } else if (MyApplication.payWxStatus.equals("shopping")) {
+                    startAct(Act_MerchandiseOrder.class);
                 }
+            } else {
+                finish();
             }
         });
     }
@@ -94,8 +98,12 @@ public class Act_Cashier extends BaseActivity {
                 startActClear(Act_Main.class);
                 break;
             case R.id.Cashier_oder://订单
-                if (getIntent().getStringExtra("cashistatus") != null) {
-                    startAct(Act_HouseOrder.class);
+                if (getIntent().getStringExtra("cashistatus") != null||getIntent().getStringExtra("status") != null) {
+                    if (MyApplication.payWxStatus.equals("fangchan")) {
+                        startAct(Act_HouseOrder.class);
+                    } else if (MyApplication.payWxStatus.equals("shopping")) {
+                        startAct(Act_MerchandiseOrder.class);
+                    }
                 } else {
                     finish();
                 }
