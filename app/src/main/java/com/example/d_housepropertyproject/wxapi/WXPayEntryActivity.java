@@ -50,18 +50,20 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
             if (errCord == 0) {
                 if (MyApplication.payWxStatus.equals("vip")) {//会员支付
                     EventBus.getDefault().post(new MessageStatus("1"));
-                } else if (MyApplication.payWxStatus.equals("fangchan")||MyApplication.payWxStatus.equals("shopping")) {
+                } else if (MyApplication.payWxStatus.equals("fangchan") || MyApplication.payWxStatus.equals("shopping")) {
                     Intent intent1 = new Intent();
                     intent1.setClass(WXPayEntryActivity.this, Act_Cashier.class);
                     intent1.putExtra("status", "success");
                     startActivity(intent1);
+                } else if (MyApplication.payWxStatus.equals("oderUp")) {
+                    EventBus.getDefault().post(new MessageStatus("3"));
                 }
             }
             finish();
         } else {
             if (MyApplication.payWxStatus.equals("vip")) {//会员支付
                 EventBus.getDefault().post(new MessageStatus("2"));
-            } else if (MyApplication.payWxStatus.equals("fangchan")||MyApplication.payWxStatus.equals("shopping")) {
+            } else if (MyApplication.payWxStatus.equals("fangchan") || MyApplication.payWxStatus.equals("shopping")) {
                 Intent intent1 = new Intent();
                 intent1.setClass(WXPayEntryActivity.this, Act_Cashier.class);
                 intent1.putExtra("status", "lose");

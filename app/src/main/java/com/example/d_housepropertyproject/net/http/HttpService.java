@@ -254,6 +254,12 @@ public interface HttpService {
 
     @POST(ApiConstant.vipWxfiedOrder)
     Observable<String> vipWxfiedOrder(@Body RequestBody requestBody, @Header("token") String token);
+
+    @POST(ApiConstant.traAliUnifiedOrderApp)
+    Observable<String> traAliUnifiedOrderApp(@QueryMap Map<String, String> map, @Header("token") String token);
+
+    @GET(ApiConstant.orderQueryLogistics)
+    Observable<String> orderQueryLogistics(@QueryMap Map<String, String> map, @Header("token") String token);
     /**
      * 下载文件
      *

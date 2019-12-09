@@ -2,16 +2,22 @@ package com.example.d_housepropertyproject.ui.mainfgt.home.act;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.alipay.sdk.app.PayTask;
 import com.bumptech.glide.Glide;
 import com.example.d_housepropertyproject.R;
+import com.example.d_housepropertyproject.bean.vipAliUnifiedOrderBean;
 import com.example.d_housepropertyproject.commt.MyApplication;
 import com.example.d_housepropertyproject.net.http.HttpHelper;
+import com.example.d_housepropertyproject.tool.AuthResult;
+import com.example.d_housepropertyproject.tool.PayResult;
 import com.example.d_housepropertyproject.ui.mainfgt.apartment.bean.TransactionWXUnifiedOrderBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.GoodsQueryInfoStoreUserBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.PostBasketBean;
@@ -33,6 +39,7 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -201,7 +208,7 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
                     if (stPay.equals("wx")) {
                         traWxUnified_orderApp(entity.getResult().getId_sub());
                     } else {
-
+                        traAliUnifiedOrderApp(entity.getResult().getId_sub());
                     }
                 }
             }
@@ -277,6 +284,97 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
         request.sign = wxBean.getResult().getSign();
         iwxapi.sendReq(request);//发送调起微信的请求
     }
+
+    /**
+     * 支付宝支付统一下单
+     */
+    public void traAliUnifiedOrderApp(String result) {
+        HttpHelper.traAliUnifiedOrderApp(this, result, new HttpHelper.HttpUtilsCallBack<String>() {
+            @Override
+            public void onFailure(String failure) {
+                loding.dismiss();
+                MyToast.show(getContext(), failure);
+            }
+
+            @Override
+            public void onSucceed(String succeed) {
+                loding.dismiss();
+                Gson gson = new Gson();
+                vipAliUnifiedOrderBean entity = gson.fromJson(succeed, vipAliUnifiedOrderBean.class);
+                if (entity.getCode() == 20000) {
+                    appPlayZFB(entity.getResult());
+                }
+            }
+            @Override
+            public void onError(String error) {
+                loding.dismiss();
+                MyToast.show(getContext(), error);
+            }
+        });
+    }
+
+    private static final int SDK_PAY_FLAG = 1;
+
+    //    支付宝支付调用
+    public void appPlayZFB(String apippp) {
+        Runnable payRunnable = () -> {
+            PayTask alipay = new PayTask(this);
+            Map<String, String> result = alipay.payV2(apippp, true);
+            Message msg = new Message();
+            msg.what = SDK_PAY_FLAG;
+            msg.obj = result;
+            mHandler.sendMessage(msg);
+        };
+        // 必须异步调用
+        Thread payThread = new Thread(payRunnable);
+        payThread.start();
+    }
+
+    private static final int SDK_AUTH_FLAG = 2;
+    private Handler mHandler = new Handler() {
+        @SuppressWarnings("unused")
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case SDK_PAY_FLAG: {
+                    @SuppressWarnings("unchecked")
+                    PayResult payResult = new PayResult((Map<String, String>) msg.obj);
+                    /**
+                     * 对于支付结果，请商户依赖服务端的异步通知结果。同步通知结果，仅作为支付结束的通知。
+                     */
+                    String resultInfo = payResult.getResult();// 同步返回需要验证的信息
+                    String resultStatus = payResult.getResultStatus();
+                    // 判断resultStatus 为9000则代表支付成功
+                    if (TextUtils.equals(resultStatus, "9000")) {
+                        // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
+                        MyToast.show(getApplicationContext(), "会员开通成功!！");
+                        setResult(11);
+                        finish();
+                    } else {
+                        // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
+                    }
+                    break;
+                }
+                case SDK_AUTH_FLAG: {
+                    @SuppressWarnings("unchecked")
+                    AuthResult authResult = new AuthResult((Map<String, String>) msg.obj, true);
+                    String resultStatus = authResult.getResultStatus();
+                    // 判断resultStatus 为“9000”且result_code
+                    // 为“200”则代表授权成功，具体状态码代表含义可参考授权接口文档
+                    if (TextUtils.equals(resultStatus, "9000") && TextUtils.equals(authResult.getResultCode(), "200")) {
+                        // 获取alipay_open_id，调支付时作为参数extern_token 的value
+                        // 传入，则支付账户为该授权账户
+                    } else {
+                        MyToast.show(getApplicationContext(), "支付失败、请重试！");
+                        // 其他状态值则为授权失败
+                    }
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+    };
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

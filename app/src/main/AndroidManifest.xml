@@ -98,7 +98,7 @@
             android:label="@string/lg_lable" />
         <activity
             android:name="com.example.d_housepropertyproject.ui.Act_Main"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -326,5 +326,9 @@
             android:name=".ui.mainfgt.mine.act.merchandiseorder.Act_MerchandiseOrderDetails"
             android:label="@string/MerchandiseOrderDetails_name"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.mainfgt.mine.act.merchandiseorder.Act_LogisticsInformation"
+            android:label="@string/LogisticsInformation_name"
+            />
     </application>
 </manifest>

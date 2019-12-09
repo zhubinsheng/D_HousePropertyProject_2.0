@@ -57,7 +57,9 @@ import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.bean.ClipCoupo
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.bean.HouseInspectionOrderDetailsBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.bean.couponGetCouponListBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.merchandiseorder.bean.MyOrderDetaleBean;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.merchandiseorder.bean.orderQueryLogisticsBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.merchandiseorder.bean.orderQueryOrdersetBean;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.merchandiseorder.bean.orderUpdateCancelBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.bean.ApartmentBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.bean.Historical_RecordBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.bean.LookrecordDeleteBean;
@@ -2211,7 +2213,7 @@ public class HttpHelper {
         hashMap.put("fettle", fettle);
 //        hashMap.put("page", page);
 //        hashMap.put("size", "10");
-        Debug.e("----------------Token==="+ MyApplication.getLoGinBean().getResult().getToken());
+        Debug.e("----------------Token===" + MyApplication.getLoGinBean().getResult().getToken());
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
         httpService.couponGetMyCouponList(hashMap, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
@@ -2348,7 +2350,6 @@ public class HttpHelper {
                     public void onSubscribe(Disposable d) {
 
                     }
-
                     @Override
                     public void onNext(String succeed) {
                         Gson gson = new Gson();
@@ -2817,19 +2818,17 @@ public class HttpHelper {
 
                     @Override
                     public void onNext(String succeed) {
-                        Debug.e("------------取消订单==succeed==" + succeed);
                         Gson gson = new Gson();
-//                        VipGetVipRemarkBean entity = gson.fromJson(succeed, VipGetVipRemarkBean.class);
-//                        if (entity.getCode() == 20000) {
-//                            callBack.onSucceed(succeed);
-//                        } else {
-//                            callBack.onError(entity.getMessage());
-//                        }
+                        orderUpdateCancelBean entity = gson.fromJson(succeed, orderUpdateCancelBean.class);
+                        if (entity.getCode() == 20000) {
+                            callBack.onSucceed(succeed);
+                        } else {
+                            callBack.onError(entity.getMessage());
+                        }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Debug.e("------------取消订单==onError==" + e.getMessage());
                         callBack.onFailure(httpFailureMsg());
                     }
 
@@ -3061,6 +3060,7 @@ public class HttpHelper {
                     public void onSubscribe(Disposable d) {
 
                     }
+
                     @Override
                     public void onNext(String succeed) {
                         Gson gson = new Gson();
@@ -3086,7 +3086,7 @@ public class HttpHelper {
     /**
      * 微信统一下单
      */
-    public static void vipWxfiedOrder( String vipId, final HttpUtilsCallBack<String> callBack) {
+    public static void vipWxfiedOrder(String vipId, final HttpUtilsCallBack<String> callBack) {
         vipPayVOBean voBean = new vipPayVOBean();
         voBean.setVipId(vipId);
         Gson gson = new Gson();
@@ -3103,6 +3103,7 @@ public class HttpHelper {
                     public void onSubscribe(Disposable d) {
 
                     }
+
                     @Override
                     public void onNext(String succeed) {
                         Gson gson = new Gson();
@@ -3124,6 +3125,83 @@ public class HttpHelper {
                     }
                 });
     }
+
+
+    /**
+     * 支付宝支付统一下单
+     */
+    public static void traAliUnifiedOrderApp(Context context,String id_order,  final HttpUtilsCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("id_order", id_order);
+        HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
+        httpService.traAliUnifiedOrderApp(hashMap, MyApplication.getLoGinBean().getResult().getToken())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(String succeed) {
+                        Gson gson = new Gson();
+                        vipAliUnifiedOrderBean entity = gson.fromJson(succeed, vipAliUnifiedOrderBean.class);
+                        if (entity.getCode() == 20000) {
+                            callBack.onSucceed(succeed);
+                        } else {
+                            callBack.onError(entity.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callBack.onFailure(httpFailureMsg());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+    /**
+     * 物流详情
+     */
+    public static void orderQueryLogistics(Context context,String id ,  final HttpUtilsCallBack<String> callBack) {
+//        "1202826744591020035"
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("id",id );
+        HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
+        httpService.orderQueryLogistics(hashMap, MyApplication.getLoGinBean().getResult().getToken())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+                    @Override
+                    public void onNext(String succeed) {
+                        Gson gson = new Gson();
+                        orderQueryLogisticsBean entity = gson.fromJson(succeed, orderQueryLogisticsBean.class);
+                        if (entity.getCode() == 20000) {
+                            callBack.onSucceed(succeed);
+                        } else {
+                            callBack.onError(entity.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callBack.onFailure(httpFailureMsg());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
 
     public interface HttpUtilsCallBack<T> {
         public void onFailure(String failure);

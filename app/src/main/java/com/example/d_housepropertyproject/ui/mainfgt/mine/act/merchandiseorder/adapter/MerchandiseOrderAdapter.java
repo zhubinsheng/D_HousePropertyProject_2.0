@@ -34,20 +34,23 @@ public class MerchandiseOrderAdapter extends BaseMultiItemQuickAdapter<OrderQuer
             case OrderQueryStoreListUserContext.TYPE1://待收货
                 helper.getView(R.id.Status).setVisibility(View.GONE);
                 helper.setText(R.id.Pay_status, "待收货");
-                helper.addOnClickListener(R.id.bt_ViewLogistics);
-                helper.addOnClickListener(R.id.bt_ConfirmReceipt);
+                helper.addOnClickListener(R.id.cancel_oder);//取消订单
                 break;
             case OrderQueryStoreListUserContext.TYPE2://待付款
                 if (item.getPay_status().equals("p")) {//待付款
                     helper.getView(R.id.yifukuan).setVisibility(View.GONE);
+                    helper.getView(R.id.weifukuan).setVisibility(View.VISIBLE);
                     helper.getView(R.id.Status).setVisibility(View.GONE);
                     helper.setText(R.id.Pay_status, "待付款");
-                    helper.addOnClickListener(R.id.cancel_oder);//取消订单
+                    helper.addOnClickListener(R.id.bt_itemOderCancle);//取消订单
+                    helper.addOnClickListener(R.id.bt_itemPay);//付款
                 } else {//已付款
                     helper.getView(R.id.yifukuan).setVisibility(View.VISIBLE);
+                    helper.getView(R.id.weifukuan).setVisibility(View.GONE);
                     helper.setText(R.id.Pay_status, "已付款");
                     helper.getView(R.id.Status).setVisibility(View.GONE);
-                    helper.getView(R.id.cancel_oder).setVisibility(View.GONE);
+                    helper.addOnClickListener(R.id.bt_ConfirmReceipt);//确认收货
+                    helper.addOnClickListener(R.id.bt_ViewLogistics);//查看物流
                 }
                 break;
             case OrderQueryStoreListUserContext.TYPE3://待发货、已完成、已取消、已关闭

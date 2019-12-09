@@ -53,13 +53,25 @@
 
                 <TextView
                     android:id="@+id/oderTime"
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="@dimen/dp_10"
                     android:text="请在0分0秒内完成支付"
                     android:textColor="#FFF42F2F" />
-
+                <TextView
+                    android:id="@+id/oderWuLiu"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:text="您的商品已发货"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dp_10"
+                    android:textSize="@dimen/fond_14sp"
+                    android:textColor="#5C96FF"
+                    android:drawablePadding="@dimen/dp_10"
+                    android:drawableLeft="@mipmap/icon_wuliutu"
+                    android:layout_height="wrap_content" />
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/myorderdetale_RecyclerView"
                     android:layout_width="match_parent"
@@ -121,29 +133,6 @@
                         android:textSize="@dimen/fond_14sp" />
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/dp_10"
-                    android:paddingRight="@dimen/dp_10"
-                    android:paddingBottom="@dimen/dp_10"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="运费"
-                        android:textColor="#FF999999"
-                        android:textSize="@dimen/fond_14sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:text="0"
-                        android:textColor="#FF999999"
-                        android:textSize="@dimen/fond_14sp" />
-                </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -322,7 +311,6 @@
         android:layout_height="@dimen/dip_50"
         android:layout_alignParentBottom="true"
         android:visibility="gone">
-
         <TextView
             android:id="@+id/oder_cancle"
             android:layout_width="@dimen/dip_140"

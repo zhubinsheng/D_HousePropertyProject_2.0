@@ -160,5 +160,9 @@ public class ApiConstant {
     public static final String vipAliUnifiedOrder = "vip/ali/unifiedOrder";
     //微信统一下单
     public static final String vipWxfiedOrder = "vip/wx/unifiedOrder";
+    //支付宝支付统一下单
+    public static final String traAliUnifiedOrderApp = "tra/ali/unifiedOrder/app";
+    //物流详情
+    public static final String orderQueryLogistics = "order/query/logistics";
 }
 

@@ -81,4 +81,5 @@
     <string name="ChoseCoupon_name">使用优惠券</string>
     <string name="MerchandiseOrder_name">商城订单</string>
     <string name="MerchandiseOrderDetails_name">商城订单详情</string>
+    <string name="LogisticsInformation_name">物流信息</string>
 </resources>
