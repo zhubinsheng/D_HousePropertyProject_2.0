@@ -64,12 +64,13 @@
             android:textSize="@dimen/fond_16sp" />
 
         <TextView
+            android:id="@+id/tv_Stock1"
             android:layout_width="@dimen/dip_60"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="54654"
+            android:text="0"
             android:textColor="@color/min_color" />
     </RelativeLayout>
 

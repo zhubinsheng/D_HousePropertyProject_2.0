@@ -121,7 +121,6 @@ public class Fgt_MerchandiseOrder extends BaseFragment implements Dilog_Pay.OnBa
                     intent.setClass(getContext(), Act_MerchandiseOrderDetails.class);
                     startActivityForResult(intent, 10);
                     break;
-                case R.id.cancel_oder://取消订单
                 case R.id.bt_itemOderCancle://取消订单
                     Dilog_Login_Cler cler = new Dilog_Login_Cler(getContext(), () -> {
                         orderUpdateCancel(position);
@@ -133,7 +132,7 @@ public class Fgt_MerchandiseOrder extends BaseFragment implements Dilog_Pay.OnBa
                     startAct(intent, Act_LogisticsInformation.class);
                     break;
                 case R.id.bt_ConfirmReceipt://确认收货
-
+                    orderUpdateConfirm(position);
                     break;
                 case R.id.delete_oder://删除订单
 //                    Dilog_Login_Cler cler1 = new Dilog_Login_Cler(getContext(), () -> {
@@ -314,6 +313,36 @@ public class Fgt_MerchandiseOrder extends BaseFragment implements Dilog_Pay.OnBa
         });
     }
 
+    /**
+     * 用户订单确认收货
+     */
+    public void orderUpdateConfirm(int position) {
+        loding.show();
+        HttpHelper.orderUpdateConfirm(getContext(), datas.get(position).getId(), new HttpHelper.HttpUtilsCallBack<String>() {
+            @Override
+            public void onFailure(String failure) {
+                loding.dismiss();
+                MyToast.show(getContext(), failure);
+            }
+
+            @Override
+            public void onSucceed(String succeed) {
+                loding.dismiss();
+                Gson gson = new Gson();
+                orderUpdateCancelBean entity = gson.fromJson(succeed, orderUpdateCancelBean.class);
+                if (entity.getCode() == 20000) {
+                    MyToast.show(context, "确认收货成功！");
+                    EventBus.getDefault().post(new MessageStatus("3"));
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                loding.dismiss();
+                MyToast.show(getContext(), error);
+            }
+        });
+    }
 
     @Override
     public void onPayWx() {

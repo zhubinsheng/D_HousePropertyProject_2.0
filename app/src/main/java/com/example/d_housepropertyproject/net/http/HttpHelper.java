@@ -2350,6 +2350,7 @@ public class HttpHelper {
                     public void onSubscribe(Disposable d) {
 
                     }
+
                     @Override
                     public void onNext(String succeed) {
                         Gson gson = new Gson();
@@ -2848,6 +2849,7 @@ public class HttpHelper {
         map.put("productId", productId);
         Gson gson = new Gson();
         String json = gson.toJson(map);
+        Debug.e("-------------"+json);
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
         httpService.orderSubmitIntegral(body, MyApplication.getLoGinBean().getResult().getToken())
@@ -2858,7 +2860,6 @@ public class HttpHelper {
                     public void onSubscribe(Disposable d) {
 
                     }
-
                     @Override
                     public void onNext(String succeed) {
                         Gson gson = new Gson();
@@ -2869,7 +2870,6 @@ public class HttpHelper {
                             callBack.onError(entity.getMessage());
                         }
                     }
-
                     @Override
                     public void onError(Throwable e) {
                         callBack.onFailure(httpFailureMsg());
@@ -3130,7 +3130,7 @@ public class HttpHelper {
     /**
      * 支付宝支付统一下单
      */
-    public static void traAliUnifiedOrderApp(Context context,String id_order,  final HttpUtilsCallBack<String> callBack) {
+    public static void traAliUnifiedOrderApp(Context context, String id_order, final HttpUtilsCallBack<String> callBack) {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("id_order", id_order);
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
@@ -3164,13 +3164,14 @@ public class HttpHelper {
                     }
                 });
     }
+
     /**
      * 物流详情
      */
-    public static void orderQueryLogistics(Context context,String id ,  final HttpUtilsCallBack<String> callBack) {
+    public static void orderQueryLogistics(Context context, String id, final HttpUtilsCallBack<String> callBack) {
 //        "1202826744591020035"
         HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("id",id );
+        hashMap.put("id", id);
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
         httpService.orderQueryLogistics(hashMap, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
@@ -3180,6 +3181,7 @@ public class HttpHelper {
                     public void onSubscribe(Disposable d) {
 
                     }
+
                     @Override
                     public void onNext(String succeed) {
                         Gson gson = new Gson();
@@ -3202,6 +3204,44 @@ public class HttpHelper {
                 });
     }
 
+
+    /**
+     * 用户订单确认收货
+     */
+    public static void orderUpdateConfirm(Context context, String id, final HttpUtilsCallBack<String> callBack) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("id", id);
+        HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
+        httpService.orderUpdateConfirm(hashMap, MyApplication.getLoGinBean().getResult().getToken())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(String succeed) {
+                        Gson gson = new Gson();
+                        orderUpdateCancelBean entity = gson.fromJson(succeed, orderUpdateCancelBean.class);
+                        if (entity.getCode() == 20000) {
+                            callBack.onSucceed(succeed);
+                        } else {
+                            callBack.onError(entity.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callBack.onFailure(httpFailureMsg());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
 
     public interface HttpUtilsCallBack<T> {
         public void onFailure(String failure);

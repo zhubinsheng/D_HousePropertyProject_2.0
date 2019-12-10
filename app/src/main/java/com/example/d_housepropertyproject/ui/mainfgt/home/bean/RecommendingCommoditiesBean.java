@@ -1,4 +1,6 @@
 package com.example.d_housepropertyproject.ui.mainfgt.home.bean;
+import com.lykj.aextreme.afinal.utils.Debug;
+
 import java.util.List;
 public class RecommendingCommoditiesBean {
 
@@ -240,7 +242,7 @@ public class RecommendingCommoditiesBean {
             private Object price;
             private String unit;
             private String newStatus;
-            private Object stock;
+            private String stock;
 
             public String getId() {
                 return id;
@@ -298,11 +300,11 @@ public class RecommendingCommoditiesBean {
                 this.newStatus = newStatus;
             }
 
-            public Object getStock() {
+            public String getStock() {
                 return stock;
             }
 
-            public void setStock(Object stock) {
+            public void setStock(String stock) {
                 this.stock = stock;
             }
         }

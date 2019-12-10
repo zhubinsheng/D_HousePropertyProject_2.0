@@ -137,7 +137,6 @@ public class Act_Accumulation extends BaseActivity {
                 MyToast.show(context, failure);
                 loding.dismiss();
             }
-
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();

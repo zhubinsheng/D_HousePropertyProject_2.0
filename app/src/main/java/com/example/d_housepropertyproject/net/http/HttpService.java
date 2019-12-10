@@ -260,6 +260,9 @@ public interface HttpService {
 
     @GET(ApiConstant.orderQueryLogistics)
     Observable<String> orderQueryLogistics(@QueryMap Map<String, String> map, @Header("token") String token);
+
+    @POST(ApiConstant.orderUpdateConfirm)
+    Observable<String> orderUpdateConfirm(@QueryMap Map<String, String> map, @Header("token") String token);
     /**
      * 下载文件
      *

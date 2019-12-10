@@ -1,6 +1,8 @@
 package com.example.d_housepropertyproject.ui.mainfgt.mine.act;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -11,12 +13,15 @@ import com.example.d_housepropertyproject.net.http.HttpHelper;
 import com.example.d_housepropertyproject.tool.GlideImageLoader;
 import com.example.d_housepropertyproject.ui.mainfgt.home.adapter.ImageListAdapter;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.GoodsQueryInfoIntegralUserBean;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.ReceivingAddressBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.linkmanAddLinkmanBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.orderSubmitIntegralBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.dailog.Dilog_Exchange;
+import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.bean.couponGetCouponListBean;
 import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lykj.aextreme.afinal.common.BaseActivity;
+import com.lykj.aextreme.afinal.utils.Debug;
 import com.lykj.aextreme.afinal.utils.MyToast;
 import com.youth.banner.Banner;
 
@@ -26,6 +31,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cz.msebera.android.httpclient.util.TextUtils;
 
 /**
  * 积分礼品详情
@@ -70,9 +76,6 @@ public class Act_GiftDetails extends BaseActivity implements Dilog_Exchange.Back
         ButterKnife.bind(this);
         goodId = getIntent().getStringExtra("goodId");
         Integral = getIntent().getStringExtra("Integral");
-        dilogExchange = new Dilog_Exchange(this);
-        dilogExchange.setTouchCancle(true);
-        dilogExchange.setBackCommit(this);
     }
 
     private String des;
@@ -108,7 +111,7 @@ public class Act_GiftDetails extends BaseActivity implements Dilog_Exchange.Back
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.min_Historical_Record_back, R.id.bt_Integral})
+    @OnClick({R.id.min_Historical_Record_back, R.id.bt_Integral, R.id.bt_AddressSelection})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.min_Historical_Record_back:
@@ -116,10 +119,26 @@ public class Act_GiftDetails extends BaseActivity implements Dilog_Exchange.Back
                 break;
             case R.id.bt_Integral:
                 if (bt_Integral.isSelected()) {
+                    if (entity == null) {
+                        return;
+                    }
+                    if (TextUtils.isEmpty(LinkmanId)) {
+                        MyToast.show(this, "请选择地址！");
+                        return;
+                    }
+                    dilogExchange = new Dilog_Exchange(this, entity.getResult().getStock());
+                    dilogExchange.setTouchCancle(true);
+                    dilogExchange.setBackCommit(this);
                     dilogExchange.show();
                 } else {
                     MyToast.show(context, "您的积分不足，暂不能兑换！");
                 }
+                break;
+            case R.id.bt_AddressSelection:
+                Intent intent = new Intent();
+                intent.setClass(this, Act_ReceivingAddress.class);
+                intent.putExtra("status", "choseAddress");
+                startActivityForResult(intent, 10);
                 break;
         }
     }
@@ -127,7 +146,7 @@ public class Act_GiftDetails extends BaseActivity implements Dilog_Exchange.Back
     private GoodsQueryInfoIntegralUserBean entity;
 
     /**
-     * 商品列表
+     * 商品列表详情
      */
     public void goodsQueryInfoIntegralUser() {
         HttpHelper.goodsQueryInfoIntegralUser(context, goodId, new HttpHelper.HttpUtilsCallBack<String>() {
@@ -136,6 +155,7 @@ public class Act_GiftDetails extends BaseActivity implements Dilog_Exchange.Back
                 MyToast.show(context, failure);
                 loding.dismiss();
             }
+
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();
@@ -179,6 +199,7 @@ public class Act_GiftDetails extends BaseActivity implements Dilog_Exchange.Back
                     price.setText(entity.getResult().getSalePrice() + "");
                     salePrice.setText("剩余" + entity.getResult().getStock() + entity.getResult().getUnit());
                     linkman.setText(entity.getResult().getLinkman() + "  " + entity.getResult().getPhone());
+                    LinkmanId = entity.getResult().getLinkmanId();
                     address.setText(entity.getResult().getAddress());
                     if (entity.getResult().getSalePrice() > Integer.valueOf(Integral)) {
                         bt_Integral.setSelected(false);
@@ -229,9 +250,23 @@ public class Act_GiftDetails extends BaseActivity implements Dilog_Exchange.Back
         });
     }
 
+    private String LinkmanId = "";
+
     @Override
     public void commit(int number) {
         loding.show();
-        commitorderSubmitIntegral(entity.getResult().getLinkmanId(), number + "", entity.getResult().getId());
+        commitorderSubmitIntegral(LinkmanId, number + "", entity.getResult().getId());
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 10 && resultCode == 10) {
+            ReceivingAddressBean.ResultBean bean = (ReceivingAddressBean.ResultBean) data.getSerializableExtra("bean");
+            LinkmanId = bean.getId();
+            linkman.setText(bean.getLinkman() + "  " + bean.getPhone());
+            address.setText(bean.getAddress());
+        }
     }
 }

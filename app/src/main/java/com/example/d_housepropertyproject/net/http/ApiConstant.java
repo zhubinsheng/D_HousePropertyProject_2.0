@@ -164,5 +164,7 @@ public class ApiConstant {
     public static final String traAliUnifiedOrderApp = "tra/ali/unifiedOrder/app";
     //物流详情
     public static final String orderQueryLogistics = "order/query/logistics";
+    //用户订单确认收货
+    public static final String orderUpdateConfirm = "order/update/confirm";
 }
 

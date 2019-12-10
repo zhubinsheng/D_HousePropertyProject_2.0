@@ -83,12 +83,10 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
     @BindView(R.id.oderWuLiu)
     TextView oderWuLiu;
     private CountDownTimer mTimer;
-
     @Override
     public int initLayoutId() {
         return R.layout.act_merchandiseorderdetails;
     }
-
     @Override
     public void initView() {
         hideHeader();
@@ -97,13 +95,10 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
         ImmersionBar.with(this).statusBarDarkFont(true).init();
         EventBus.getDefault().register(this);
         myorderdetaleRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
     }
-
     List<MyOrderDetaleBean.ResultBean.ProductsBean> data = new ArrayList<>();
     private String id = "";
     MyOrderDetaleAdapter adapter;
-
     @Override
     public void initData() {
         id = getIntent().getStringExtra("id");
@@ -121,13 +116,11 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
                 break;
         }
     }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
-
     /**
      * 倒计时
      */
@@ -147,7 +140,6 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
             }
         };
     }
-
     @Override
     public void updateUI() {
 
@@ -241,8 +233,8 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
                     for (int i = 0; i < entity.getResult().size(); i++) {
                         if (entity.getResult().get(i).getCode().equals("l") && entity.getResult().get(i).getType().equals("p")) {
                             long minute = 60 * entity.getResult().get(i).getTimeLimit() * 1000;// 分钟前
-//                            timerStart(minute);
-//                            mTimer.start();
+                            timerStart(minute);
+                            mTimer.start();
                         }
                     }
                 }
@@ -280,7 +272,7 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
                 dilogPay.show();
                 break;
             case R.id.tv_shouhuo://确认收货
-
+                orderUpdateConfirm();
                 break;
             case R.id.oderWuLiu://物流
                 Intent intent = new Intent();
@@ -289,9 +281,7 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
                 break;
         }
     }
-
     Dilog_Pay dilogPay;
-
     /**
      * 取消订单
      */
@@ -303,7 +293,6 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
                 loding.dismiss();
                 MyToast.show(getContext(), failure);
             }
-
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();
@@ -315,7 +304,6 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
                     finish();
                 }
             }
-
             @Override
             public void onError(String error) {
                 loding.dismiss();
@@ -476,5 +464,35 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
             }
         }
     };
+
+    /**
+     * 用户订单确认收货
+     */
+    public void orderUpdateConfirm() {
+        loding.show();
+        HttpHelper.orderUpdateConfirm(getContext(), entity.getResult().getId(), new HttpHelper.HttpUtilsCallBack<String>() {
+            @Override
+            public void onFailure(String failure) {
+                loding.dismiss();
+                MyToast.show(getContext(), failure);
+            }
+            @Override
+            public void onSucceed(String succeed) {
+                loding.dismiss();
+                Gson gson = new Gson();
+                orderUpdateCancelBean entity = gson.fromJson(succeed, orderUpdateCancelBean.class);
+                if (entity.getCode() == 20000) {
+                    MyToast.show(getContext(), "确认收货成功！");
+                    setResult(10);
+                    finish();
+                }
+            }
+            @Override
+            public void onError(String error) {
+                loding.dismiss();
+                MyToast.show(getContext(), error);
+            }
+        });
+    }
 
 }

@@ -53,25 +53,27 @@
 
                 <TextView
                     android:id="@+id/oderTime"
-                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="@dimen/dp_10"
                     android:text="请在0分0秒内完成支付"
-                    android:textColor="#FFF42F2F" />
+                    android:textColor="#FFF42F2F"
+                    android:visibility="gone" />
+
                 <TextView
                     android:id="@+id/oderWuLiu"
-                    android:visibility="gone"
                     android:layout_width="match_parent"
-                    android:text="您的商品已发货"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@mipmap/icon_wuliutu"
+                    android:drawablePadding="@dimen/dp_10"
                     android:gravity="center_vertical"
                     android:padding="@dimen/dp_10"
-                    android:textSize="@dimen/fond_14sp"
+                    android:text="您的商品已发货"
                     android:textColor="#5C96FF"
-                    android:drawablePadding="@dimen/dp_10"
-                    android:drawableLeft="@mipmap/icon_wuliutu"
-                    android:layout_height="wrap_content" />
+                    android:textSize="@dimen/fond_14sp"
+                    android:visibility="gone" />
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/myorderdetale_RecyclerView"
                     android:layout_width="match_parent"
@@ -103,6 +105,7 @@
                     <TextView
                         android:id="@+id/total"
                         android:layout_width="wrap_content"
+                        android:layout_centerVertical="true"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:text="¥0"
@@ -118,6 +121,7 @@
 
                     <TextView
                         android:layout_width="wrap_content"
+                        android:layout_centerVertical="true"
                         android:layout_height="wrap_content"
                         android:text="运费"
                         android:textColor="#FF999999"
@@ -125,6 +129,7 @@
 
                     <TextView
                         android:id="@+id/ddd"
+                        android:layout_centerVertical="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -132,8 +137,6 @@
                         android:textColor="#FF999999"
                         android:textSize="@dimen/fond_14sp" />
                 </RelativeLayout>
-
-
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -145,12 +148,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:text="付款金额"
                         android:textColor="@color/min_color"
                         android:textSize="@dimen/fond_16sp" />
 
                     <TextView
                         android:id="@+id/total1"
+                        android:layout_centerVertical="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -311,6 +316,7 @@
         android:layout_height="@dimen/dip_50"
         android:layout_alignParentBottom="true"
         android:visibility="gone">
+
         <TextView
             android:id="@+id/oder_cancle"
             android:layout_width="@dimen/dip_140"
@@ -337,20 +343,21 @@
             android:textColor="@color/white"
             android:textSize="@dimen/fond_14sp" />
     </RelativeLayout>
+
     <TextView
         android:id="@+id/tv_shouhuo"
-        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_marginBottom="@dimen/dp_10"
         android:layout_height="@dimen/dip_30"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/dip_20"
         android:layout_marginRight="@dimen/dip_20"
+        android:layout_marginBottom="@dimen/dp_10"
         android:background="@drawable/boder2"
         android:gravity="center"
         android:text="确认收货"
         android:textColor="@color/white"
-        android:textSize="@dimen/fond_14sp" />
+        android:textSize="@dimen/fond_14sp"
+        android:visibility="gone" />
 </RelativeLayout>

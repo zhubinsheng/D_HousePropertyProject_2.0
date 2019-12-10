@@ -23,8 +23,8 @@ public class MerchandiseOrderAdapter extends BaseMultiItemQuickAdapter<OrderQuer
 
     public MerchandiseOrderAdapter(List<OrderQueryStoreListUserContext> data) {
         super(data);
-        addItemType(OrderQueryStoreListUserContext.TYPE1, R.layout.item_merchandiseorder1);//待付款
-        addItemType(OrderQueryStoreListUserContext.TYPE2, R.layout.item_merchandiseorder2);//待收货
+        addItemType(OrderQueryStoreListUserContext.TYPE1, R.layout.item_merchandiseorder1);//待收货
+        addItemType(OrderQueryStoreListUserContext.TYPE2, R.layout.item_merchandiseorder2);//待付款、已付款
         addItemType(OrderQueryStoreListUserContext.TYPE3, R.layout.item_merchandiseorder3);//待发货、已完成、已取消、已关闭
     }
 
@@ -34,7 +34,8 @@ public class MerchandiseOrderAdapter extends BaseMultiItemQuickAdapter<OrderQuer
             case OrderQueryStoreListUserContext.TYPE1://待收货
                 helper.getView(R.id.Status).setVisibility(View.GONE);
                 helper.setText(R.id.Pay_status, "待收货");
-                helper.addOnClickListener(R.id.cancel_oder);//取消订单
+                helper.addOnClickListener(R.id.bt_ConfirmReceipt);//确认收货
+                helper.addOnClickListener(R.id.bt_ViewLogistics);//查看物流
                 break;
             case OrderQueryStoreListUserContext.TYPE2://待付款
                 if (item.getPay_status().equals("p")) {//待付款
