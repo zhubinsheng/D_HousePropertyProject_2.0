@@ -6,6 +6,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.d_housepropertyproject.R;
 import com.example.d_housepropertyproject.net.http.HttpHelper;
@@ -71,19 +72,41 @@ public class Act_HousePropertyCustomerService extends BaseActivity implements Ba
     public void onNoInterNet() {
 
     }
-
-    @OnClick(R.id.CustomerService_back)
-    public void onClick() {
-        finish();
+    @OnClick({R.id.CustomerService_back, R.id.allWenTi,
+            R.id.FangChanWenTi, R.id.ShangchengWenTi})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.CustomerService_back:
+                finish();
+                break;
+            case R.id.allWenTi://全部问题
+                type = "";
+                datas.clear();
+                loding.show();
+                syswordGetHelpWord();
+                break;
+            case R.id.FangChanWenTi://房产问题
+                datas.clear();
+                loding.show();
+                type = "3";
+                syswordGetHelpWord();
+                break;
+            case R.id.ShangchengWenTi://商城问题
+                datas.clear();
+                loding.show();
+                type = "7";
+                syswordGetHelpWord();
+                break;
+        }
     }
-
+    private String type = "";
     /**
      * 客服
      */
     List<CustomerServiceBean.ResultBean> datas = new ArrayList<>();
     CustomerServiceAdapter adapter;
     public void syswordGetHelpWord() {
-        HttpHelper.syswordGetHelpWord(this,new HttpHelper.HttpUtilsCallBack<String>() {
+        HttpHelper.syswordGetQuestion(this, type, new HttpHelper.HttpUtilsCallBack<String>() {
             @Override
             public void onFailure(String failure) {
                 MyToast.show(context, failure);

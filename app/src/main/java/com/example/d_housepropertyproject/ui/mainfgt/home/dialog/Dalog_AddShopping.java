@@ -189,9 +189,7 @@ public class Dalog_AddShopping extends BaseDialog {
         }
         return false;
     }
-
     String stAttrs = "";
-
     /**
      * 提交到购物车
      */
@@ -216,10 +214,10 @@ public class Dalog_AddShopping extends BaseDialog {
                 loding.dismiss();
                 MyToast.show(getContext(), failure);
             }
-
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();
+                Debug.e("--------------onSucceed=="+succeed);
                 Gson gson = new Gson();
                 pmsOrderAddBasketBean entity = gson.fromJson(succeed, pmsOrderAddBasketBean.class);
                 if (entity.getCode() == 20000) {
@@ -238,7 +236,6 @@ public class Dalog_AddShopping extends BaseDialog {
                     MyToast.show(getContext(), entity.getMessage());
                 }
             }
-
             @Override
             public void onError(String error) {
                 loding.dismiss();
@@ -247,9 +244,7 @@ public class Dalog_AddShopping extends BaseDialog {
         });
 
     }
-
     pmsgoodsqueryproductinfoBean pmsgoodsqueryproductinfo;
-
     /**
      * 产品信息
      */

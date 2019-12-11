@@ -83,10 +83,12 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
     @BindView(R.id.oderWuLiu)
     TextView oderWuLiu;
     private CountDownTimer mTimer;
+
     @Override
     public int initLayoutId() {
         return R.layout.act_merchandiseorderdetails;
     }
+
     @Override
     public void initView() {
         hideHeader();
@@ -96,9 +98,11 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
         EventBus.getDefault().register(this);
         myorderdetaleRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
+
     List<MyOrderDetaleBean.ResultBean.ProductsBean> data = new ArrayList<>();
     private String id = "";
     MyOrderDetaleAdapter adapter;
+
     @Override
     public void initData() {
         id = getIntent().getStringExtra("id");
@@ -116,11 +120,13 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
                 break;
         }
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
+
     /**
      * 倒计时
      */
@@ -131,6 +137,7 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
                 long seconds = millisUntilFinished / 1000;
                 long minutes = seconds / 60;
                 long remainingSeconds = seconds % 60;
+
                 oderTime.setText("请在" + String.valueOf(minutes) + "分" + String.valueOf(remainingSeconds) + "秒内完成支付");
             }
 
@@ -140,6 +147,7 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
             }
         };
     }
+
     @Override
     public void updateUI() {
 
@@ -224,21 +232,28 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
                 loding.dismiss();
                 MyToast.show(Act_MerchandiseOrderDetails.this, failure);
             }
+
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();
                 Gson gson = new Gson();
-                orderQueryOrdersetBean entity = gson.fromJson(succeed, orderQueryOrdersetBean.class);
+                orderQueryOrdersetBean entityTime = gson.fromJson(succeed, orderQueryOrdersetBean.class);
                 if (entity.getCode() == 20000) {
-                    for (int i = 0; i < entity.getResult().size(); i++) {
-                        if (entity.getResult().get(i).getCode().equals("l") && entity.getResult().get(i).getType().equals("p")) {
-                            long minute = 60 * entity.getResult().get(i).getTimeLimit() * 1000;// 分钟前
-                            timerStart(minute);
-                            mTimer.start();
+                    for (int i = 0; i < entityTime.getResult().size(); i++) {
+                        if (entityTime.getResult().get(i).getCode().equals("l") && entityTime.getResult().get(i).getType().equals("p")) {
+                            long minute = 60 * entityTime.getResult().get(i).getTimeLimit() * 1000;// 分钟前
+                            long timeStamp = System.currentTimeMillis();//系统时间
+                            long oderTime = Long.valueOf(entity.getResult().getTime())+minute;//订单时间
+                            long chacha = oderTime - timeStamp;
+                            if (chacha > 0) {
+                                timerStart(chacha);
+                                mTimer.start();
+                            }
                         }
                     }
                 }
             }
+
             @Override
             public void onError(String error) {
                 loding.dismiss();
@@ -281,7 +296,9 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
                 break;
         }
     }
+
     Dilog_Pay dilogPay;
+
     /**
      * 取消订单
      */
@@ -293,6 +310,7 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
                 loding.dismiss();
                 MyToast.show(getContext(), failure);
             }
+
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();
@@ -304,6 +322,7 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
                     finish();
                 }
             }
+
             @Override
             public void onError(String error) {
                 loding.dismiss();
@@ -476,6 +495,7 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
                 loding.dismiss();
                 MyToast.show(getContext(), failure);
             }
+
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();
@@ -487,6 +507,7 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
                     finish();
                 }
             }
+
             @Override
             public void onError(String error) {
                 loding.dismiss();

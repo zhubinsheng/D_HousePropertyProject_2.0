@@ -263,6 +263,10 @@ public interface HttpService {
 
     @POST(ApiConstant.orderUpdateConfirm)
     Observable<String> orderUpdateConfirm(@QueryMap Map<String, String> map, @Header("token") String token);
+
+
+    @GET(ApiConstant.syswordGetQuestion)
+    Observable<String> syswordGetQuestion(@QueryMap Map<String, String> map, @Header("token") String token);
     /**
      * 下载文件
      *

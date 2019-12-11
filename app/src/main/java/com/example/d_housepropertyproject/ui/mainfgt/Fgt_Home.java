@@ -283,6 +283,12 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
                 startAct(Act_PreferentialInformation.class);
                 break;
             case 4://咨询
+                if (MyApplication.getLoGinBean() == null) {
+                    Intent intent = new Intent();
+                    intent.setClass(getContext(), Act_Login.class);
+                    startActivityForResult(intent, 10);
+                    return;
+                }
                 startAct(Act_HousePropertyCustomerService.class);
                 break;
             case 5://会员
@@ -418,7 +424,6 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
                 MyToast.show(context, failure);
                 loding.dismiss();
             }
-
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();

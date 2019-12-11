@@ -166,5 +166,7 @@ public class ApiConstant {
     public static final String orderQueryLogistics = "order/query/logistics";
     //用户订单确认收货
     public static final String orderUpdateConfirm = "order/update/confirm";
+    //获取问题(房产、商城问题)
+    public static final String syswordGetQuestion = "sysword/getQuestion";
 }
 

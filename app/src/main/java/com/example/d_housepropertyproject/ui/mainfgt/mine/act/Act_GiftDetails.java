@@ -163,20 +163,20 @@ public class Act_GiftDetails extends BaseActivity implements Dilog_Exchange.Back
                 entity = gson.fromJson(succeed, GoodsQueryInfoIntegralUserBean.class);
                 if (entity.getCode() == 20000) {
                     //banner图
-                    if (entity.getResult().getPic().contains(";http")) {
-                        String mmc[] = entity.getResult().getPic().split(";");
-                        for (int i = 0; i < mmc.length; i++) {
-                            image.add(mmc[i]);
-                        }
-                    } else if (entity.getResult().getPic().contains(",")) {
-                        bannerstImg = entity.getResult().getPic().split(",");
-                        for (int i = 0; i < bannerstImg.length; i++) {
-                            image.add(bannerstImg[i]);
-                        }
-                    } else if (entity.getResult().getPic().contains(";")) {
-                        bannerPic = entity.getResult().getPic().replace(";", "");
-                        image.add(bannerPic);
-                    }
+//                    if (entity.getResult().getPic().contains(";http")) {
+//                        String mmc[] = entity.getResult().getPic().split(";");
+//                        for (int i = 0; i < mmc.length; i++) {
+//                            image.add(mmc[i]);
+//                        }
+//                    } else if (entity.getResult().getPic().contains(",")) {
+//                        bannerstImg = entity.getResult().getPic().split(",");
+//                        for (int i = 0; i < bannerstImg.length; i++) {
+//                            image.add(bannerstImg[i]);
+//                        }
+//                    } else if (entity.getResult().getPic().contains(";")) {
+//                        bannerPic = entity.getResult().getPic().replace(";", "");
+                        image.add(entity.getResult().getPic());
+//                    }
                     banner.setImageLoader(new GlideImageLoader());
                     banner.setImages(image).start();
                     //产品详情图片显示

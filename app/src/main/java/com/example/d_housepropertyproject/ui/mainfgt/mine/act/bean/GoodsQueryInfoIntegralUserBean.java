@@ -82,6 +82,9 @@ public class GoodsQueryInfoIntegralUserBean {
         }
 
         public String getPic() {
+
+
+
             return pic;
         }
 

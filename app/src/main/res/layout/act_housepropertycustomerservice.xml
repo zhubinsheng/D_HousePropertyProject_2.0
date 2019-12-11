@@ -4,10 +4,12 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dip_45"
         android:layout_marginTop="@dimen/dip_20">
+
         <ImageView
             android:id="@+id/CustomerService_back"
             android:layout_width="wrap_content"
@@ -25,10 +27,90 @@
             android:textColor="@color/min_color"
             android:textSize="@dimen/fond_21sp" />
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_0.1"
+        android:background="#e0e0e0" />
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/dip_20"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/allWenTi"
+            android:layout_width="0dip"
+            android:layout_height="@dimen/dip_70"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@mipmap/icon_allwenti" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dip_20"
+                android:text="全部问题"
+                android:textColor="@color/white"
+                android:textSize="@dimen/fond_14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/FangChanWenTi"
+            android:layout_width="0dip"
+            android:layout_height="@dimen/dip_70"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@mipmap/icon_fangchanwenti" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dip_20"
+                android:text="房产问题"
+                android:textColor="@color/white"
+                android:textSize="@dimen/fond_14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/ShangchengWenTi"
+            android:layout_width="0dip"
+            android:layout_height="@dimen/dip_70"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@mipmap/icon_shangchenwenti" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dip_20"
+                android:text="商城问题"
+                android:textColor="@color/white"
+                android:textSize="@dimen/fond_14sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/min_Historical_refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/min_Historical_RecyclerView"
             android:layout_width="match_parent"
