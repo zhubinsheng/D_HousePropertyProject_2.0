@@ -65,6 +65,7 @@
         <activity
             android:name="com.example.d_housepropertyproject.wxapi.WXPayEntryActivity"
             android:exported="true"
+            android:theme="@style/wx_theme"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -172,7 +173,7 @@
         <activity
             android:name="com.example.d_housepropertyproject.ui.mainfgt.apartment.act.Act_Cashier"
             android:label="@string/Cashier_name"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.example.d_housepropertyproject.ui.mainfgt.mine.act.Act_Cash_withdrawal"
             android:label="@string/Cash_Withdrawal_name"

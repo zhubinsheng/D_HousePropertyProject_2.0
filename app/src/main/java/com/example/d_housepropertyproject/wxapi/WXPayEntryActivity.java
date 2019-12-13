@@ -10,6 +10,7 @@ import com.example.d_housepropertyproject.commt.MyApplication;
 import com.example.d_housepropertyproject.ui.mainfgt.apartment.act.Act_Cashier;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.Act_MemberCenter;
 import com.github.lzyzsd.jsbridge.Message;
+import com.lykj.aextreme.afinal.utils.Debug;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
@@ -45,18 +46,42 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 
     @Override
     public void onResp(BaseResp baseResp) {
+        int errCord = baseResp.errCode;
         if (baseResp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
-            int errCord = baseResp.errCode;
             if (errCord == 0) {
                 if (MyApplication.payWxStatus.equals("vip")) {//会员支付
                     EventBus.getDefault().post(new MessageStatus("1"));
                 } else if (MyApplication.payWxStatus.equals("fangchan") || MyApplication.payWxStatus.equals("shopping")) {
+                    if(MyApplication.payWxStatus.equals("shopping")){
+                        EventBus.getDefault().post(new MessageStatus("1"));
+                    }
                     Intent intent1 = new Intent();
                     intent1.setClass(WXPayEntryActivity.this, Act_Cashier.class);
                     intent1.putExtra("status", "success");
                     startActivity(intent1);
                 } else if (MyApplication.payWxStatus.equals("oderUp")) {
                     EventBus.getDefault().post(new MessageStatus("3"));
+                }
+            } else if (errCord == -1) {
+                if (MyApplication.payWxStatus.equals("vip")) {//会员支付
+                    EventBus.getDefault().post(new MessageStatus("2"));
+                } else if (MyApplication.payWxStatus.equals("fangchan") || MyApplication.payWxStatus.equals("shopping")) {
+                    Intent intent1 = new Intent();
+                    intent1.setClass(WXPayEntryActivity.this, Act_Cashier.class);
+                    intent1.putExtra("status", "lose");
+                    startActivity(intent1);
+                }
+            } else if (errCord == -2) {
+                if (MyApplication.payWxStatus.equals("vip")) {//会员支付
+                    EventBus.getDefault().post(new MessageStatus("2"));
+                } else if (MyApplication.payWxStatus.equals("fangchan") || MyApplication.payWxStatus.equals("shopping")) {
+                    if(MyApplication.payWxStatus.equals("shopping")){
+                        EventBus.getDefault().post(new MessageStatus("2"));
+                    }
+                    Intent intent1 = new Intent();
+                    intent1.setClass(WXPayEntryActivity.this, Act_Cashier.class);
+                    intent1.putExtra("status", "lose");
+                    startActivity(intent1);
                 }
             }
             finish();

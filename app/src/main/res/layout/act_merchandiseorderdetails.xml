@@ -34,6 +34,14 @@
                 android:text="订单详情"
                 android:textColor="@color/min_color"
                 android:textSize="@dimen/fond_16sp" />
+            <ImageView
+                android:id="@+id/Cashier_call"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/dip_10"
+                android:src="@mipmap/icon_min_contact_customer_service" />
         </RelativeLayout>
 
         <View
@@ -73,7 +81,15 @@
                     android:textColor="#5C96FF"
                     android:textSize="@dimen/fond_14sp"
                     android:visibility="gone" />
-
+                <TextView
+                    android:id="@+id/firmName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@mipmap/icon_right"
+                    android:padding="@dimen/dp_10"
+                    android:text="中国塑料在线交易网"
+                    android:textColor="@color/min_color"
+                    android:textSize="@dimen/fond_14sp" />
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/myorderdetale_RecyclerView"
                     android:layout_width="match_parent"
@@ -256,7 +272,7 @@
                             android:layout_width="0dip"
                             android:layout_height="wrap_content"
                             android:layout_weight="5"
-                            android:text="线下支付"
+                            android:text="在线支付"
                             android:textColor="@color/min_color" />
                     </LinearLayout>
 

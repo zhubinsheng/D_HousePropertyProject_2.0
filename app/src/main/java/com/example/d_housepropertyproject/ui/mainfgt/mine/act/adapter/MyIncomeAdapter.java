@@ -16,7 +16,7 @@ public class MyIncomeAdapter extends BaseQuickAdapter<MyIncomeBean.ResultBean.In
     @Override
     protected void convert(BaseViewHolder helper, MyIncomeBean.ResultBean.IntegralInfoListBean item) {
         helper.setText(R.id.tv_source, item.getSource())
-                .setText(R.id.tv_integral, "+" + item.getIntegral());
+                .setText(R.id.tv_integral, "-" + item.getIntegral());
         if (item.getCreated().length() >= 10) {
             helper.setText(R.id.tv_created, MyTimeUtils.dateToStampTimeHH(item.getCreated() + ""));
         }

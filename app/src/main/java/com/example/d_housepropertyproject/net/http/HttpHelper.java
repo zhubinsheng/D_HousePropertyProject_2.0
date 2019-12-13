@@ -449,7 +449,6 @@ public class HttpHelper {
 
                     @Override
                     public void onNext(String succeed) {
-                        Debug.e("---------------报名==onNext=" + succeed);
                         try {
                             Gson gson = new Gson();
                             CodeBean entity = gson.fromJson(succeed, CodeBean.class);
@@ -2207,13 +2206,14 @@ public class HttpHelper {
      * searchValue 查询值
      * fettle  1: 可使用; 2: 已使用; 3: 已过期
      */
-    public static void couponGetMyCouponList(Context context, String fettle, String page, String searchValue, final HttpUtilsCallBack<String> callBack) {
+    public static void couponGetMyCouponList(Context context, String fettle, String page, String searchValue, String type, final HttpUtilsCallBack<String> callBack) {
         HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("type", "3");
+        if (!TextUtils.isEmpty(type)) {
+            hashMap.put("type", type);
+        }
         hashMap.put("fettle", fettle);
 //        hashMap.put("page", page);
 //        hashMap.put("size", "10");
-        Debug.e("----------------Token===" + MyApplication.getLoGinBean().getResult().getToken());
         HttpService httpService = RetrofitFactory1.getRetrofit(15l, 15l).create(HttpService.class);
         httpService.couponGetMyCouponList(hashMap, MyApplication.getLoGinBean().getResult().getToken())
                 .subscribeOn(Schedulers.io())
@@ -2938,13 +2938,10 @@ public class HttpHelper {
                 .subscribe(new Observer<String>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-
                     }
-
                     @Override
                     public void onNext(String succeed) {
                         Gson gson = new Gson();
-                        Debug.e("---------------添加购物车==" + succeed);
                         pmsOrderAddBasketBean entity = gson.fromJson(succeed, pmsOrderAddBasketBean.class);
                         if (entity.getCode() == 20000) {
                             callBack.onSucceed(succeed);
@@ -3197,6 +3194,7 @@ public class HttpHelper {
 
                     @Override
                     public void onError(Throwable e) {
+                        Debug.e("-------------onError==" + e.getMessage());
                         callBack.onFailure(httpFailureMsg());
                     }
 
@@ -3260,6 +3258,7 @@ public class HttpHelper {
                     public void onSubscribe(Disposable d) {
 
                     }
+
                     @Override
                     public void onNext(String succeed) {
                         Gson gson = new Gson();

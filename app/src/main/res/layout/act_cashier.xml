@@ -9,7 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dip_45"
         android:layout_marginTop="@dimen/dip_20">
-
+        <ImageView
+            android:id="@+id/Cashier_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dip_10"
+            android:src="@mipmap/icon_blck_back" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -103,7 +109,7 @@
             android:textSize="@dimen/fond_16sp" />
 
         <TextView
-            android:id="@+id/Cashier_oder"
+            android:id="@+id/bt_Cashier_oder"
             android:layout_width="@dimen/dip_110"
             android:layout_marginLeft="@dimen/dip_20"
             android:layout_height="@dimen/dip_35"

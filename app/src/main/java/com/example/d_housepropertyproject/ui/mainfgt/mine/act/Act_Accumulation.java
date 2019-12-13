@@ -2,6 +2,7 @@ package com.example.d_housepropertyproject.ui.mainfgt.mine.act;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -52,7 +53,9 @@ public class Act_Accumulation extends BaseActivity {
         super.initImmersionBar();
         ImmersionBar.with(this).statusBarDarkFont(true).init();
     }
+
     List<RecommendingCommoditiesBean.ResultBean.ListBean> listDatas = new ArrayList<>();
+
     @Override
     public void initView() {
         hideHeader();
@@ -68,6 +71,7 @@ public class Act_Accumulation extends BaseActivity {
             page_num = 1;
             listDatas.clear();
             goodsQueryListUser();
+            integralGetMyIntegral();
             refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
         });
         mRefreshLayout.setOnLoadMoreListener(refreshlayout -> {
@@ -87,7 +91,8 @@ public class Act_Accumulation extends BaseActivity {
             Intent intent = new Intent();
             intent.putExtra("Integral", tv_totalIntegral.getText().toString());
             intent.putExtra("goodId", listDatas.get(position).getId());
-            startAct(intent, Act_GiftDetails.class);
+            intent.setClass(this, Act_GiftDetails.class);
+            startActivityForResult(intent, 10);
         });
         jifenRecyclerView.setAdapter(adapter);
         jifenRecyclerView.setNestedScrollingEnabled(false);
@@ -112,7 +117,7 @@ public class Act_Accumulation extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.min_Historical_Record_back, R.id.ExchangeRecords, R.id.MyIncome})
+    @OnClick({R.id.min_Historical_Record_back, R.id.ExchangeRecords, R.id.MyIncome, R.id.MyIncome1})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.min_Historical_Record_back:
@@ -122,11 +127,11 @@ public class Act_Accumulation extends BaseActivity {
                 startAct(Act_ExchangeRecords.class);
                 break;
             case R.id.MyIncome://我的收益
+            case R.id.MyIncome1:
                 startAct(Act_MyIncome.class);
                 break;
         }
     }
-
     /**
      * 获取我的积分
      */
@@ -137,6 +142,7 @@ public class Act_Accumulation extends BaseActivity {
                 MyToast.show(context, failure);
                 loding.dismiss();
             }
+
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();
@@ -196,5 +202,15 @@ public class Act_Accumulation extends BaseActivity {
                 MyToast.show(context, error);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 10 && resultCode == 10) {
+            listDatas.clear();
+            goodsQueryListUser();
+            integralGetMyIntegral();
+        }
     }
 }

@@ -271,7 +271,7 @@ public class Fgt_MerchandiseOrder extends BaseFragment implements Dilog_Pay.OnBa
                 view_nonett.setVisibility(View.GONE);
                 view_noteoder.setVisibility(View.VISIBLE);
                 consultation_MyRecyclerView.setVisibility(View.GONE);
-                MyToast.show(getContext(), error);
+//                MyToast.show(getContext(), error);
             }
         });
     }

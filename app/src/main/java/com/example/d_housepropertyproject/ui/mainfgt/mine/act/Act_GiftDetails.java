@@ -175,7 +175,7 @@ public class Act_GiftDetails extends BaseActivity implements Dilog_Exchange.Back
 //                        }
 //                    } else if (entity.getResult().getPic().contains(";")) {
 //                        bannerPic = entity.getResult().getPic().replace(";", "");
-                        image.add(entity.getResult().getPic());
+                    image.add(entity.getResult().getPic());
 //                    }
                     banner.setImageLoader(new GlideImageLoader());
                     banner.setImages(image).start();
@@ -198,9 +198,18 @@ public class Act_GiftDetails extends BaseActivity implements Dilog_Exchange.Back
                     name.setText(entity.getResult().getName());
                     price.setText(entity.getResult().getSalePrice() + "");
                     salePrice.setText("剩余" + entity.getResult().getStock() + entity.getResult().getUnit());
-                    linkman.setText(entity.getResult().getLinkman() + "  " + entity.getResult().getPhone());
+                    if (entity.getResult().getLinkman()!=null&&!TextUtils.isEmpty(entity.getResult().getLinkman())) {
+                        linkman.setText(entity.getResult().getLinkman() + "  " + entity.getResult().getPhone());
+                    } else {
+                        linkman.setText("请选择收货人");
+                    }
+                    if (entity.getResult().getAddress()!=null&&!TextUtils.isEmpty(entity.getResult().getAddress())) {
+                        address.setText(entity.getResult().getAddress());
+                    } else {
+                        address.setText("请选择收货地址");
+                    }
                     LinkmanId = entity.getResult().getLinkmanId();
-                    address.setText(entity.getResult().getAddress());
+
                     if (entity.getResult().getSalePrice() > Integer.valueOf(Integral)) {
                         bt_Integral.setSelected(false);
                         bt_Integral.setText("积分不足");
@@ -237,6 +246,7 @@ public class Act_GiftDetails extends BaseActivity implements Dilog_Exchange.Back
                 orderSubmitIntegralBean entity = gson.fromJson(succeed, orderSubmitIntegralBean.class);
                 if (entity.getCode() == 20000) {
                     dilogExchange.dismiss();
+                    setResult(10);
                     finish();
                     MyToast.show(getApplicationContext(), "兑换成功！");
                 }

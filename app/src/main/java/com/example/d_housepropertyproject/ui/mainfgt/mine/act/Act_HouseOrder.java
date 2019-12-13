@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.ViewGroup;
 
 import com.example.d_housepropertyproject.R;
+import com.example.d_housepropertyproject.ui.Act_Main;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.actfgt.Fgt_HouseInspection;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.actfgt.Fgt_ReservationHouse;
 import com.flyco.tablayout.SlidingTabLayout;
@@ -30,6 +31,7 @@ public class Act_HouseOrder extends BaseActivity {
     ViewPager orderViewpager;
     @BindView(R.id.order_table)
     SlidingTabLayout orderTable;
+
     @Override
     public int initLayoutId() {
         return R.layout.act_houseorder;
@@ -47,7 +49,9 @@ public class Act_HouseOrder extends BaseActivity {
         //绑定初始化ButterKnife
         ButterKnife.bind(this);
     }
+
     MyPagerAdapter mAdapter;
+
     @Override
     public void initData() {
         mFragments.add(new Fgt_ReservationHouse());
@@ -75,7 +79,11 @@ public class Act_HouseOrder extends BaseActivity {
 
     @OnClick(R.id.min_Order_back)
     public void onClick() {
-        finish();
+        if (getIntent().getStringExtra("status") != null) {
+            startActClear(Act_Main.class);
+        } else {
+            finish();
+        }
     }
 
     private class MyPagerAdapter extends FragmentPagerAdapter {

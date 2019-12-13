@@ -10,6 +10,15 @@ public class GoodsQueryInfoStoreUserBean implements Serializable {
      * message : 成功
      * code : 20000
      */
+    private String firmName;
+
+    public String getFirmName() {
+        return firmName;
+    }
+
+    public void setFirmName(String firmName) {
+        this.firmName = firmName;
+    }
 
     private ResultBean result;
     private String message;
@@ -71,6 +80,16 @@ public class GoodsQueryInfoStoreUserBean implements Serializable {
          * hot : [{"id":"1162278114532655105","name":"迪奥烈艳蓝金唇膏999 3.5g","pic":"http://116.62.242.76:8080/group1/M00/00/05/rBA9Jl1WZfqAX_9jAAMydvMZeak505.png","salePrice":315,"price":400,"unit":null,"newStatus":null,"stock":null},{"id":"1163327774349307905","name":"矿泉水1L农夫山泉","pic":"http://116.62.242.76:8080/group1/M00/00/05/rBA9Jl1aOHaAH8EFAACPnzycM1s040.png","salePrice":0.01,"price":20,"unit":null,"newStatus":null,"stock":null},{"id":"1163348579523211266","name":"鞋子李林42码测试测测测","pic":"http://116.62.242.76:8080/group1/M00/00/05/rBA9Jl1aOnWAYWnVAACJkGAOdbc457.png","salePrice":120,"price":201.5,"unit":null,"newStatus":null,"stock":null},{"id":"1166181118927409154","name":"测试002","pic":"http://116.62.242.76:8080/group1/M00/00/06/rBA9Jl1kmmSAObTjAACeipFOgNg439.png","salePrice":28,"price":30,"unit":null,"newStatus":null,"stock":null},{"id":"1198789932625047553","name":"商品4","pic":"http://192.168.2.201:8080/group1/M00/00/1D/wKgCyV3bNgCABz9kAACXC4kkxHU335.jpg","salePrice":43,"price":42,"unit":null,"newStatus":null,"stock":null}]
          * pAttrs : [{"id":"1158917809828134914","name":"厚度","attrs":[{"attrId":"1158975951456006146","value":"薄款"},{"attrId":"1158975951464394753","value":"加厚款"}]},{"id":"1158917967135506433","name":"领型","attrs":[{"attrId":"1158976185531723777","value":"圆领"},{"attrId":"1158976185535918081","value":"V领"}]},{"id":"1158924929076281345","name":"颜色","attrs":[{"attrId":"1158976094754402305","value":"红"},{"attrId":"1158976094754402306","value":"黄"},{"attrId":"1158976094758596610","value":"深蓝"}]},{"id":"1164469153444118529","name":"第四类","attrs":[{"attrId":"1164469153477672962","value":"选项1"},{"attrId":"1164469153494450177","value":"选项2"},{"attrId":"1164469153494450178","value":"选项3"}]}]
          */
+        private String AlbumPics;
+
+        public String getAlbumPics() {
+            return AlbumPics;
+        }
+
+        public void setAlbumPics(String albumPics) {
+            AlbumPics = albumPics;
+        }
+
         private int Goodnum;
         private String id;
 
@@ -419,7 +438,7 @@ public class GoodsQueryInfoStoreUserBean implements Serializable {
                 this.attrs = attrs;
             }
 
-            public static class AttrsBeanX {
+            public static class AttrsBeanX  implements Serializable {
                 /**
                  * attrId : 1158975951456006146
                  * value : 薄款

@@ -75,9 +75,10 @@ public class Act_ReceivingAddressModify extends BaseActivity implements Dlg_Addr
         });
         if (getIntent().getSerializableExtra("bean") != null) {
             resultBean = (ReceivingAddressBean.ResultBean) getIntent().getSerializableExtra("bean");
-            tvAddress.setText(resultBean.getAddress());
+            tvRegion.setText(resultBean.getAddress());
             edPhone.setText(resultBean.getPhone());
             etLinkman.setText(resultBean.getLinkman());
+//            tvRegion.setText(resultBean.get);
             TextView tvChecoe = getView(R.id.tv_checkbox);
             if (resultBean.getIsdefault().equals("1")) {
                 tvChecoe.setSelected(true);
@@ -173,6 +174,7 @@ public class Act_ReceivingAddressModify extends BaseActivity implements Dlg_Addr
     }
     @Override
     public void onBackItem(String areaId, String addr) {
+        address=addr;
         tvRegion.setText(addr);
     }
 
@@ -239,7 +241,7 @@ public class Act_ReceivingAddressModify extends BaseActivity implements Dlg_Addr
     public void linkmanUpdateLinkman(String id) {
         stLinkman = etLinkman.getText().toString();
         phone = edPhone.getText().toString();
-        address = newAddr.getText().toString();
+        address = tvRegion.getText().toString();
         addressDetail = tvAddress.getText().toString();
         if (TextUtils.isEmpty(stLinkman)) {
             MyToast.show(Act_ReceivingAddressModify.this, "请输入联系人");

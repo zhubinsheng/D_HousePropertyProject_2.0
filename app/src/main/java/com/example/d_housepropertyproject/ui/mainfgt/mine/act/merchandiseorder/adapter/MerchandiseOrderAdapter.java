@@ -45,6 +45,11 @@ public class MerchandiseOrderAdapter extends BaseMultiItemQuickAdapter<OrderQuer
                     helper.setText(R.id.Pay_status, "待付款");
                     helper.addOnClickListener(R.id.bt_itemOderCancle);//取消订单
                     helper.addOnClickListener(R.id.bt_itemPay);//付款
+                } else if (item.getPay_status().equals("s")) {//已付款=》待发货
+                    helper.getView(R.id.yifukuan).setVisibility(View.GONE);
+                    helper.getView(R.id.weifukuan).setVisibility(View.GONE);
+                    helper.setText(R.id.Pay_status, "待发货");
+                    helper.getView(R.id.Status).setVisibility(View.GONE);
                 } else {//已付款
                     helper.getView(R.id.yifukuan).setVisibility(View.VISIBLE);
                     helper.getView(R.id.weifukuan).setVisibility(View.GONE);
@@ -75,6 +80,7 @@ public class MerchandiseOrderAdapter extends BaseMultiItemQuickAdapter<OrderQuer
                 }
                 break;
         }
+        helper.setText(R.id.firmName, item.getFirmName());
         helper.addOnClickListener(R.id.myoder1_item);
         helper.setText(R.id.allPrice, "合计：¥" + item.getTotal());
         if (item.getProducts().size() == 1) {//单个数据

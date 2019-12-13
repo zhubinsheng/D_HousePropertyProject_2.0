@@ -30,7 +30,6 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.zyao89.view.zloading.ZLoadingDialog;
 import com.zyao89.view.zloading.Z_TYPE;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -189,7 +188,9 @@ public class Dalog_AddShopping extends BaseDialog {
         }
         return false;
     }
+
     String stAttrs = "";
+
     /**
      * 提交到购物车
      */
@@ -214,10 +215,10 @@ public class Dalog_AddShopping extends BaseDialog {
                 loding.dismiss();
                 MyToast.show(getContext(), failure);
             }
+
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();
-                Debug.e("--------------onSucceed=="+succeed);
                 Gson gson = new Gson();
                 pmsOrderAddBasketBean entity = gson.fromJson(succeed, pmsOrderAddBasketBean.class);
                 if (entity.getCode() == 20000) {
@@ -236,6 +237,7 @@ public class Dalog_AddShopping extends BaseDialog {
                     MyToast.show(getContext(), entity.getMessage());
                 }
             }
+
             @Override
             public void onError(String error) {
                 loding.dismiss();
@@ -244,7 +246,9 @@ public class Dalog_AddShopping extends BaseDialog {
         });
 
     }
+
     pmsgoodsqueryproductinfoBean pmsgoodsqueryproductinfo;
+
     /**
      * 产品信息
      */
@@ -264,6 +268,10 @@ public class Dalog_AddShopping extends BaseDialog {
                 if (pmsgoodsqueryproductinfo.getCode() == 20000) {
                     Glide.with(getContext()).load(pmsgoodsqueryproductinfo.getResult().getAlbumPics()).into(home_tuangou);
                     price.setText(pmsgoodsqueryproductinfo.getResult().getSalePrice() + "");
+                    customerBean.getResult().setSalePrice(pmsgoodsqueryproductinfo.getResult().getSalePrice());
+//                    customerBean.getResult().setId(pmsgoodsqueryproductinfo.getResult().getId());
+                    customerBean.getResult().setName(pmsgoodsqueryproductinfo.getResult().getName());
+                    customerBean.getResult().setPic(pmsgoodsqueryproductinfo.getResult().getAlbumPics());
                 } else {
                     MyToast.show(getContext(), "无货");
                 }

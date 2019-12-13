@@ -23,6 +23,7 @@ import com.example.d_housepropertyproject.net.http.HttpHelper;
 import com.example.d_housepropertyproject.tool.AuthResult;
 import com.example.d_housepropertyproject.tool.MyTimeUtils;
 import com.example.d_housepropertyproject.tool.PayResult;
+import com.example.d_housepropertyproject.ui.mainfgt.apartment.act.Act_HousePropertyCustomerService;
 import com.example.d_housepropertyproject.ui.mainfgt.apartment.bean.TransactionWXUnifiedOrderBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.dialog.Dilog_Pay;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.merchandiseorder.adapter.MyOrderDetaleAdapter;
@@ -82,6 +83,8 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
     TextView tvShouhuo;
     @BindView(R.id.oderWuLiu)
     TextView oderWuLiu;
+    @BindView(R.id.firmName)
+    TextView firmName;
     private CountDownTimer mTimer;
 
     @Override
@@ -185,6 +188,7 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
                     linkmanphone.setText(entity.getResult().getLinkman() + " " + entity.getResult().getPhone());
                     address.setText(entity.getResult().getAddress());
                     time.setText(MyTimeUtils.dateToStampTimeHH(entity.getResult().getTime()));
+                    firmName.setText(entity.getResult().getFirmName());
                     switch (entity.getResult().getStatus()) {
                         case "j"://待收货
                             tvShouhuo.setVisibility(View.VISIBLE);
@@ -198,6 +202,11 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
                                 oderPayView.setVisibility(View.VISIBLE);
                                 oderTime.setVisibility(View.VISIBLE);
                                 orderQueryOrderset();
+                            } else if (entity.getResult().getPay_status().equals("s")) {//已付款=》待发货
+                                tvShouhuo.setVisibility(View.GONE);
+                                oderWuLiu.setVisibility(View.GONE);
+                                oderPayView.setVisibility(View.GONE);
+                                oderTime.setVisibility(View.GONE);
                             } else {//已付款
                                 oderWuLiu.setVisibility(View.VISIBLE);
                                 oderTime.setVisibility(View.GONE);
@@ -243,7 +252,7 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
                         if (entityTime.getResult().get(i).getCode().equals("l") && entityTime.getResult().get(i).getType().equals("p")) {
                             long minute = 60 * entityTime.getResult().get(i).getTimeLimit() * 1000;// 分钟前
                             long timeStamp = System.currentTimeMillis();//系统时间
-                            long oderTime = Long.valueOf(entity.getResult().getTime())+minute;//订单时间
+                            long oderTime = Long.valueOf(entity.getResult().getTime()) + minute;//订单时间
                             long chacha = oderTime - timeStamp;
                             if (chacha > 0) {
                                 timerStart(chacha);
@@ -270,7 +279,7 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
     }
 
     @OnClick({R.id.consultation_back, R.id.oder_cancle, R.id.tv_shouhuo,
-            R.id.oder_pay, R.id.oderWuLiu})
+            R.id.oder_pay, R.id.oderWuLiu, R.id.Cashier_call})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.consultation_back:
@@ -291,8 +300,11 @@ public class Act_MerchandiseOrderDetails extends BaseAct implements Dilog_Pay.On
                 break;
             case R.id.oderWuLiu://物流
                 Intent intent = new Intent();
-                intent.putExtra("oderID", entity.getResult().getNo() + "");
+                intent.putExtra("oderID", entity.getResult().getId() + "");
                 startAct(intent, Act_LogisticsInformation.class);
+                break;
+            case R.id.Cashier_call:
+                startAct(Act_HousePropertyCustomerService.class);
                 break;
         }
     }

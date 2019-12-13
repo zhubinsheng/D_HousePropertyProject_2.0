@@ -12,9 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:paddingBottom="@dimen/dip_25"
         android:gravity="center"
         android:paddingTop="@dimen/dip_25"
+        android:paddingBottom="@dimen/dip_25"
         android:textColor="@color/gray_dark"
         android:textSize="@dimen/fond_14sp" />
 
@@ -24,6 +24,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="@dimen/dip_15"
+            android:text="暂不"
+            android:textColor="@color/min_color"
+            android:textSize="@dimen/fond_14sp" />
+
+        <View style="@style/vertical_line" />
 
         <TextView
             android:id="@+id/center"
@@ -36,17 +50,5 @@
             android:textColor="@color/min_color"
             android:textSize="@dimen/fond_14sp" />
 
-        <View style="@style/vertical_line" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:id="@+id/cancel"
-            android:padding="@dimen/dip_15"
-            android:textColor="@color/min_color"
-            android:text="取消"
-            android:textSize="@dimen/fond_14sp" />
     </LinearLayout>
 </LinearLayout>

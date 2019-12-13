@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
@@ -25,6 +26,7 @@ import com.example.d_housepropertyproject.ui.mainfgt.bean.HomeBannerBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.Act_BookingProperty;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.Act_CommodityDetails;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.Act_HouseInspection;
+import com.example.d_housepropertyproject.ui.mainfgt.home.act.Act_HousingLoanCalculation;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.Act_MakeMoney;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.Act_PreferentialInformation;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.Act_ShoppingCenter;
@@ -59,8 +61,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-import static com.zhouyou.http.EasyHttp.getContext;
-
 /**
  * 主页
  */
@@ -77,6 +77,8 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
     SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.RecommendingCommodities)
     RecyclerView RecommendingCommodities;
+    @BindView(R.id.ll_remen)
+    LinearLayout ll_remen;
 
     @Override
     public int initLayoutId() {
@@ -143,8 +145,8 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
         mBanner.setData(list, stData);
     }
 
-    private String gridName[] = {"爱订房产", "爱订商城", "赚钱", "优惠信息", "咨询", "会员"};
-    private int gridImg[] = {R.mipmap.icon_booking_property, R.mipmap.icon_loveshoppng_mall, R.mipmap.icon_qianbao,
+    private String gridName[] = {"爱订房产", "爱订商城","房贷计算", "赚钱", "优惠信息", "咨询", "会员"};
+    private int gridImg[] = {R.mipmap.icon_booking_property, R.mipmap.icon_loveshoppng_mall,R.mipmap.icon_fangdai, R.mipmap.icon_qianbao,
             R.mipmap.icon_preferential_information, R.mipmap.icon_consultation, R.mipmap.icon_vip1};
     List<HomeGridViewBean> gridDatas = new ArrayList<>();
     HomeGridViewAdapter1 adapter1;
@@ -202,6 +204,7 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
             startAct(intent, Act_CommodityDetails.class);
         });
         RecommendingCommodities.setAdapter(accumulationAdapter);
+        RecommendingCommodities.setNestedScrollingEnabled(false);
         myGridView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -276,13 +279,16 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
             case 1://爱订商城
                 startAct(Act_ShoppingCenter.class);
                 break;
-            case 2://赚钱
+            case 2://房贷计算
+                startAct(Act_HousingLoanCalculation.class);
+                break;
+            case 3://赚钱
                 startAct(Act_MakeMoney.class);
                 break;
-            case 3://优惠信息
+            case 4://优惠信息
                 startAct(Act_PreferentialInformation.class);
                 break;
-            case 4://咨询
+            case 5://咨询
                 if (MyApplication.getLoGinBean() == null) {
                     Intent intent = new Intent();
                     intent.setClass(getContext(), Act_Login.class);
@@ -291,7 +297,7 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
                 }
                 startAct(Act_HousePropertyCustomerService.class);
                 break;
-            case 5://会员
+            case 6://会员
                 if (MyApplication.getLoGinBean() == null) {
                     Intent intent = new Intent();
                     intent.setClass(getContext(), Act_Login.class);
@@ -341,6 +347,11 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
                     }
                 }
                 popular_recommendaAdapter.notifyDataSetChanged();
+                if (data.size() == 0) {
+                    ll_remen.setVisibility(View.GONE);
+                } else {
+                    ll_remen.setVisibility(View.VISIBLE);
+                }
                 if (myRefreshlayout) {
                     mRefreshLayout.finishRefresh();
                     MyToast.show(context, "数据更新成功！");
@@ -424,6 +435,7 @@ public class Fgt_Home extends BaseFragment implements BaseQuickAdapter.OnItemCli
                 MyToast.show(context, failure);
                 loding.dismiss();
             }
+
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();

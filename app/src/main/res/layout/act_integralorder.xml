@@ -52,6 +52,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/fond_20sp"
                 android:textStyle="bold" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dip_200"
@@ -134,27 +135,39 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentBottom="true">
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
+                            <RelativeLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_alignParentBottom="true"
-                                android:orientation="horizontal">
+                                android:layout_alignParentBottom="true">
 
-                                <TextView
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="兑换时间："
-                                    android:textColor="#FF999999"
-                                    android:textSize="@dimen/fond_12sp" />
+                                    android:orientation="horizontal">
 
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="兑换时间："
+                                        android:textColor="#FF999999"
+                                        android:textSize="@dimen/fond_12sp" />
+
+                                    <TextView
+                                        android:id="@+id/oder_time"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="2019.11.11   21:36:55"
+                                        android:textColor="#FF999999"
+                                        android:textSize="@dimen/fond_12sp" />
+                                </LinearLayout>
                                 <TextView
-                                    android:id="@+id/oder_time"
+                                    android:id="@+id/tv_Number"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="2019.11.11   21:36:55"
+                                    android:layout_alignParentRight="true"
                                     android:textColor="#FF999999"
                                     android:textSize="@dimen/fond_12sp" />
-                            </LinearLayout>
+                            </RelativeLayout>
                         </RelativeLayout>
                     </RelativeLayout>
                 </LinearLayout>

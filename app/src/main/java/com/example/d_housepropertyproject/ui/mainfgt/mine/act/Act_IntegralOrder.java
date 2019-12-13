@@ -36,6 +36,8 @@ public class Act_IntegralOrder extends BaseActivity {
     TextView oderLinkman;
     @BindView(R.id.oder_address)
     TextView oderAddress;
+    @BindView(R.id.tv_Number)
+    TextView tv_Number;
 
     @Override
     public int initLayoutId() {
@@ -47,20 +49,23 @@ public class Act_IntegralOrder extends BaseActivity {
         super.initImmersionBar();
         ImmersionBar.with(this).statusBarDarkFont(true).init();
     }
+
     private ExchangeRecordsBean.ResultBean.ListBean bean;
+
     @Override
     public void initView() {
         hideHeader();
         //绑定初始化ButterKnife
         ButterKnife.bind(this);
         bean = (ExchangeRecordsBean.ResultBean.ListBean) getIntent().getSerializableExtra("bean");
-        oderId.setText("订单号："+bean.getId());
+        oderId.setText("订单号：" + bean.getNo());
         Glide.with(this).load(bean.getPic()).into(oderImage);
         oderName.setText(bean.getName());
-        tv_price.setText(bean.getPrice()+"");
+        tv_price.setText(bean.getPrice() + "");
         oderTime.setText(MyTimeUtils.dateToStampTimeHH(bean.getTime()));
-        oderLinkman.setText(bean.getLinkman()+" "+bean.getPhone());
+        oderLinkman.setText(bean.getLinkman() + " " + bean.getPhone());
         oderAddress.setText(bean.getAddress());
+        tv_Number.setText("x"+bean.getCount());
     }
 
     @Override

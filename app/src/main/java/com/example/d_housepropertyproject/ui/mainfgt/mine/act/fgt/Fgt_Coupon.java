@@ -1,9 +1,11 @@
 package com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt;
+
 import android.annotation.SuppressLint;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.RelativeLayout;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.d_housepropertyproject.R;
 import com.example.d_housepropertyproject.net.http.HttpHelper;
@@ -13,9 +15,12 @@ import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.bean.couponGet
 import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lykj.aextreme.afinal.common.BaseFragment;
+import com.lykj.aextreme.afinal.utils.Debug;
 import com.lykj.aextreme.afinal.utils.MyToast;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -127,7 +132,7 @@ public class Fgt_Coupon extends BaseFragment implements BaseQuickAdapter.OnItemC
      * fettle  1: 可使用; 2: 已使用; 3: 已过期
      */
     public void couponGetCouponList() {
-        HttpHelper.couponGetMyCouponList(getContext(), fettle, page + "", searchValue, new HttpHelper.HttpUtilsCallBack<String>() {
+        HttpHelper.couponGetMyCouponList(getContext(), fettle, page + "", searchValue, "",new HttpHelper.HttpUtilsCallBack<String>() {
             @Override
             public void onFailure(String failure) {
                 loding.dismiss();
@@ -140,6 +145,7 @@ public class Fgt_Coupon extends BaseFragment implements BaseQuickAdapter.OnItemC
             @Override
             public void onSucceed(String succeed) {
                 loding.dismiss();
+                Debug.e("-------------fettle=="+fettle+"---------succeed=="+succeed);
                 Gson gson = new Gson();
                 couponGetCouponListBean entity = gson.fromJson(succeed, couponGetCouponListBean.class);
                 if (entity.getCode() == 20000) {
@@ -187,7 +193,7 @@ public class Fgt_Coupon extends BaseFragment implements BaseQuickAdapter.OnItemC
                 view_nonett.setVisibility(View.VISIBLE);
                 view_noteoder.setVisibility(View.GONE);
                 myRecyclerView.setVisibility(View.GONE);
-                MyToast.show(getContext(), error);
+//                MyToast.show(getContext(), error);
             }
         });
     }

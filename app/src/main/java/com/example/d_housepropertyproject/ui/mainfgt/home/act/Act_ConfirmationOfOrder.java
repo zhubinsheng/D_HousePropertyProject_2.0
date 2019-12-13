@@ -13,11 +13,13 @@ import android.widget.TextView;
 import com.alipay.sdk.app.PayTask;
 import com.bumptech.glide.Glide;
 import com.example.d_housepropertyproject.R;
+import com.example.d_housepropertyproject.bean.MessageStatus;
 import com.example.d_housepropertyproject.bean.vipAliUnifiedOrderBean;
 import com.example.d_housepropertyproject.commt.MyApplication;
 import com.example.d_housepropertyproject.net.http.HttpHelper;
 import com.example.d_housepropertyproject.tool.AuthResult;
 import com.example.d_housepropertyproject.tool.PayResult;
+import com.example.d_housepropertyproject.ui.mainfgt.apartment.act.Act_Cashier;
 import com.example.d_housepropertyproject.ui.mainfgt.apartment.bean.TransactionWXUnifiedOrderBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.GoodsQueryInfoStoreUserBean;
 import com.example.d_housepropertyproject.ui.mainfgt.home.act.bean.PostBasketBean;
@@ -27,6 +29,7 @@ import com.example.d_housepropertyproject.ui.mainfgt.mine.act.Act_ReceivingAddre
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.bean.ReceivingAddressBean;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.act.Act_ClipCoupons;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.bean.couponGetCouponListBean;
+import com.example.d_housepropertyproject.wxapi.WXPayEntryActivity;
 import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lykj.aextreme.afinal.common.BaseActivity;
@@ -36,6 +39,10 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +82,8 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
     TextView tv_number;
     @BindView(R.id.choseCoupon)
     TextView choseCoupon;
+    @BindView(R.id.firmName)
+    TextView firmName;
     private Dilog_Pay dilogPay;
     private String basketIdItem1 = "";
 
@@ -95,10 +104,22 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
         //绑定初始化ButterKnife
         ButterKnife.bind(this);
         dilogPay = new Dilog_Pay(this, this);
+        EventBus.getDefault().register(this);
     }
 
     GoodsQueryInfoStoreUserBean bean;
     private Double numPrice = 0.0;
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onGetMessage(MessageStatus message) {
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 
     @Override
     public void initData() {
@@ -113,6 +134,7 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
         tv_number.setText("x" + bean.getResult().getGoodnum());
         numPrice = (bean.getResult().getSalePrice() * bean.getResult().getGoodnum());
         oderAllPrice.setText(numPrice + "");
+        firmName.setText(bean.getResult().getBrandName());
     }
 
     @Override
@@ -135,12 +157,15 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
     @OnClick({R.id.Cash_WithdrawalSuccess_back, R.id.choseCoupon,
             R.id.dlg_jian, R.id.dlg_add, R.id.but_commit, R.id.bt_AddressSelection})
     public void onClick(View view) {
+        Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.Cash_WithdrawalSuccess_back:
                 finish();
                 break;
             case R.id.choseCoupon:
-                startActivityForResult(Act_ClipCoupons.class, 11);
+                intent.putExtra("salePrice", numPrice + "");
+                intent.setClass(getContext(), Act_ClipCoupons.class);
+                startActivityForResult(intent, 11);
                 break;
             case R.id.dlg_jian:
                 if (bean.getResult().getGoodnum() == 1) {
@@ -165,7 +190,6 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
                 dilogPay.show();
                 break;
             case R.id.bt_AddressSelection://地址选择
-                Intent intent = new Intent();
                 intent.setClass(this, Act_ReceivingAddress.class);
                 intent.putExtra("status", "choseAddress");
                 startActivityForResult(intent, 10);
@@ -265,7 +289,9 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
             }
         });
     }
+
     private IWXAPI iwxapi; //微信支付api
+
     /**
      * 调起微信支付的方法
      **/
@@ -305,6 +331,7 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
                     appPlayZFB(entity.getResult());
                 }
             }
+
             @Override
             public void onError(String error) {
                 loding.dismiss();
@@ -346,11 +373,17 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
                     // 判断resultStatus 为9000则代表支付成功
                     if (TextUtils.equals(resultStatus, "9000")) {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
-                        MyToast.show(getApplicationContext(), "会员开通成功!！");
-                        setResult(11);
-                        finish();
+                        Intent intent1 = new Intent();
+                        intent1.setClass(Act_ConfirmationOfOrder.this, Act_Cashier.class);
+                        intent1.putExtra("status", "success");
+                        startActivity(intent1);
                     } else {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
+                        Intent intent1 = new Intent();
+                        intent1.setClass(Act_ConfirmationOfOrder.this, Act_Cashier.class);
+                        intent1.putExtra("status", "lose");
+                        startActivity(intent1);
+                        finish();
                     }
                     break;
                 }
@@ -364,7 +397,7 @@ public class Act_ConfirmationOfOrder extends BaseActivity implements Dilog_Pay.O
                         // 获取alipay_open_id，调支付时作为参数extern_token 的value
                         // 传入，则支付账户为该授权账户
                     } else {
-                        MyToast.show(getApplicationContext(), "支付失败、请重试！");
+//                        MyToast.show(getApplicationContext(), "支付失败、请重试！");
                         // 其他状态值则为授权失败
                     }
                     break;

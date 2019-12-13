@@ -58,6 +58,8 @@ public class Act_ClipCoupons extends BaseActivity implements BaseQuickAdapter.On
         ImmersionBar.with(this).statusBarDarkFont(true).init();
     }
 
+    private double salePrice = 0;
+
     @Override
     public void initView() {
         hideHeader();
@@ -89,6 +91,7 @@ public class Act_ClipCoupons extends BaseActivity implements BaseQuickAdapter.On
 
     @Override
     public void initData() {
+        salePrice = Double.valueOf(getIntent().getStringExtra("salePrice"));
         adapter = new ClipCouponsAdapter(dataList);
         adapter.setOnItemClickListener(this);
         myRecyclerView.setAdapter(adapter);
@@ -112,11 +115,12 @@ public class Act_ClipCoupons extends BaseActivity implements BaseQuickAdapter.On
 
     private int page = 1;
     private String searchValue = "";
+
     /**
      * 获取优惠券list
      */
     public void couponGetCouponInfoList() {
-        HttpHelper.couponGetMyCouponList(getContext(), "1", page + "", searchValue, new HttpHelper.HttpUtilsCallBack<String>() {
+        HttpHelper.couponGetMyCouponList(getContext(), "1", page + "", searchValue, "3", new HttpHelper.HttpUtilsCallBack<String>() {
             @Override
             public void onFailure(String failure) {
                 loding.dismiss();
@@ -131,11 +135,18 @@ public class Act_ClipCoupons extends BaseActivity implements BaseQuickAdapter.On
                 Gson gson = new Gson();
                 couponGetCouponListBean entity = gson.fromJson(succeed, couponGetCouponListBean.class);
                 if (entity.getCode() == 20000) {
-                    dataList.addAll(entity.getResult().getCoupon());
+                    for (int i = 0; i < entity.getResult().getCoupon().size(); i++) {
+                        if (salePrice>=Double.valueOf(entity.getResult().getCoupon().get(i).getSuitable()) )
+                            dataList.add(entity.getResult().getCoupon().get(i));
+                    }
                     adapter.notifyDataSetChanged();
                 }
+                if (dataList.size() == 0) {
+                    view_nonett.setVisibility(View.GONE);
+                    view_noteoder.setVisibility(View.VISIBLE);
+                    myRecyclerView.setVisibility(View.GONE);
+                }
             }
-
             @Override
             public void onError(String error) {
                 loding.dismiss();
@@ -148,7 +159,7 @@ public class Act_ClipCoupons extends BaseActivity implements BaseQuickAdapter.On
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         Intent intent = new Intent();
-        intent.putExtra("bean",dataList.get(position));
+        intent.putExtra("bean", dataList.get(position));
         setResult(11, intent);
         finish();
     }

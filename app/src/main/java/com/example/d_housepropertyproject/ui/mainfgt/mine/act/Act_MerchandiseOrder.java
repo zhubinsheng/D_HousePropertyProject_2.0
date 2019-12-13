@@ -7,12 +7,14 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import com.example.d_housepropertyproject.R;
+import com.example.d_housepropertyproject.ui.Act_Main;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.fgt.actfgt.fgt.Fgt_Order;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.merchandiseorder.Fgt_MerchandiseOrder;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lykj.aextreme.afinal.common.BaseActivity;
 import com.lykj.aextreme.afinal.common.BaseFragment;
+import com.lykj.aextreme.afinal.utils.Debug;
 
 import java.util.ArrayList;
 
@@ -44,11 +46,8 @@ public class Act_MerchandiseOrder extends BaseActivity {
         hideHeader();
         //绑定初始化ButterKnife
         ButterKnife.bind(this);
-
     }
-
     MyPagerAdapter mAdapter;
-
     @Override
     public void initData() {
         mFragments.add(Fgt_MerchandiseOrder.getInstance(""));
@@ -82,7 +81,12 @@ public class Act_MerchandiseOrder extends BaseActivity {
 
     @OnClick(R.id.modifycellphone_back)
     public void onClick() {
-        finish();
+        Debug.e("--------------status=="+getIntent().getStringExtra("status"));
+        if (getIntent().getStringExtra("status") != null) {
+            startActClear(Act_Main.class);
+        } else {
+            finish();
+        }
     }
 
     private class MyPagerAdapter extends FragmentPagerAdapter {

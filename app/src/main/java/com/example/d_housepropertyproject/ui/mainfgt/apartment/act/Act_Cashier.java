@@ -1,5 +1,6 @@
 package com.example.d_housepropertyproject.ui.mainfgt.apartment.act;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,6 +15,7 @@ import com.example.d_housepropertyproject.ui.mainfgt.mine.act.Act_HouseOrder;
 import com.example.d_housepropertyproject.ui.mainfgt.mine.act.Act_MerchandiseOrder;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lykj.aextreme.afinal.common.BaseActivity;
+import com.lykj.aextreme.afinal.utils.Debug;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,7 +33,7 @@ public class Act_Cashier extends BaseActivity {
     LinearLayout ll_Success;
     @BindView(R.id.Cashier_home)
     TextView CashierHome;
-    @BindView(R.id.Cashier_oder)
+    @BindView(R.id.bt_Cashier_oder)
     TextView CashierOder;
 
     @Override
@@ -51,17 +53,17 @@ public class Act_Cashier extends BaseActivity {
         //绑定初始化ButterKnife
         ButterKnife.bind(this);
         CashierOder.setSelected(true);
-        CashierOder.setOnClickListener(v -> {
-            if (getIntent().getStringExtra("cashistatus") != null||getIntent().getStringExtra("status") != null) {
-                if (MyApplication.payWxStatus.equals("fangchan")) {
-                    startAct(Act_HouseOrder.class);
-                } else if (MyApplication.payWxStatus.equals("shopping")) {
-                    startAct(Act_MerchandiseOrder.class);
-                }
-            } else {
-                finish();
-            }
-        });
+//        CashierOder.setOnClickListener(v -> {
+//            if (getIntent().getStringExtra("cashistatus") != null || getIntent().getStringExtra("status") != null) {
+//                if (MyApplication.payWxStatus.equals("fangchan")) {
+//                    startAct(Act_HouseOrder.class);
+//                } else if (MyApplication.payWxStatus.equals("shopping")) {
+//                    startAct(Act_MerchandiseOrder.class);
+//                }
+//            } else {
+//                finish();
+//            }
+//        });
     }
 
     String status = "";
@@ -88,25 +90,35 @@ public class Act_Cashier extends BaseActivity {
 
     }
 
-    @OnClick({R.id.Cashier_call, R.id.Cashier_home, R.id.Cashier_oder})
+    @OnClick({R.id.Cashier_call, R.id.Cashier_home, R.id.bt_Cashier_oder, R.id.Cashier_back})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.Cashier_call://联系客户
-                MyUtils.callPhone(ApiConstant.PHONE, this);
+                if (MyApplication.payWxStatus.equals("shopping")) {
+                    startAct(Act_HousePropertyCustomerService.class);
+                } else {
+                    MyUtils.callPhone(ApiConstant.PHONE, this);
+                }
                 break;
             case R.id.Cashier_home:
                 startActClear(Act_Main.class);
                 break;
-            case R.id.Cashier_oder://订单
-                if (getIntent().getStringExtra("cashistatus") != null||getIntent().getStringExtra("status") != null) {
+            case R.id.bt_Cashier_oder://订单
+                Intent intent = new Intent();
+                if (getIntent().getStringExtra("cashistatus") != null || getIntent().getStringExtra("status") != null) {
                     if (MyApplication.payWxStatus.equals("fangchan")) {
-                        startAct(Act_HouseOrder.class);
+                        intent.putExtra("status", "cashier");
+                        startAct(intent, Act_HouseOrder.class);
                     } else if (MyApplication.payWxStatus.equals("shopping")) {
-                        startAct(Act_MerchandiseOrder.class);
+                        intent.putExtra("status", "cashier");
+                        startAct(intent, Act_MerchandiseOrder.class);
                     }
                 } else {
                     finish();
                 }
+                break;
+            case R.id.Cashier_back:
+                finish();
                 break;
         }
     }

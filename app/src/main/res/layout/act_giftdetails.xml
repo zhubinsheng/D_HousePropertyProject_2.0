@@ -109,7 +109,9 @@
                     android:layout_height="@dimen/dip_10"
                     android:layout_marginTop="@dimen/dip_10"
                     android:background="#FFF9F9F9" />
-
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <LinearLayout
                     android:id="@+id/bt_AddressSelection"
                     android:layout_width="match_parent"
@@ -134,7 +136,6 @@
                             android:id="@+id/linkman"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="顾凯凯 13666666666"
                             android:textColor="@color/min_color"
                             android:textSize="@dimen/fond_12sp" />
 
@@ -143,12 +144,19 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingTop="@dimen/dip_5"
-                            android:text="四川成都新都区 中国塑料城9栋23号"
+                            android:singleLine="true"
                             android:textColor="@color/min_color"
                             android:textSize="@dimen/fond_12sp" />
                     </LinearLayout>
                 </LinearLayout>
-
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:src="@mipmap/icon_right"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dip_20"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dip_0.1"

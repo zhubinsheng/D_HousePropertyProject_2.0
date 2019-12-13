@@ -209,7 +209,6 @@ public class Act_SelectRoomNumber extends BaseActivity implements BaseQuickAdapt
 
     @Override
     public void onBack(String decorationCodes1, String orientedCodes1,String min,String max) {
-        Debug.e("----------------min==="+min+"------------max=="+max);
         decorationCodes = decorationCodes1;
         orientedCodes = orientedCodes1;
         loding.show();

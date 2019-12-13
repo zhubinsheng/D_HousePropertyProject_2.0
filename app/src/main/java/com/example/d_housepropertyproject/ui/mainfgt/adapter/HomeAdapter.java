@@ -28,7 +28,6 @@ public class HomeAdapter extends BaseMultiItemQuickAdapter<HomeBean, BaseViewHol
             case HomeBean.TEXT:
                 break;
             case HomeBean.IMG:
-                Debug.e("-----------------url==="+item.getPicUrl());
                 Glide.with(context1).load(item.getPicUrl()).into((ImageView)helper.getView(R.id.home_item_imag));
                 break;
         }

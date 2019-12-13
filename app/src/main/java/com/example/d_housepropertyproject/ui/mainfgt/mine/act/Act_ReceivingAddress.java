@@ -65,6 +65,7 @@ public class Act_ReceivingAddress extends BaseActivity {
         mRefreshLayout.setRefreshHeader(new MaterialHeader(context).setShowBezierWave(false));  //设置 Header 为 Material风格
         mRefreshLayout.setRefreshFooter(new BallPulseFooter(context).setSpinnerStyle(SpinnerStyle.Scale));    //设置 Footer 为 球脉冲
         mRefreshLayout.setOnRefreshListener(refreshlayout -> {
+            dataAll.clear();
             linkmanGetMyLinkmanList();
             refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
         });

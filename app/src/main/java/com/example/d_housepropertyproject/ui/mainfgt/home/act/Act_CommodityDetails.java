@@ -74,7 +74,7 @@ public class Act_CommodityDetails extends BaseAct {
         hideHeader();
         //绑定初始化ButterKnife
         ButterKnife.bind(this);
-        ImmersionBar.with(this).statusBarDarkFont(false).init();
+        ImmersionBar.with(this).statusBarDarkFont(true).init();
         goodId = getIntent().getStringExtra("goodId");
     }
 
@@ -153,6 +153,7 @@ public class Act_CommodityDetails extends BaseAct {
                 loding.dismiss();
                 Gson gson = new Gson();
                 entity = gson.fromJson(succeed, GoodsQueryInfoStoreUserBean.class);
+                entity.setFirmName("");
                 if (entity.getCode() == 20000) {
                     String dedede = "";
                     //产品详情图片显示
@@ -217,9 +218,7 @@ public class Act_CommodityDetails extends BaseAct {
             }
         });
     }
-
     private CountDownTimer mTimer;
-
     /**
      * 倒计时
      */
